@@ -1,0 +1,23 @@
+.sureComponent{
+    width: 50%;
+    height:100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.contentWrapper{
+    height:80%;
+    width:80%;
+}
+.sureComponent h1{
+    color: #444F60;
+    font-family: 'Gilroy-Bold';
+font-size: 32px;
+}
+
+.sureComponent p{
+    color: #999999;
+    font-family: 'Gilroy-Regular';
+font-size: 14px;
+}
+

@@ -3,9 +3,20 @@ import React from "react";
 import style from "./createAcct.module.css"
 //svg
 import Logo from "../../assets/createAcct/logo.svg"
+import checkBoxIcon from "../../assets/createAcct/checkBox.svg"
 //material-ui
 
 import SigninForm from "../form/signin/signin"
+// //components
+// import * as Icon from 'react-icons/fi';
+// import Checkbox from 'react-custom-checkbox';
+//@ts-ignore
+import  Checkbox from "react-custom-checkbox"
+//link
+//@ts-ignore
+import {Link} from "react-router-dom"
+//icons
+import {FcGoogle} from "react-icons/fc"
 
 
 
@@ -14,49 +25,59 @@ import SigninForm from "../form/signin/signin"
 
 const createAcct:React.FC = (props)=>{
     return (
-      <section className={style.createAcctContainer}>
-        <div className={style.ImgWrapper}>
-          <img src={Logo} alt='' />
-        </div>
-        <div className={style.createTextWrapper}>
-          <h1 className={style.createAccHeader}>
-            Take Your First Step Towards Success
-          </h1>
-          <a href='#' className={style.signInWithGoogle}>
-            Sign Up With Google
-          </a>
-          <br></br>
-          <a href='#' className={style.signUpWithEmail}>
-            Sign Up With Email
-          </a>
-          <SigninForm></SigninForm>
-        </div>
+      <>
+        <section className={style.createAcctContainer}>
+          <div className={style.ImgWrapper}>
+            <img src={Logo} alt='' />
+          </div>
+          <div className={style.createTextWrapper}>
+            <h1 className={style.createAccHeader}>
+              Take Your First Step Towards Success
+            </h1>
+            <Link to='/signup' className={style.signInWithGoogle}>
+              <div>
+                <FcGoogle></FcGoogle>
+              </div>
+              Sign Up With Google
+            </Link>
+            <br></br>
+            <Link to='/' className={style.signUpWithEmail}>
+              Sign Up With Email
+            </Link>
+            <br></br>
+            <SigninForm></SigninForm>
+            <br></br>
+            <div className={style.agreementSection}>
+              <Checkbox
+                checked={true}
+                icon={<img src={checkBoxIcon} alt='' />}
+                borderColor='#E6E9ED'
+                borderRadius={3}
+                size={18}
+              />
+              <div>
+                By creating an account you agree Yourstudypath’s Privacy and
+                Terms or use
+              </div>
+            </div>
+            <br></br>
 
-        {/* <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
-          <InputLabel htmlFor='outlined-adornment-password'>
-            Password
-          </InputLabel>
-          <OutlinedInput
-            id='outlined-adornment-password'
-            type={values.showPassword ? 'text' : 'password'}
-            value={values.password}
-            onChange={handleChange('password')}
-            endAdornment={
-              <InputAdornment position='end'>
-                <IconButton
-                  aria-label='toggle password visibility'
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge='end'
-                >
-                  {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-            label='Password'
-          />
-        </FormControl> */}
-      </section>
+            <Link className={style.createAccount} to='/createAccount'>
+              Create Account
+            </Link>
+            <br />
+
+            <section className={style.createAccoutEnding}>
+              <span>
+                Already a member?{' '}
+                <Link to='/'>
+                  <b>Log in</b>
+                </Link>
+              </span>
+            </section>
+          </div>
+        </section>
+      </>
     );
 }
 

@@ -11,9 +11,11 @@ import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+//styles 
+import style from "./signin.module.css"
 
 interface State {
-  amount: string;
+  Email: string;
   password: string;
   weight: string;
   weightRange: string;
@@ -22,7 +24,7 @@ interface State {
 
 export default function InputAdornments() {
   const [values, setValues] = React.useState<State>({
-    amount: '',
+    Email: '',
     password: '',
     weight: '',
     weightRange: '',
@@ -33,6 +35,12 @@ export default function InputAdornments() {
     (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
       setValues({ ...values, [prop]: event.target.value });
     };
+
+      const handleEmailChange =
+        (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
+          setValues({ ...values, [prop]: event.target.value });
+        };
+    
 
   const handleClickShowPassword = () => {
     setValues({
@@ -48,17 +56,55 @@ export default function InputAdornments() {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-      <div>
-      
-        
-      
-        <FormControl sx={{  width: '25ch',border:"2px" }} variant='standard'>
-          <InputLabel htmlFor='standard-adornment-password'>
+    <Box>
+      <div className={style.formContainer}>
+        <FormControl
+          sx={{ width: '25ch', border: '2px' }}
+          className={style.siginContainer}
+          variant='standard'
+        >
+          <InputLabel
+            htmlFor='standard-adornment-password'
+            className={style.labelName}
+          >
+            Email
+          </InputLabel>
+          <Input
+            id='standard-adornment-password'
+            className={style.disableInputStyle}
+            type="text"
+            value={values.Email}
+            onChange={handleEmailChange('Email')}
+            // endAdornment={
+            //   <InputAdornment position='end'>
+            //     <IconButton
+            //       aria-label='toggle password visibility'
+            //       onClick={handleClickShowPassword}
+            //       onMouseDown={handleMouseDownPassword}
+            //     >
+            //       {values.showPassword ? <VisibilityOff /> : <Visibility />}
+            //     </IconButton>
+            //   </InputAdornment>
+            // }
+          />
+        </FormControl>
+      </div>
+      <br></br>
+      <div className={style.formContainer}>
+        <FormControl
+          sx={{ width: '25ch', border: '2px' }}
+          className={style.siginContainer}
+          variant='standard'
+        >
+          <InputLabel
+            htmlFor='standard-adornment-password'
+            className={style.labelName}
+          >
             Password
           </InputLabel>
           <Input
             id='standard-adornment-password'
+            className={style.disableInputStyle}
             type={values.showPassword ? 'text' : 'password'}
             value={values.password}
             onChange={handleChange('password')}
@@ -75,7 +121,6 @@ export default function InputAdornments() {
             }
           />
         </FormControl>
-        
       </div>
     </Box>
   );

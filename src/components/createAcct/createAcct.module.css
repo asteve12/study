@@ -3,7 +3,7 @@
     height:100%;
     box-sizing: border-box;
    
-    padding-top:8%;
+    padding-top:1%;
   
 
 }
@@ -21,6 +21,8 @@
 
  
 }
+
+
 
 
 .createAccHeader{
@@ -42,6 +44,11 @@ color: #444F60;
 .signInWithGoogle{
     height: 48px;
 width: 100%;
+text-decoration:none;
+color: #444F60;
+display:flex;
+align-items:center;
+justify-content:center;
 
 
 border-radius: 33px;
@@ -55,6 +62,12 @@ align-items:center;
 justify-content: center;
 
 }
+.signInWithGoogle div{
+    display:flex;
+    height:100%;
+    margin-right:10px;
+    align-items:center;
+}
 .signUpWithEmail{
     font-family: Gilroy-Medium;
 font-size: 14px;
@@ -66,4 +79,63 @@ color: #999999;
 display:block;
 text-decoration: none;
 width: 100%;
+}
+
+.agreementSection{
+    display:flex;
+    width:100%;
+    justify-content:space-between;
+    color:#999999;
+
+}
+.agreementSection div{
+    margin-left:10px;
+
+}
+.createAccount{
+    height:48px;
+    width:100%;
+    display:flex;
+   background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(313.78deg, #2855AE -3.15%, #7292CF 100%);
+/* button */
+
+box-shadow: 0px 4px 20px rgba(50, 145, 255, 0.3);
+border-radius: 33px;
+align-items: center;
+justify-content:center;
+font-family: 'Avenir';
+font-style: normal;
+font-weight: 800;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+
+text-align: center;
+letter-spacing: 0.33913px;
+
+color: #FFFFFF;
+text-decoration: none;
+
+
+}
+.createAccoutEnding{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family :Gilroy-Regular;
+    color:#444F60;
+}
+
+.createAccoutEnding a {
+    text-decoration:none;
+    color:#444F60;
+}
+
+
+@media(max-width:900px){
+    .createAcctContainer{
+         width:100%;
+
+    }
+
 }

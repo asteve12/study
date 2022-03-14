@@ -24,13 +24,13 @@ const bestTeacher: React.FC<bestTeacherInt> = (props) => {
           helping students succeed.
         </p>
         {
-          props.isIndicatorOn.map((eachBtn,index)=>{
+           props.isIndicatorOn.map((eachBtn,index)=>{
             return(
               <Indicator status={eachBtn.btnStatus}  handleIndicator={props.handleIndicator} indexed={index} ></Indicator>
             )
           })
 
-          })
+          }
         
 
         

@@ -1,4 +1,5 @@
-*{
-    margin:0px;
-    padding:0px;
+
+
+.MuiInputBase-root-MuiInput-root:last-child{
+    border:none !important;
 }
