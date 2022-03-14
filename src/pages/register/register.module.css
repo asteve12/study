@@ -1,18 +1,16 @@
-.homePageContainer{
+.registerPageWrapper{
     width:100%;
     height:100vh;
     display:flex;
-    margin:0px;
-    padding:0px;
     overflow:hidden;
+    
 }
 
 @media(max-width:900px){
-    .homePageContainer{
+    .registerPageWrapper{
         flex-direction: column;
           overflow:scroll;
 
     }
 
 }
-

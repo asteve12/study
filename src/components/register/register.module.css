@@ -1,0 +1,35 @@
+
+.registerWrapper{
+    width:50%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+}
+.formContainer{
+      width:70%;
+    height:100%;
+   
+
+}
+.formContainer h1{
+     color: #444F60;
+     font-family: 'Gilroy-Bold';
+font-size: 32px;
+margin:0px
+
+}
+
+.formContainer p{
+    font-family: 'Gilroy-Regular';
+font-size: 14px;
+color: #999999;
+}
+
+
+
+
+@media(max-width:900px){
+    .registerWrapper{
+        width:100%
+    }
+}

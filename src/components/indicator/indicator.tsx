@@ -10,10 +10,10 @@ const Indicator: React.FC <indicatorInterface> = (props) => {
   return (
     <p
       className={
-        props.status ? style.indicatorCircle : style.offIndicatorCircle
+         props.status ? style.indicatorCircle : style.offIndicatorCircle
       }
       onClick={props.handleIndicator}
-      id={props.indexed.toString()}
+      id={props.indexed ? props.toString():""}
     ></p>
   );
 };

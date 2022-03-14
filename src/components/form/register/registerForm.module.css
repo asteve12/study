@@ -1,0 +1,83 @@
+.siginContainer{
+       width:100% !important;
+       height:auto !important;
+       border: 1px solid rgba(126, 139, 182, 0.3) !important;
+box-sizing: border-box;
+border-radius: 8px;
+padding-left:5px !important;
+padding-bottom:10px !important;
+  margin-bottom:10px;
+
+
+        }
+        
+       .formContainer{
+    width:100%;
+     
+}
+
+
+
+.disableInputStyle:before{
+    border:none !important;
+}
+.disableInputStyle:after{
+    border:none !important;
+}
+
+.labelName{
+    color:grey !important;
+    margin-top:4px;
+    margin-left:5px;
+   
+}
+
+.inputNameField{
+    margin-bottom:10px;
+}
+
+.siginContainerForm{
+       width:60% !important;
+       height:auto !important;
+       border: 1px solid rgba(126, 139, 182, 0.3) !important;
+      box-sizing: border-box;
+border-radius: 8px;
+padding-left:5px !important;
+padding-bottom:10px !important;
+  margin-bottom:10px;
+
+        }
+.disableTextFieldSTyle{
+    height:100%;
+    width:100%;
+   border: 1px solid rgba(126, 139, 182, 0.3) !important;
+    box-sizing: border-box;
+   border-radius: 8px;
+   padding: 5px !important;
+     color:grey !important;
+  
+}
+.textfield{
+    width: 30%;
+    height:100%
+}
+
+        .FormContainer{
+            width:100% !important;
+            display:flex;
+            justify-content: space-between  !important;
+            height:auto;
+            align-items:center;
+              color:rgba(126, 139, 182, 0.3) !important;
+            
+         
+            
+        }
+
+      
+        
+
+     
+
+
+ 
