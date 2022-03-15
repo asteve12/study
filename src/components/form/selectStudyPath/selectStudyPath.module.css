@@ -1,0 +1,30 @@
+.selectStdPath{
+        display:flex;
+        justify-content: space-between;
+        width:100%;
+}
+
+.jambPath,.waecPath{
+    width:45%;
+    height:224.8px;
+    border-radius: 11.6023px;
+    border: 1px solid rgba(126, 139, 182, 0.3) !important;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    cursor:pointer;
+    
+}
+
+.indicatedSelectedPath{
+    border: 1.51682px solid rgba(126, 139, 182, 0.3);
+      width:45%;
+    height:224.8px;
+    border-radius: 11.6023px;
+    border: 1px solid rgba(126, 139, 182, 0.3) !important;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+      cursor:pointer;
+
+}

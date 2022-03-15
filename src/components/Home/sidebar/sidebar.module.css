@@ -1,0 +1,16 @@
+.homeSideBarWrapper{
+    height:100%;
+    width:20%;
+  
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-right:solid 1px rgb(240, 234, 234);
+
+}
+
+.homePageContainer{
+    width:70%;
+    height:90%;
+  
+}

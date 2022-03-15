@@ -1,0 +1,48 @@
+.confirmComponentWrapper{
+    height:100%;
+    width:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    
+}
+
+.confirmCompCon{
+    width:80%;
+    height:80%;
+
+}
+
+.confirmCompCon h1{
+    color: #444F60;
+    font-size: 32px;
+    font-family: 'Gilroy-Bold';
+}
+
+.confirmCompCon p{
+    color: #999999;
+    font-family: 'Gilroy-Regular';
+font-size: 14px;
+
+}
+
+.addSubjectBtn{
+    display:flex;
+   
+    color:#355695
+}
+
+.addBtn{
+    background:none;
+    border:0;
+    color:#355695;
+    font-size:16px
+}
+
+@media(max-width:900px){
+    .confirmComponentWrapper{
+         width:100%;
+
+    }
+
+}

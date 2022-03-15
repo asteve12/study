@@ -1,13 +1,12 @@
-.surePageWrapper{
+.studyPathPageWrapper{
     width:100%;
     height:100vh;
-    display:flex;
     overflow:hidden;
+    display:flex;
 }
 
-
 @media(max-width:900px){
-    .surePageWrapper{
+    .studyPathPageWrapper{
         flex-direction: column;
           overflow:scroll;
 

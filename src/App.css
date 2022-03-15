@@ -1,5 +1,4 @@
 
-
-.MuiInputBase-root-MuiInput-root:last-child{
-    border:none !important;
+*{
+    font-family: 'Gilroy-Regular', Gilroy-Regular, sans-serif !important;
 }

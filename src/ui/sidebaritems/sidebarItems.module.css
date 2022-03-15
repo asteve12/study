@@ -1,0 +1,29 @@
+.sidebarItemsWrapper{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    width:90%;
+    margin-bottom: 25px;
+}
+
+
+
+.HomeLink{
+    text-decoration: none;
+       color:#999999;
+       display:flex;
+       align-items:center;
+       /* justify-content: space-between; */
+       width:80%;
+      font-family: 'Gilroy-SemiBold';
+font-size: 16px;
+    
+
+
+}
+
+.iconColor{
+       margin-right:30px;
+
+}
+

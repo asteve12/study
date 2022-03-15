@@ -1,0 +1,6 @@
+.confirmCrsInField{
+    display:flex;
+    width:100% !important;
+    justify-content:space-between;
+    align-items:center;
+}

@@ -22,9 +22,81 @@ function MyFormHelperText() {
 
 export default function UseFormControl() {
   return (
-    <Box component='form' noValidate autoComplete='off'>
-      <FormControl className={style.formContainer}sx={{ width: '78px', height: '78px', borderRadius: '8px' }}>
-        <OutlinedInput placeholder='?' className={style.inputOutline} />
+    <Box
+      component='form'
+      noValidate
+      autoComplete='off'
+      sx={{ display: 'flex', justifyContent: 'space-between' }}
+    >
+      <FormControl
+        className={style.formContainer}
+        sx={{ width: '78px', height: '78px', borderRadius: '8px' }}
+      >
+        <OutlinedInput
+          placeholder='?'
+          className={style.inputOutline}
+          sx={{
+            '& .MuiOutlinedInput-input': {
+              textAlign: 'center',
+            },
+          }}
+        />
+      </FormControl>
+      <FormControl
+        className={style.formContainer}
+        sx={{ width: '78px', height: '78px', borderRadius: '8px' }}
+      >
+        <OutlinedInput
+          placeholder='?'
+          className={style.inputOutline}
+          sx={{
+            '& .MuiOutlinedInput-input': {
+              textAlign: 'center',
+            },
+          }}
+        />
+      </FormControl>
+      <FormControl
+        className={style.formContainer}
+        sx={{ width: '78px', height: '78px', borderRadius: '8px' }}
+      >
+        <OutlinedInput
+          placeholder='?'
+          className={style.inputOutline}
+          sx={{
+            '& .MuiOutlinedInput-input': {
+              textAlign: 'center',
+            },
+          }}
+        />
+      </FormControl>
+      <FormControl
+        className={style.formContainer}
+        sx={{ width: '78px', height: '78px', borderRadius: '8px' }}
+      >
+        <OutlinedInput
+          placeholder='?'
+          className={style.inputOutline}
+          sx={{
+            '& .MuiOutlinedInput-input': {
+              textAlign: 'center',
+            },
+          }}
+        />
+      </FormControl>
+      <FormControl
+        className={style.formContainer}
+        sx={{ width: '78px', height: '78px', borderRadius: '8px' }}
+      >
+        <OutlinedInput
+          placeholder='?'
+          className={style.inputOutline}
+          sx={{
+            '& .MuiOutlinedInput-input': {
+              textAlign: 'center',
+            },
+          }}
+        />
       </FormControl>
     </Box>
   );

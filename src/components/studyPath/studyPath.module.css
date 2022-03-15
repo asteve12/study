@@ -1,0 +1,37 @@
+.studyPathPageWrapper{
+    width:50%;
+    height:100%;
+    display:flex;
+    /* align-items: center; */
+    justify-content:center;
+    overflow-y:scroll   !important
+
+    
+}
+
+.studyPathContainer{
+    height:80%;
+    width:80%;
+}
+
+.studyPathContainer h1{
+ color: #444F60;
+ font-family: 'Gilroy-Bold';
+font-size: 32px;
+margin: 0;
+}
+
+.chooseAPth h1{
+color: #273464;
+font-family: 'Gilroy-Regular';
+font-size: 24px;
+
+}
+
+
+@media(max-width:900px){
+    .studyPathPageWrapper{
+         width:100%;
+      }
+
+}

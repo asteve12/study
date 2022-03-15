@@ -1,0 +1,32 @@
+.subjectBox{
+    width:100%;
+    background: rgba(126, 139, 182, 0.1);
+border-radius: 8px;
+Height:57px;
+display:flex;
+align-items: center;
+justify-content:space-between;
+padding-left:3%;
+padding-right:3%;
+box-sizing: border-box;
+margin-bottom: 10px;
+}
+
+.closeBtn{
+outline:0px;
+border:0px;
+font-size: 30px !important;
+ background:none;
+ cursor: pointer;
+ 
+}
+.closeIcon{
+    color:  rgba(126, 139, 182, 0.3);
+    background:none
+}
+
+.subjects{
+    color: #444F60;
+    font-family: 'Gilroy-Regular';
+font-size: 14px;
+}

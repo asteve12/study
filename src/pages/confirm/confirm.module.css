@@ -1,4 +1,4 @@
-.surePageWrapper{
+.confirmPageWrapper{
     width:100%;
     height:100vh;
     display:flex;
@@ -7,10 +7,11 @@
 
 
 @media(max-width:900px){
-    .surePageWrapper{
+    .confirmPageWrapper{
         flex-direction: column;
           overflow:scroll;
 
     }
 
 }
+

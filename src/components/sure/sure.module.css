@@ -13,11 +13,21 @@
     color: #444F60;
     font-family: 'Gilroy-Bold';
 font-size: 32px;
+
 }
 
 .sureComponent p{
     color: #999999;
     font-family: 'Gilroy-Regular';
 font-size: 14px;
+}
+
+
+@media(max-width:900px){
+    .sureComponent{
+         width:100%;
+
+    }
+
 }
 
