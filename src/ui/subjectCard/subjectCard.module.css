@@ -1,0 +1,41 @@
+.subjectCard{
+    width: 191.57px;
+height: 153px;
+background: #FF7648;
+border-radius: 20.5714px;
+position:relative;
+overflow: hidden;
+margin-bottom: 10px;
+}
+.placeSvgProperly{
+    position:absolute;
+    right:0px;
+    top:-5px;
+    
+}
+
+.moreBtn{
+    position:absolute;
+    left:50px;
+    top:20px;
+    background:none;
+    outline:none;
+    border:none;
+    cursor:pointer
+}
+
+.LogoCont{
+    position:absolute;
+    top:10px;
+    left:10px
+}
+
+.Subject{
+    position:absolute;
+    bottom:30px;
+    left:20px;
+    color: #FFFFFF;
+    font-family: 'Gilroy';
+font-style: normal;
+}
+

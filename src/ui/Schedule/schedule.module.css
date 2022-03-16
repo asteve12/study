@@ -1,0 +1,95 @@
+.ScheduleCard{
+    width:350px;
+    height:150px;
+    /* background-color:yellow */
+    display: flex;
+    box-sizing: border-box !important;
+
+
+  
+}
+.scheduleTimeDetail{
+    width:70px;height:100%
+}
+
+.scheduleCardDetail{
+    width:263.25px;
+    height:118.11px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(313.78deg, #2855AE -3.15%, #7292CF 100%);
+border-radius: 16.0155px;
+  box-sizing: border-box;
+      padding:20px;
+}
+
+.courseStartTime{
+    color: #212525;
+    font-family: 'Poppins';
+    font-size: 16.0155px;
+    font-style: normal;
+    margin:0px
+}
+
+.courseEndTime{
+      color: #BCC1CD;
+    font-family: 'Poppins';
+    font-size: 16.0155px;
+    font-style: normal;
+    margin:0px
+
+}
+
+.scheduleCont h1{
+    margin:0px;
+
+
+}
+
+.scheduleCont p{
+    margin:0px
+}
+
+.scheduleContHead{
+    display:flex;
+    justify-content:space-between;
+}
+.scheduleContHead p{
+    color: #FFFFFF;
+    font-family: 'Gilroy';
+    font-size: 20.0193px;
+}
+
+.scheduleContHead button{
+  background:none;
+  outline:none;
+  border: none;
+  cursor:pointer
+}
+
+.intro{
+    color: #FFFFFF;
+    font-family: 'Gilroy';
+    font-size: 14.0135px;
+    margin-bottom: 10px !important;
+       margin-top: 10px !important;
+
+}
+
+.tutoPicsContent{
+    display:flex;
+      color:white;
+      align-items:center;
+
+}
+.tutoPicsContent p{
+    font-size: 12.0116px;
+    font-family: 'Gilroy';
+}
+
+.tutorPics{
+    height:10.85px;
+    width:10.85px;
+    background-color:white;
+    border-radius:10.85px;
+  
+
+}

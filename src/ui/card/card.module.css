@@ -1,0 +1,56 @@
+.cardWrapper{
+width:270px;
+height:220.68px;
+border-radius:19.97px;
+background:url(../../assets/home/cardImage.svg);
+background-size: cover;
+/* background-color:yellow; */
+display:flex;
+border-radius: 19.9678px;
+position:relative;
+box-sizing: border-box !important
+
+}
+
+.cardContent{
+    position:absolute;
+    bottom:40px;
+    left:20px
+}
+
+.cardContent h1{
+    color: #FFFFFF;
+    font-family: 'Gilroy';
+    font-size: 19.9678px;
+    margin:0px;
+}
+
+.cardContent p{
+    color: #FFFFFF;
+    font-family: 'Gilroy';
+font-style: normal;
+font-size: 13.3119px;
+  margin:0px;
+}
+
+.timeContainer{
+    display:flex;
+    color:grey;
+   
+    width:60%;
+    margin-top:10px;
+    font-size: 15px;
+    align-items: center;
+    margin-bottom:10px
+}
+
+.courseTutor{
+    display:flex;
+}
+
+.imageWrapper{
+    width: 13.31px;
+height: 13.31px;
+border-radius:13.31px;
+background-color:white;
+}

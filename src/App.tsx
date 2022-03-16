@@ -4,12 +4,14 @@ import SurePage from "./pages/sure/sure"
 import StudyPath from './pages/studyPath/studyPath';
 import ConfirmCourse from './pages/confirm/confirm';
 import HomePage from "./pages/home/home"
+import Register from './pages/register/register';
+import ChatHomePage from "../src/pages/chats/chat"
 
 
 
 //@ts-ignore
 import {Routes, Route} from 'react-router-dom';
-import Register from './pages/register/register';
+
 import './App.css';
 
 
@@ -24,8 +26,8 @@ function App() {
         <Route path='/sure' element={<SurePage />}></Route>
         <Route path='/chooseAStudyPath' element={<StudyPath />}></Route>
         <Route path='/confirmCourse' element={<ConfirmCourse />}></Route>
-
-        <Route path='/homePage' element={<HomePage/>}></Route>
+        <Route path='/homePage' element={<HomePage />}></Route>
+        <Route path='/Chats' element={<ChatHomePage />}></Route>
       </Routes>
     </div>
   );

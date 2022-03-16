@@ -43,16 +43,24 @@ const HomeSideBar:React.FC = (props)=>{
             <img src={companyLogo} alt='' />
           </div>
           <br />
-        
-          {navigation.map((eachItems)=>{
-              return (
-                <SideBarItems
-                  link={eachItems.links}
-                  icon={eachItems.icons}
-                  name={eachItems.name}
-                ></SideBarItems>
-              );
+
+          {navigation.map((eachItems) => {
+            return (
+              <SideBarItems
+                link={eachItems.links}
+                icon={eachItems.icons}
+                name={eachItems.name}
+              ></SideBarItems>
+            );
           })}
+          <br></br>
+          <br></br>
+          <br></br>
+
+          <div className={style.setExamDateCont}>
+            <p>Let's set a reminder for you</p>
+            <button className={style.setExamDate}>Select exam date</button>
+          </div>
         </div>
       </section>
     );
