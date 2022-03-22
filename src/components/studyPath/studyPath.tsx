@@ -20,7 +20,6 @@ const StudyPathComponent: React.FC<studyPath> = (props) => {
     <section className={style.studyPathPageWrapper}>
       <div className={style.studyPathContainer}>
         <br></br>
-        <br></br>
         <BackBtn path='/sure'></BackBtn>
         <br></br>
         <h1>What are you preparing for?</h1>
@@ -29,20 +28,22 @@ const StudyPathComponent: React.FC<studyPath> = (props) => {
           your first try.
         </p>
         <br></br>
-
-        <SelectStudyPath
-          studyPath={props.path}
-          changeStdPath={props.changeStudyPath}
-        ></SelectStudyPath>
+        <div>
+          <SelectStudyPath
+            studyPath={props.path}
+            changeStdPath={props.changeStudyPath}
+          ></SelectStudyPath>
+        </div>
 
         <div className={style.chooseAPth}>
           <br></br>
           <h1>Choose a study path</h1>
           <br></br>
           <SelectItems></SelectItems>
+          <ContinueBtn path='/confirmCourse'></ContinueBtn>
         </div>
-        <ContinueBtn path="/confirmCourse"></ContinueBtn>
-        <br/>
+
+        <br />
       </div>
     </section>
   );

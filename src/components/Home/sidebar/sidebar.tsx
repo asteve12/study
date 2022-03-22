@@ -37,33 +37,63 @@ const navigationItems = [
 const HomeSideBar:React.FC = (props)=>{
     const [navigation, setNavigation] = useState(navigationItems);
     return (
-      <section className={style.homeSideBarWrapper}>
-        <div className={style.homePageContainer}>
-          <div className={style.logoContainer}>
-            <img src={companyLogo} alt='' />
-          </div>
-          <br />
+      <>
+        <section className={style.homeSideBarWrapper}>
+          <div className={style.homePageContainer}>
+            <div className={style.logoContainer}>
+              <img src={companyLogo} alt='' />
+            </div>
+            <br />
 
-          {navigation.map((eachItems) => {
-            return (
-              <SideBarItems
-                link={eachItems.links}
-                icon={eachItems.icons}
-                name={eachItems.name}
-              ></SideBarItems>
-            );
-          })}
-          <br></br>
-          <br></br>
-          <br></br>
+            {navigation.map((eachItems) => {
+              return (
+                <SideBarItems
+                  link={eachItems.links}
+                  icon={eachItems.icons}
+                  name={eachItems.name}
+                ></SideBarItems>
+              );
+            })}
+            <br></br>
+            <br></br>
+            <br></br>
 
-          <div className={style.setExamDateCont}>
-            <p>Let's set a reminder for you</p>
-            <button className={style.setExamDate}>Select exam date</button>
+            <div className={style.setExamDateCont}>
+              <p>Let's set a reminder for you</p>
+              <button className={style.setExamDate}>Select exam date</button>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+       
+      
+      </>
     );
 }
 
 export default HomeSideBar;
+
+export const MobileSidebar:React.FC = ()=>{
+  const [navigation, setNavigation] = useState(navigationItems);
+  return (
+    <section className={style.mobileSidebar}>
+      <div className={style.homePageContainer}>
+        {/* <div className={style.logoContainer}>
+              <img src={companyLogo} alt='' />
+            </div> */}
+        <br />
+
+        {navigation.map((eachItems) => {
+          return (
+            <SideBarItems
+              link={eachItems.links}
+              icon={eachItems.icons}
+              name={eachItems.name}
+            ></SideBarItems>
+          );
+        })}
+     
+      </div>
+    </section>
+  );
+}
+

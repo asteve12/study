@@ -6,6 +6,10 @@ import ConfirmCourse from './pages/confirm/confirm';
 import HomePage from "./pages/home/home"
 import Register from './pages/register/register';
 import ChatHomePage from "../src/pages/chats/chat"
+import Profile from "../src/pages/profile/profile"
+import ResourcePage from "../src/pages/resources/resources"
+import SchedulePage from "./pages/schedule/schedule"
+import CoursePage from "./pages/courses/course"
 
 
 
@@ -28,6 +32,10 @@ function App() {
         <Route path='/confirmCourse' element={<ConfirmCourse />}></Route>
         <Route path='/homePage' element={<HomePage />}></Route>
         <Route path='/Chats' element={<ChatHomePage />}></Route>
+        <Route path='/Profile' element={<Profile />}></Route>
+        <Route path='/Resources' element={<ResourcePage />}></Route>
+        <Route path='/schedule' element={<SchedulePage />}></Route>
+        <Route path='/Courses' element={<CoursePage />}></Route>
       </Routes>
     </div>
   );

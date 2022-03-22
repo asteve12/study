@@ -4,23 +4,39 @@ import {NavLink} from "react-router-dom"
 //interface 
 import sidebarInterface from "./interface"
 //styles
-import style from "./sidebarItems.module.css"
+import styles from "./sidebarItems.module.css"
 
 
 
 const SideBarItems: React.FC<sidebarInterface> = (props) => {
   return (
-    <section className={style.sidebarItemsWrapper}>
-      <NavLink
-        className={style.HomeLink}
-        to={props.link}
-        style={(isActive) => ({
-          color: isActive ? '#45629c' : 'color:#999999',
-        })}
-      >
-        <props.icon className={style.iconColor}></props.icon> {props.name}
-      </NavLink>
-    </section>
+    <>
+      <section className={styles.sidebarItemsWrapper}>
+        <NavLink
+          className={styles.HomeLink}
+          style={({ isActive }) => ({
+            color: isActive ? '#45629c' : 'color:#999999',
+          })}
+          to={`${props.link}`}
+          key={props.link}
+        >
+          <props.icon className={styles.iconColor}></props.icon> {props.name}
+        </NavLink>
+      </section>
+      {/*responsiveness*/}
+      <section className={styles.mobileItemsWrapper}>
+        <NavLink
+          className={styles.smHomeLink}
+          style={({ isActive }) => ({
+            color: isActive ? '#45629c' : 'color:#999999',
+          })}
+          to={`${props.link}`}
+          key={props.link}
+        >
+          <props.icon className={styles.iconColor}></props.icon> 
+        </NavLink>
+      </section>
+    </>
   );
 };
 

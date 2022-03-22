@@ -49,14 +49,15 @@ const StudyPath: React.FC = (props) => {
 
  
   return (
-    <section className={style.studyPathPageWrapper}>
+    <section className={style.mainPathPageWrapper}>
       <BestTeacher
         isIndicatorOn={isIndicatorOn}
         handleIndicator={handleIndicator}
       ></BestTeacher>
-      <StudyPathComponent changeStudyPath={()=> changeStudyPathHandler("jamb")} path={currentPath}></StudyPathComponent>
-
-     
+      <StudyPathComponent
+        changeStudyPath={() => changeStudyPathHandler('jamb')}
+        path={currentPath}
+      ></StudyPathComponent>
     </section>
   );
 };

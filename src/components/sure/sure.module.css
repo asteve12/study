@@ -31,3 +31,20 @@ font-size: 14px;
 
 }
 
+@media(max-width:500px){
+    .contentWrapper{
+        width:90%;
+        height:95%;
+        position:relative
+      
+    }
+    .contBtnWrapper{
+        position:absolute;
+        bottom:0px !important;
+        width:100%;
+
+        height:auto;
+       
+    }
+}
+

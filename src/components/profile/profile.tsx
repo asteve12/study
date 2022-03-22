@@ -1,0 +1,54 @@
+import React from "react";
+import ChatHeader from "../../ui/chatHeader/chatHeader";
+//styles
+import style from "./profile.module.css"
+//icons
+import pencilIcon from "../../assets/profile/pencil.svg"
+//link
+import {NavLink} from "react-router-dom"
+
+
+
+const ProfileComp:React.FC = (props)=>{
+    return (
+      <section className={style.ProfileCom}>
+        <div className={style.chatHead}>
+          <ChatHeader title='Profile'></ChatHeader>
+        </div>
+        <div className={style.profileDetailPage}>
+          <section className={style.ProfileBgCont}>
+            <div className={style.BgImg}></div>
+            <div className={style.BgPics}></div>
+            <button className={style.changeProfile}>
+              <img src={pencilIcon} alt='' />
+            </button>
+          </section>
+          <br></br>
+          <br></br>
+          <div className={style.profileNameCont}>
+            <h3>Ukauwa David</h3>
+            <p>dukauwa.du@gmail.com</p>
+          </div>
+          <div className={style.linkCont}>
+            <NavLink to='/notification' className={style.linkStyle}>
+              Notification
+            </NavLink>
+            <NavLink to='/payment' className={style.linkStyle}>
+              Payment
+            </NavLink>
+            <NavLink to='/legal' className={style.linkStyle}>
+              Legal
+            </NavLink>
+            <NavLink to='/speackWithUs' className={style.linkStyle}>
+              Speak with us
+            </NavLink>
+            <NavLink to='/logout' className={style.logout}>
+              Log Out
+            </NavLink>
+          </div>
+        </div>
+      </section>
+    ); 
+}
+
+export default ProfileComp;

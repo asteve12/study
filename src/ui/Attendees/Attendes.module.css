@@ -1,0 +1,86 @@
+.attendedWrapper{
+    display:flex;
+    width:100%;
+    justify-content:space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding-right:30px;
+}
+.picsCont{
+    width:36px;
+    height:36px;
+    border-radius:36px;
+    background-color:#00DA97;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size: 12.6633px;
+    color:white;
+    font-family: 'Gilroy';
+font-style: normal;
+}
+
+.profileCont{
+    display:flex;
+    align-items:center;
+    
+}
+.profileCont p {
+    font-family: 'Gilroy';
+font-style: normal;
+font-size: 12px;
+color: #444F60;
+}
+
+.followRequest{
+    width: 141px;
+    height: 36px;
+    border: 1px solid #E8E8E8;
+    border-radius: 74.0506px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    outline:none;
+    cursor:pointer;
+    font-family: 'Gilroy';
+    font-size: 12px;
+    color: #444F60;
+}
+
+.callCont{
+    display:flex;
+    align-items:center;
+    justify-content:space-around
+    
+}
+.callCont button{
+    margin:5px
+}
+
+.callIcons{
+    width: 36px;
+height: 36px;
+border-radius:36px;
+background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(313.78deg, #2855AE -3.15%, #7292CF 100%);
+border:none;
+outline:none;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.messageIcons{
+        width: 36px;
+height: 36px;
+border-radius:36px;
+background: #00DA97;
+border:none;
+outline:none;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+
+}

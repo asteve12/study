@@ -1,6 +1,6 @@
 .cardWrapper{
-width:270px;
-height:220.68px;
+width:270px !important;
+height:220.68px !important;
 border-radius:19.97px;
 background:url(../../assets/home/cardImage.svg);
 background-size: cover;
@@ -8,7 +8,8 @@ background-size: cover;
 display:flex;
 border-radius: 19.9678px;
 position:relative;
-box-sizing: border-box !important
+box-sizing: border-box !important;
+flex:0 0 270px;
 
 }
 

@@ -6,6 +6,8 @@ border-radius: 20.5714px;
 position:relative;
 overflow: hidden;
 margin-bottom: 10px;
+flex:0 0 191.57px;
+margin-right:10px;
 }
 .placeSvgProperly{
     position:absolute;

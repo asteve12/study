@@ -40,7 +40,9 @@ const SureComponent:React.FC =(props)=>{
           </div>
           <br></br>
           <br></br>
-          <ContinueBtn path='/chooseAStudyPath'></ContinueBtn>
+          <div className={style.contBtnWrapper}>
+            <ContinueBtn path='/chooseAStudyPath'></ContinueBtn>
+          </div>
         </div>
       </section>
     );

@@ -4,13 +4,15 @@
     display:flex;
     /* align-items: center; */
     justify-content:center;
-    overflow-y:scroll   !important
+ 
+ 
+   
 
     
 }
 
 .studyPathContainer{
-    height:80%;
+    height:auto;
     width:80%;
 }
 
@@ -27,11 +29,20 @@ font-family: 'Gilroy-Regular';
 font-size: 24px;
 
 }
+.continueWrapper{
+    display:flex;
+    justify-content:center;
+    width:100%;
+}
 
 
 @media(max-width:900px){
     .studyPathPageWrapper{
          width:100%;
+   
+       
       }
+    
 
 }
+

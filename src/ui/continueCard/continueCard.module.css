@@ -4,7 +4,9 @@
     background: #F2F3F8;
     border-radius:19.95px;
     display:flex;
-    position:relative
+    position:relative;
+    flex:0 0 308.95px;
+margin-right:10px;
     
 }
 

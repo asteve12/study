@@ -6,3 +6,20 @@
     align-items:center;
     position:absolute !important;
 }
+
+@media(max-width:500px){
+    .formContainer{
+        width:50px !important;
+        height:50px  !important;
+      
+    }
+}
+
+@media(max-width:300px){
+    .formContainer{
+        width:39px !important;
+        height:39px  !important;
+        padding:0px !important
+      
+    }
+}

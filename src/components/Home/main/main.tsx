@@ -11,6 +11,66 @@ import circleDot from '../../../assets/home/circledot.svg';
 import ScheduleCard from "../../../ui/Schedule/schedule"
 import SubjectCard from "../../../ui/subjectCard/subjectCard"
 import ContinueCard from "../../../ui/continueCard/continuCard";
+import {MobileSidebar} from "../sidebar/sidebar"
+import SimpleBar from 'simplebar-react';
+import 'simplebar/dist/simplebar.min.css';
+import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+
+const responsive = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1090 },
+    items: 3,
+    slidesToSlide: 1, // optional, default to 1.
+  },
+  tablet: {
+    breakpoint: { max: 1090, min: 464 },
+    items: 2,
+    slidesToSlide: 1, // optional, default to 1.
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+    slidesToSlide: 1, // optional, default to 1.
+  },
+};
+
+const subresponsive = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1090 },
+    items: 5,
+    slidesToSlide: 1, // optional, default to 1.
+  },
+  tablet: {
+    breakpoint: { max: 1090, min: 464 },
+    items: 3,
+    slidesToSlide: 1, // optional, default to 1.
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+    slidesToSlide: 1, // optional, default to 1.
+  },
+};
+
+const responsiveSchedule =  {
+  desktop: {
+    breakpoint: { max: 3000, min: 1090 },
+    items: 3,
+    slidesToSlide: 1, // optional, default to 1.
+  },
+  tablet: {
+    breakpoint: { max: 1090, min: 464 },
+    items: 2,
+    slidesToSlide: 1, // optional, default to 1.
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+    slidesToSlide: 1, // optional, default to 1.
+  },
+};
 
 
 
@@ -45,12 +105,46 @@ const subjects = [
     symbol: otherSmbol,
     svgColor: '#1F3A6D',
   },
+  {
+    colors: '#4ED442;',
+    name: 'Mathematics',
+    symbol: otherSmbol,
+    svgColor: '#1F3A6D',
+  },
+  {
+    colors: '#4ED442;',
+    name: 'Mathematics',
+    symbol: otherSmbol,
+    svgColor: '#1F3A6D',
+  },
+  {
+    colors: '#4ED442;',
+    name: 'Mathematics',
+    symbol: otherSmbol,
+    svgColor: '#1F3A6D',
+  },
+  {
+    colors: '#4ED442;',
+    name: 'Mathematics',
+    symbol: otherSmbol,
+    svgColor: '#1F3A6D',
+  },
 ];
 
 
 
 
 const homeMainPage:React.FC = (props)=>{
+//   function LeftArrow() {
+//   const { isFirstItemVisible, scrollPrev } =
+//     React.useContext(VisibilityContext);
+
+//   return (
+//     <Arrow disabled={isFirstItemVisible} onClick={() => scrollPrev()}>
+//       Left
+//     </Arrow>
+//   );
+// }
     return (
       <div className={style.homeMainPage}>
         <div className={style.homeMainPageWrapper}>
@@ -68,8 +162,6 @@ const homeMainPage:React.FC = (props)=>{
 
           <section className={style.upcomingWrapper}>
             <br></br>
-            <br></br>
-
             <div className={style.upcomingWrapperHeader}>
               <div className={style.circleRed}></div>
               &nbsp;&nbsp;
@@ -78,35 +170,99 @@ const homeMainPage:React.FC = (props)=>{
               </p>
             </div>
             <br />
-            <div className={style.courseCardCont}>
-              <CourseCard
-                courseTitle='Mathematics'
-                topic='introduction'
-                timeElapse={5}
-                img=''
-                tutorName='james brown'
-              ></CourseCard>
-              <CourseCard
-                courseTitle='Mathematics'
-                topic='introduction'
-                timeElapse={5}
-                img=''
-                tutorName='james brown'
-              ></CourseCard>
-              <CourseCard
-                courseTitle='Mathematics'
-                topic='introduction'
-                timeElapse={5}
-                img=''
-                tutorName='james brown'
-              ></CourseCard>
-              <CourseCard
-                courseTitle='Mathematics'
-                topic='introduction'
-                timeElapse={5}
-                img=''
-                tutorName='james brown'
-              ></CourseCard>
+            {/* <div >
+              <ScrollMenu
+                LeftArrow={<div>leftArrow</div>}
+                RightArrow={<div>rightArrow</div>}
+              >
+                <CourseCard
+                  courseTitle='Mathematics'
+                  topic='introduction'
+                  timeElapse={5}
+                  img=''
+                  tutorName='james brown'
+                ></CourseCard>
+                <CourseCard
+                  courseTitle='Mathematics'
+                  topic='introduction'
+                  timeElapse={5}
+                  img=''
+                  tutorName='james brown'
+                ></CourseCard>
+                <CourseCard
+                  courseTitle='Mathematics'
+                  topic='introduction'
+                  timeElapse={5}
+                  img=''
+                  tutorName='james brown'
+                ></CourseCard>
+                <CourseCard
+                  courseTitle='Mathematics'
+                  topic='introduction'
+                  timeElapse={5}
+                  img=''
+                  tutorName='james brown'
+                ></CourseCard>
+              </ScrollMenu>
+            </div> */}
+            <div style={{ width: '100%' }}>
+              <Carousel
+                responsive={responsive}
+                containerClass='carousel-container'
+                itemClass='carousel-item'
+                infinite={false}
+                autoPlay={false}
+              >
+                <CourseCard
+                  courseTitle='Mathematics'
+                  topic='introduction'
+                  timeElapse={5}
+                  img=''
+                  tutorName='james brown'
+                ></CourseCard>
+                <CourseCard
+                  courseTitle='Mathematics'
+                  topic='introduction'
+                  timeElapse={5}
+                  img=''
+                  tutorName='james brown'
+                ></CourseCard>
+                <CourseCard
+                  courseTitle='Mathematics'
+                  topic='introduction'
+                  timeElapse={5}
+                  img=''
+                  tutorName='james brown'
+                ></CourseCard>
+                <CourseCard
+                  courseTitle='Mathematics'
+                  topic='introduction'
+                  timeElapse={5}
+                  img=''
+                  tutorName='james brown'
+                ></CourseCard>
+                <CourseCard
+                  courseTitle='Mathematics'
+                  topic='introduction'
+                  timeElapse={5}
+                  img=''
+                  tutorName='james brown'
+                ></CourseCard>
+                <CourseCard
+                  courseTitle='Mathematics'
+                  topic='introduction'
+                  timeElapse={5}
+                  img=''
+                  tutorName='james brown'
+                ></CourseCard>
+                <CourseCard
+                  courseTitle='Mathematics'
+                  topic='introduction'
+                  timeElapse={5}
+                  img=''
+                  tutorName='james brown'
+                ></CourseCard>
+              </Carousel>
             </div>
             <br></br>
             <div className={style.scheduleContainer}>
@@ -115,27 +271,93 @@ const homeMainPage:React.FC = (props)=>{
               </p>
               <p className={style.nextLesson}>Next Lessons</p>
               <br></br>
-              <div className={style.scheduleCardWrapper}>
-                <ScheduleCard></ScheduleCard>
-                <ScheduleCard></ScheduleCard>
-                <ScheduleCard></ScheduleCard>
+              <div style={{ width: '100%' }}>
+                <Carousel
+                  responsive={responsiveSchedule}
+                  autoPlay={false}
+                  infinite={false}
+                  containerClass='schedule-carousel-container'
+                  itemClass='schedule-carousel-item'
+                >
+                  <section className={style.scheduleCard}>
+                    <ScheduleCard></ScheduleCard>
+                  </section>
+                  <section className={style.scheduleCard}>
+                    <ScheduleCard></ScheduleCard>
+                  </section>
+                  <section className={style.scheduleCard}>
+                    <ScheduleCard></ScheduleCard>
+                  </section>
+                  <section className={style.scheduleCard}>
+                    <ScheduleCard></ScheduleCard>
+                  </section>
+                  <section className={style.scheduleCard}>
+                    <ScheduleCard></ScheduleCard>
+                  </section>
+                  <section className={style.scheduleCard}>
+                    <ScheduleCard></ScheduleCard>
+                  </section>
+                  <section className={style.scheduleCard}>
+                    <ScheduleCard></ScheduleCard>
+                  </section>
+                  <section className={style.scheduleCard}>
+                    <ScheduleCard></ScheduleCard>
+                  </section>
+                  <section className={style.scheduleCard}>
+                    <ScheduleCard></ScheduleCard>
+                  </section>
+                  <section className={style.scheduleCard}>
+                    <ScheduleCard></ScheduleCard>
+                  </section>
+                  <section className={style.scheduleCard}>
+                    <ScheduleCard></ScheduleCard>
+                  </section>
+                  <section className={style.scheduleCard}>
+                    <ScheduleCard></ScheduleCard>
+                  </section>
+                </Carousel>
+
+                {/* <ScheduleCard></ScheduleCard>
+                <ScheduleCard></ScheduleCard> */}
               </div>
             </div>
             <br></br>
             <div className={style.SubjectCont}>
               <h1>Subjects</h1>
               <p>Based on your study choice</p>'
-              <div className={style.subjectCardContainer}>
-                {subjects.map((eachItems) => {
-                  return (
-                    <SubjectCard
-                      colors={eachItems.colors}
-                      name={eachItems.name}
-                      svgColor={eachItems.svgColor}
-                      symbol={eachItems.symbol}
-                    ></SubjectCard>
-                  );
-                })}
+              {/* <div className={style.subjectCardContainer}>
+                <Carousel responsive={responsive}>
+                  {subjects.map((eachItems) => {
+                    return (
+                      <SubjectCard
+                        colors={eachItems.colors}
+                        name={eachItems.name}
+                        svgColor={eachItems.svgColor}
+                        symbol={eachItems.symbol}
+                      ></SubjectCard>
+                    );
+                  })}
+                </Carousel>
+              </div> */}
+              <div style={{ width: '100%' }}>
+                <Carousel
+                  responsive={subresponsive}
+                  autoPlay={false}
+                  infinite={false}
+                  containerClass='subject-carousel-container'
+                  itemClass='subject-carousel-item'
+                >
+                  {subjects.map((eachItems) => {
+                    return (
+                      <SubjectCard
+                        colors={eachItems.colors}
+                        name={eachItems.name}
+                        svgColor={eachItems.svgColor}
+                        symbol={eachItems.symbol}
+                      ></SubjectCard>
+                    );
+                  })}
+                </Carousel>
               </div>
             </div>
             <br />
@@ -143,7 +365,7 @@ const homeMainPage:React.FC = (props)=>{
               <h1>Continue where you left off</h1>
               <p>Let's get you back in</p>
               <br></br>
-              <div className={style.continuCardWrap}>
+              {/* <div className={style.continuCardWrap}>
                 <ContinueCard
                   course='Mathematics'
                   chapter='Introduction'
@@ -160,10 +382,47 @@ const homeMainPage:React.FC = (props)=>{
                   course='Mathematics'
                   chapter='Introduction'
                 ></ContinueCard>
-              </div>
+              </div> */}
+              <Carousel
+                responsive={responsive}
+                autoPlay={false}
+                infinite={false}
+                containerClass='continue-carousel-container'
+                itemClass='continue-carousel-item'
+              >
+                <ContinueCard
+                  course='Mathematics'
+                  chapter='Introduction'
+                ></ContinueCard>
+                <ContinueCard
+                  course='Mathematics'
+                  chapter='Introduction'
+                ></ContinueCard>
+                <ContinueCard
+                  course='Mathematics'
+                  chapter='Introduction'
+                ></ContinueCard>
+                <ContinueCard
+                  course='Mathematics'
+                  chapter='Introduction'
+                ></ContinueCard>
+                <ContinueCard
+                  course='Mathematics'
+                  chapter='Introduction'
+                ></ContinueCard>
+              </Carousel>
+            </div>
+            <br></br>
+            <br></br>
+            <br></br>
+
+            <div className={style.setExamDateCont}>
+              <p>Let's set a reminder for you</p>
+              <button className={style.setExamDate}>Select exam date</button>
             </div>
           </section>
         </div>
+        <MobileSidebar></MobileSidebar>
       </div>
     );
 }

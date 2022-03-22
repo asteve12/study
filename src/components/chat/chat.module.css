@@ -1,0 +1,134 @@
+.ChatMainComp{
+    width:85%;
+    height:100%;
+
+ 
+        /* overflow-y:scroll !important; */
+        box-sizing: border-box;
+     
+        /* padding-left:2% */
+        padding-left:2%;
+          padding-right:2%;
+          overflow:hidden
+}
+
+.comHeader{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+         box-sizing: border-box;
+         overflow:hidden
+  
+
+}
+
+.comHeader p {
+    font-family: 'Gilroy-Bold';
+font-size: 18px;
+color: #303030;
+
+}
+
+.comPicsCon{
+    width:40px;
+    height:40px;
+    border-radius: 40px;
+    background-color:grey
+}
+
+.comUserPics{
+    display:flex;
+  align-items:center
+    
+}
+
+.comBellIcon{
+    font-size:25px;
+}
+
+.combody{
+    width:100%;
+    height:100%;
+    /* background-color:yellow */
+    display:flex;
+}
+
+.chatCont{
+    width:30%;
+    height:100%;
+    background-color:#FCFCFC;
+    padding-left:1%;
+      padding-right:1%;
+        padding-top:1%;
+        border-right:solid 1px #F2F2F2;
+        /* overflow-y:scroll */
+}
+
+.chatContHeader{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.chatAddBtnCon{
+    width:48px;
+    height:48px;
+    border-radius:48px;
+    border:none;
+ background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(313.78deg, #2855AE -3.15%, #7292CF 100%);
+box-shadow: 0px 3.09677px 15.4839px rgba(50, 145, 255, 0.3);
+border-radius: 65.0323px;
+box-sizing: border-box
+
+}
+
+.chatAddBtn{
+    color:white !important;
+    font-size:25px;
+    cursor:pointer;
+    outline: none;
+    border:none
+
+}
+
+.chatText h1{
+    font-family: 'Gilroy-Bold';
+font-size: 18px;
+color: #303030;
+margin:0px
+}
+
+.chatText p{
+    /* margin:0px; */
+
+font-family: 'Gilroy-Medium';
+font-size: 14px;
+color: #999999;
+
+}
+
+.chatContainer{
+    height:70%;
+    overflow-y: hidden;
+    width:100%;
+  
+
+}
+
+.chatDetailPage{
+ 
+    width:70%;
+    height:90%;
+    box-sizing: border-box;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.selectText{
+    color: #444F60;
+    font-family: 'Gilroy-SemiBold';
+font-size: 24px;
+}

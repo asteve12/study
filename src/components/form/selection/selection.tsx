@@ -50,7 +50,8 @@ export default function SelectItems() {
     <div>
       <FormControl
         sx={{
-          m: 1,
+          m: 0,
+          marginBottom: 1,
           p: 0,
           width: '100%',
           '& .MuiInputLabel-root ': {
@@ -88,10 +89,11 @@ export default function SelectItems() {
       </FormControl>
       <FormControl
         sx={{
-          m: 1,
+          m: 0,
+          marginBottom: 1,
           width: '100%',
           '& .MuiInputLabel-root ': {
-            top:5,
+            top: 5,
             marginTop: 0,
           },
         }}
