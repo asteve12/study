@@ -1,0 +1,284 @@
+.scheduleComp{
+    width:85%;
+    height:100%;
+
+    padding-top:10px;
+    box-sizing: border-box;
+    overflow-y:scroll
+   
+ 
+}
+.HeaderWrapper{
+    padding-left:30px;
+    padding-right:30px;
+}
+
+.scheduleMain{
+    display:flex;
+    width:100%;
+    height:90%;
+    box-sizing: border-box;
+    background-color:#FCFCFC;
+    padding-left:30px;
+    padding-right:30px;
+  
+
+}
+
+.Calendar{
+    width:40%;
+    height:100%;
+      /* padding:20px; */
+   
+}
+
+.availabelSche{
+      width:60%;
+    height:100%;
+      padding-left:40px; 
+      box-sizing:border-box;
+      padding-top:15px
+
+
+}
+.calenderHeader{
+font-family: 'Gilroy-Bold';
+font-size: 24px;
+color: #303030;
+
+
+
+}
+
+.calenderYear{
+    display:flex;
+    width:100%;
+    justify-content:space-between;
+    align-items:center
+
+
+}
+
+.monthName{
+    color: #000000;
+    font-weight:bold;
+    font-size: 16px;
+}
+.btnArrow{
+    display: flex;
+    align-items: center;
+}
+
+.btnArrow button{
+    width:30px;
+    height:30px;
+    border-radius: 4px;
+    margin:5px;
+    border:none;
+    cursor:pointer;
+    font-size:50px;
+    display:flex;
+    align-items:center;
+}
+.calendarStyle{
+   width:100%  !important;
+    height:auto;
+    border:none  !important;
+    padding:0px !important;
+
+}
+
+.courseAvail{
+    width: 100%;
+    
+}
+
+.courseAvail h1{
+    font-family: 'Gilroy-Bold';
+font-size: 22px;
+color: #303030;
+}
+
+.daysContainer{
+  width:100%;
+  display:flex;
+  justify-content:space-between
+ 
+}
+
+.todayCont{
+    color:#4DC591;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:40px;
+    background-color:#EBF7F1;
+    width:83px;
+    border-radius: 8px;
+    font-size: 16px;
+    
+    
+
+}
+/* .todayCont p{
+    margin:0px
+} */
+.dateContainer{
+    display:flex;
+    /* align-items:center; */
+}
+
+.dateDetail{
+    font-family: 'Gilroy';
+    font-size: 14px;
+    color: #999999;
+    height:100%;
+    padding-top:5px
+}
+.dateDetail p {
+    margin:0px;
+}
+
+.dayNumber{
+    font-family: 'Gilroy';
+font-style: normal;
+font-size: 44px;
+color: #444F60;
+margin:0px
+}
+.mnthForBtn{
+    width:100%;
+    height:100%;
+}
+
+.scheduleComp{
+    width:100%;
+}
+.mbCourseContent{
+    display:flex;
+    align-items:center;
+    justify-content:space-between
+}
+.mbCourseText{
+    font-size:14px;
+    color:#BCC1CD;
+    font-family: Poppins;
+    display:flex;
+    align-items:center;
+}
+
+
+
+@media(max-width:920px){
+    .scheduleMain{
+        flex-direction: column;
+        /* background-color:green; */
+        height: auto;
+    }
+    .Calendar{
+        width:100%;
+        margin-bottom:20px;
+    }
+    .availabelSche{
+          width:100%;
+          padding: 0px;
+
+    }
+       .mddaysContainer{
+        display:flex;
+        justify-content:space-between
+    }
+      .daysContainer{
+        display:none;
+        justify-content:space-between;
+    }
+      .smdaysContainer{
+        display:none;
+        justify-content:space-between
+    }
+
+   
+
+}
+
+
+@media(max-width:400px){
+    .HeaderWrapper{
+        display:none
+    }
+    .mobileCalendar{
+        display:block
+    }
+    .availabelSche{
+        width:100%;
+    }
+
+      .Calendar{
+        display:none;
+    }
+    .smdaysContainer{
+        display:flex;
+        justify-content:space-between
+    }
+
+      .daysContainer{
+        display:none
+    }
+     .mddaysContainer{
+        display:none;
+    }
+      .mbCourseContent{
+        display:flex;
+    }
+
+}
+
+@media(min-width:400px){
+    .HeaderWrapper{
+        display:block
+    }
+    .Calendar{
+        display:block
+    }
+      .mobileCalendar{
+        display:none
+    }
+
+     .smdaysContainer{
+        display:none
+    }
+     .daysContainer{
+        display:none
+    }
+
+    .mddaysContainer{
+        display:flex;
+        justify-content: space-between;
+    }
+    .mbCourseContent{
+        display:none;
+    }
+
+}
+
+@media(min-width:920px){
+      .daysContainer{
+        display:flex;
+        justify-content:space-between;
+    }
+       .mddaysContainer{
+        display:none !important; 
+    }
+    
+      .smdaysContainer{
+        display:none;
+        justify-content:space-between
+    }
+
+}
+
+
+
+
+
+

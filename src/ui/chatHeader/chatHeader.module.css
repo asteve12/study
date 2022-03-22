@@ -1,0 +1,47 @@
+.comHeader{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+         box-sizing: border-box;
+         overflow:hidden;
+       
+  
+
+}
+
+.comHeader p {
+    font-family: 'Gilroy-Bold';
+font-size: 18px;
+color: #303030;
+
+}
+
+.comPicsCon{
+    width:40px;
+    height:40px;
+    border-radius: 40px;
+    background-color:grey
+}
+
+.comUserPics{
+    display:flex;
+  align-items:center
+    
+}
+
+.comBellIcon{
+    font-size:25px;
+}
+
+.combody{
+    width:100%;
+    height:100%;
+    /* background-color:yellow */
+    display:flex;
+}
+
+.titleStyle{
+    color: #303030;
+    font-family: 'Gilroy-Bold';
+font-size: 18px;
+}

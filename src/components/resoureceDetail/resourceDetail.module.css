@@ -1,0 +1,149 @@
+.chatDetailPage{
+    width:100%;
+    height:100%;
+    padding-left:3%;
+      
+      box-sizing: border-box;
+      position:relative
+
+}
+.chatDetailPageHeader{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between
+}
+.profilePic{
+  width:40px;
+  height:40px;
+  border-radius:40px;
+  background-color:grey;
+}
+
+.picsCon{
+  display:flex;
+ 
+}
+
+.userName{
+  margin-left:15px
+}
+.userName h3{
+  margin:0px;
+  font-family: 'Gilroy-SemiBold';
+font-size: 18px;
+color: #000000;
+}
+
+.userName p{
+   margin:0px;
+   margin-top:5px;
+   color: #B5B5B5;
+   font-family: 'Gilroy-Regular';
+font-size: 10px;
+}
+.unfollowBtn button{
+  font-family: 'Gilroy';
+font-style: normal;
+font-size: 14px;
+
+height:17px;
+padding:15px;
+box-sizing:border-box;
+display:flex;
+align-items:center;
+border-radius:10px;
+background:none;
+border:solid 1px #99999980;
+color: #444F60;
+cursor:pointer
+
+
+}
+
+.inputMessageCont{
+  position:absolute;
+  bottom:10px;
+  width:100%
+}
+
+.inputMsgCont{
+  width: 100%;
+  display:flex;
+  align-items:center;
+justify-content:space-between;
+box-sizing:border-box;
+padding:10px;
+}
+
+.sendMsgBtn{
+  width:60px;
+  height:60px;
+  border-radius:60px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(313.78deg, #2855AE -3.15%, #7292CF 100%);
+ border:none;
+
+
+}
+
+.inputCont{
+  width:90%;
+  height:60px;
+  box-sizing: border-box;
+  border-radius: 43px;
+  border: 1px solid rgba(126, 139, 182, 0.3);
+  display:flex;
+}
+.inputCont input{
+    width:90%;
+  height:100%;
+  box-sizing: border-box;
+  border-radius: 43px;
+  /* border: 1px solid rgba(126, 139, 182, 0.3); */
+  display:flex;
+  border:none;
+  outline:none;
+  padding-left:10px
+
+}
+
+.recorder{
+  display:flex;
+  align-items:center;
+}
+
+.recorder button{
+  background:none;
+  border:none;
+  outline:none;
+  cursor:pointer
+}
+
+.textContainer{
+  width:100%;
+  height:auto;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  
+
+}
+.bgImgContainer{
+     width:90%;
+    height:70%
+}
+
+.resoureBg{
+    width:100%;
+    height:90%;
+    object-fit:cover
+}
+
+.todayText{
+  font-family: 'Gilroy';
+font-style: normal;
+font-size: 12px;
+color: #999999;
+text-align: center;
+}
+

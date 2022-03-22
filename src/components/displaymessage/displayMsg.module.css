@@ -1,0 +1,48 @@
+
+.mainText{
+    /* padding-left:30%; */
+    display:flex;
+              
+ 
+      height:auto;
+      
+}
+.textCont{
+  
+    height:auto;
+   
+    width:204.41px;
+background:none;
+color: #444F60;
+padding: 8px 16px;
+border: 1px solid #E8E8E8;
+border-radius: 16px;
+font-family: 'Gilroy';
+font-style: normal;
+
+font-size: 14px;
+text-align: center;
+
+}
+
+.receiverStyle{
+
+      height:auto;
+   
+    width:204.41px;
+
+color: #444F60;
+padding: 8px 16px;
+border: 1px solid #E8E8E8;
+border-radius: 16px;
+font-family: 'Gilroy';
+font-style: normal;
+
+font-size: 14px;
+text-align: center;
+background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(313.78deg, #2855AE -3.15%, #7292CF 100%);
+color:white;
+margin-left: auto;
+margin-top:20px
+
+}

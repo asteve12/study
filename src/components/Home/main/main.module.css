@@ -1,0 +1,220 @@
+.homeMainPage{
+    width:83%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background-color: #FCFCFC;
+        /* overflow-y:scroll !important; */
+        box-sizing: border-box;
+        overflow-y: scroll;
+        /* padding-left:2% */
+}
+.scheduleCard{
+   width:300px;
+    height:150px;  
+    flex:0 0 350px;
+    margin-right:15px;
+ 
+}
+
+.homeMainPageWrapper{
+    width:100%;
+    height:100%;
+      box-sizing: border-box;
+}
+
+.welcomeMessage{
+    display:flex;
+    width:100%;
+    align-items:center;
+    background-color:white;
+    margin-top:0px !important;
+    padding-left:4%;
+    box-sizing: border-box !important;
+
+}
+
+.circle{
+    width: 5px;
+height: 5px;
+background-color: #415E9A;
+border-radius: 5px;
+
+}
+
+.circleRed{
+     width: 10.01px;
+height: 10.01px;
+ background: #F8286C;;
+border-radius: 10px;
+
+}
+
+.pointGained{
+    color: #415E9A;
+    font-family: 'Gilroy-SemiBold';
+font-size: 14px;
+
+}
+
+.welcomeText{
+    color: #303030;
+    font-family: 'Gilroy-Bold';
+font-size: 18px;
+}
+
+.upcomingWrapper{
+    width:100%;
+    height:90%;
+    padding-left:1%;
+    box-sizing: border-box;
+      padding-left:4%;
+        padding-right:4%;
+
+}
+
+.upcomingWrapperHeader{
+    display:flex;
+    width:100%;
+    
+    align-items:center;
+}
+
+.upcomingText{
+color: #444F60;
+font-family: 'Gilroy-Bold';
+font-size: 24.0232px;
+}
+
+.courseCardCont{
+    display:flex;
+    flex-wrap: nowrap;
+    width:100%;
+    height:auto;
+    justify-content: space-between;
+    overflow-x: scroll !important;
+  
+  
+  
+}
+
+.scheduleText{
+    color: #444F60;
+    font-family: 'Gilroy-Bold';
+   font-size: 18.0174px;
+       margin:0px;
+}
+.nextLesson{
+    font-size: 14.0135px;
+    font-family: 'Gilroy';
+    color: #999999;
+       margin:0px;
+
+}
+
+.scheduleCardWrapper{
+    display:flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+
+}
+
+
+.SubjectCont h1{
+    font-family: 'Gilroy-Bold';
+font-size: 18.0174px;
+color: #444F60;
+margin: 0px;
+}
+
+.SubjectCont p{
+font-family: 'Gilroy-Regular';
+font-size: 14.0135px;
+color: #444F60;
+margin: 0px;
+}
+
+.subjectCardContainer{
+    display:flex;
+   
+    flex-wrap: nowrap;
+    height:auto;
+    justify-content:space-between;
+
+    overflow-x:scroll
+}
+
+.ContinueCard h1{
+    font-family: 'Gilroy-Bold';
+font-size: 18.0174px;
+color: #444F60;
+margin:0px
+}
+
+.ContinueCard p{
+    margin:0px;
+    color: #999999;
+    font-family: 'Gilroy';
+font-style: normal;
+font-size: 14px;
+
+}
+
+.continuCardWrap{
+    display:flex;
+    width:100%;
+    flex-wrap:nowrap;
+    justify-content: space-between;
+    height:auto;
+    overflow-x:scroll
+}
+/*responsive styles*/
+.setExamDateCont{
+    width:100%;
+    height:137.7px;
+    border-radius: 15.1885px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(313.78deg, #2855AE -3.15%, #7292CF 100%);
+    box-sizing: border-box;
+    padding:20px;
+    text-align:center;
+    color:white;
+    font-family: 'Gilroy-SemiBold';
+font-size: 16px;
+}
+
+.setExamDateCont button{
+    background:none;
+    color:white;
+    border-radius: 15.1885px;
+    width:auto;
+    outline:none;
+    border:solid 1px white;
+    padding:6px;
+    box-sizing: border-box ;
+    cursor:pointer;
+       margin-bottom:100px;
+
+    
+}
+
+
+@media(max-width:920px){
+    .homeMainPage{
+        width:100%
+    }
+    .setExamDateCont{
+        display:block;
+     
+    }
+
+}
+@media(min-width:920px){
+    .homeMainPage{
+        width:83%
+    }
+      .setExamDateCont{
+        display:none
+    }
+
+}

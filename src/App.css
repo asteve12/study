@@ -1,5 +1,162 @@
 
-
-.MuiInputBase-root-MuiInput-root:last-child{
-    border:none !important;
+*{
+    font-family: 'Gilroy-Regular', Gilroy-Regular, sans-serif !important;
+    /* box-sizing:border-box */
 }
+
+.react-calendar__month-view__weekdays__weekday{
+    /* background-color:green */
+    font-family: 'Gilroy-Medium';
+font-size: 14px;
+color: #8C8C8C;
+background-color: #FCFAF5;
+}
+.react-calendar__month-view__weekdays__weekday:first-child,.react-calendar__month-view__weekdays__weekday:last-child{
+    background-color: #F6F5F2;
+
+}
+
+.react-calendar__tile--active{
+    width:40px;
+    height:40px;
+    border-radius: 10px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(313.78deg, #2855AE -3.15%, #7292CF 100%) !important;
+    color:white !important;
+    
+}
+.react-calendar__tile--active:hover{
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(313.78deg, #2855AE -3.15%, #7292CF 100%);
+color:white
+}
+.react-calendar__tile--now{
+    background:#F6F5F2;
+    color:grey
+   
+} 
+
+
+
+
+abbr[title] {
+    text-decoration: none !important;
+}
+
+.react-calendar__tile--now:enabled:focus{
+    background: none !important;
+}
+.react-calendar__tile--now:enabled:hover{
+        background:#000000
+
+}
+
+.react-calendar__navigation button:hover{
+    background:#F2F3F8 !important
+} 
+
+.react-calendar{
+    background:none
+
+}
+
+.activeButton{
+        border-bottom:solid 2px #7187B3; 
+          width:50%;
+    background:none;
+    border:none;
+    border-bottom:solid 1px #EEEFF1; 
+    outline:none;
+    cursor:pointer;
+
+}
+
+.simplebar-content{
+    display:flex;
+    flex-wrap: nowrap;
+    width:auto;
+    height:auto;
+    /* justify-content: space-between; */
+    overflow-y:hidden  !important;
+       cursor:pointer;
+ 
+ 
+  
+  
+}
+.simplebar-scroll-content{
+    width:auto;
+    height:100%;
+    display:flex;
+}
+
+.carousel-container{
+    display:flex;
+    justify-content:space-between;
+    width:100%;
+    
+  
+
+  
+}
+
+
+.carousel-item{
+    width:100% !important;
+    height:auto;
+  
+   
+   
+}
+
+.subject-carousel-container{
+    display:flex;
+    justify-content:space-between;
+    width:auto;
+  
+
+  
+}
+
+.subject-carousel-item{
+    width:auto !important;
+    height:auto;
+  
+   
+   
+}
+.schedule-carousel-container{
+    display:flex;
+    justify-content:space-between;
+    width:auto;
+  
+
+  
+}
+
+.schedule-carousel-item{
+    width:auto !important;
+    height:auto;
+  
+   
+   
+}
+
+.continue-carousel-container{
+    display:flex;
+    justify-content:space-between;
+    width:auto;
+  
+
+  
+}
+
+.continue-carousel-item{
+    width:auto !important;
+    height:auto;
+  
+   
+   
+}
+
+
+
+

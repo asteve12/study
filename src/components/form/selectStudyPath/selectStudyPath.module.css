@@ -1,0 +1,73 @@
+.selectStdPath{
+        display:flex;
+        justify-content: space-between;
+        width:100%;
+}
+
+.jambPath,.waecPath{
+    width:210.4px;
+    height:214.8px;
+    border-radius: 11.6023px;
+    border: 1px solid rgba(126, 139, 182, 0.3) !important;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    cursor:pointer;
+    
+  
+    
+}
+
+.indicatedSelectedPath{
+    border: 1.51682px solid rgba(126, 139, 182, 0.3);
+      width:45%;
+    height:224.8px;
+    border-radius: 11.6023px;
+    border: 1px solid rgba(126, 139, 182, 0.3) !important;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+      cursor:pointer;
+
+}
+
+.smjambPath,.smWaecPath{
+     width:115.85px;
+    height:115.85px;
+    border-radius: 11.6023px;
+    border: 1px solid rgba(126, 139, 182, 0.3) !important;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    cursor:pointer;
+    overflow:hidden
+
+}
+
+@media(max-width:1150px){
+  .jambPath,.waecPath{
+  width:160.4px;
+  height:170.8px;
+  overflow: hidden;
+  }
+}
+
+@media(max-width:410px){
+   .jambPath,.waecPath{
+display:none;
+  }
+  .smjambPath,.smWaecPath{
+    display:flex;
+  }
+
+}
+
+@media(min-width:410px){
+   .jambPath,.waecPath{
+display:flex;
+  }
+   .smjambPath,.smWaecPath{
+    display:none;
+  }
+
+}

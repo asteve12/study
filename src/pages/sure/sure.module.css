@@ -4,3 +4,13 @@
     display:flex;
     overflow:hidden;
 }
+
+
+@media(max-width:900px){
+    .surePageWrapper{
+        flex-direction: column;
+          overflow:scroll;
+
+    }
+
+}

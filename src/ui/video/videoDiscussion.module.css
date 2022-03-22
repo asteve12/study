@@ -1,0 +1,57 @@
+.videoDiscus{
+    display:flex;
+    justify-content:space-between;
+}
+.userPics{
+    width:56px;
+    height:56px;
+    border-radius:56px;
+    background-color:#F2F3F8;
+}
+.profileDetailCont{
+    display:flex;
+    align-items:center;
+}
+.nameCont p{
+    margin:0px;
+    color:white;
+}
+.IconCont{
+    width:56px;
+    height:56px;
+    border-radius:56px;
+   background: #F8286C;
+   display:flex;
+   align-items:center;
+   justify-content:center
+
+}
+
+.userName{
+    margin:0px;
+   
+    font-family: 'Gilroy-Medium';
+font-size: 12px;
+color:#41609B;
+}
+
+.userMessage{
+      margin:0px;
+      margin-top:3px;
+   
+  font-family: 'Gilroy-Regular';
+font-size: 16px;
+color: #444F60
+
+}
+
+.IconContChat{
+      width:56px;
+    height:56px;
+    border-radius:56px;
+
+   display:flex;
+   align-items:center;
+   justify-content:center
+
+}
