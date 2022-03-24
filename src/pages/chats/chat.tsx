@@ -5,6 +5,7 @@ import style from "./chats.module.css"
 
 import Sidebar from "../../components/Home/sidebar/sidebar"
 import ChatCom from "../../components/chat/chat"
+import {MobileChatComp} from "../../components/chat/chat"
 
 
 
@@ -17,11 +18,14 @@ import ChatCom from "../../components/chat/chat"
 
     return (
       <section className={style.ChatPageWrapper}>
-        <Sidebar></Sidebar>
+        <div className={style.mbWrapper}>
+          <Sidebar></Sidebar>
+        </div>
         <ChatCom
           status={displayChatPage}
           handleChatPage={chatPageHandler}
         ></ChatCom>
+        <MobileChatComp handleChatPage={chatPageHandler}></MobileChatComp>
       </section>
     );
 }

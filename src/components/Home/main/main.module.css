@@ -121,11 +121,11 @@ font-size: 24.0232px;
 }
 
 
-.SubjectCont h1{
-    font-family: 'Gilroy-Bold';
-font-size: 18.0174px;
-color: #444F60;
-margin: 0px;
+.subjectText{
+    font-family: 'Gilroy-Bold' !important;
+font-size: 18.0174px !important;
+color: #444F60 !important;
+margin: 0px !important;
 }
 
 .SubjectCont p{
@@ -145,11 +145,11 @@ margin: 0px;
     overflow-x:scroll
 }
 
-.ContinueCard h1{
-    font-family: 'Gilroy-Bold';
-font-size: 18.0174px;
-color: #444F60;
-margin:0px
+.continueText{
+    font-family: 'Gilroy-Bold' !important;
+font-size: 18.0174px !important;
+color: #444F60 !important;
+margin:0px !important
 }
 
 .ContinueCard p{

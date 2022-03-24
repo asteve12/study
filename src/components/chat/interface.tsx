@@ -4,3 +4,8 @@ interface chatProps{
 }
 
 export default chatProps;
+
+
+export interface mbChatProps {
+  handleChatPage: () => void;
+}

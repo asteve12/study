@@ -5,14 +5,20 @@
     align-items: center;
     justify-content: center;
 }
+
+.inpuEmail{
+    text-decoration: none !important;
+    color:#6A82AF
+  
+}
 .contentWrapper{
     height:80%;
     width:80%;
 }
-.sureComponent h1{
-    color: #444F60;
-    font-family: 'Gilroy-Bold';
-font-size: 32px;
+.textHeader{
+    color: #444F60  !important;
+    font-family: 'Gilroy-Bold' !important;
+font-size: 32px !important;
 
 }
 
@@ -21,6 +27,7 @@ font-size: 32px;
     font-family: 'Gilroy-Regular';
 font-size: 14px;
 }
+
 
 
 @media(max-width:900px){

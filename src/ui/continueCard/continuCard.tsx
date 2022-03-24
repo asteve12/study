@@ -13,7 +13,7 @@ const ContinueCard: React.FC<continueInterface> = (props) => {
   return (
     <section className={style.continueCard}>
       <div className={style.continueCardDetail}>
-        <h1>Mathematics</h1>
+        <p className={style.cardDetailHeader}>Mathematics</p>
 
         <p>Chapter 1: Introduction</p>
         <div className={style.timerCont}>

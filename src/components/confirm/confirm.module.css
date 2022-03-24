@@ -13,16 +13,19 @@
 
 }
 
-.confirmCompCon h1{
-    color: #444F60;
-    font-size: 32px;
-    font-family: 'Gilroy-Bold';
+.confirmHeader{
+    color: #444F60 !important;
+    font-size: 32px !important;
+    font-family: 'Gilroy-Bold' !important;
+    margin-top:20px !important;
+    
 }
 
 .confirmCompCon p{
     color: #999999;
     font-family: 'Gilroy-Regular';
 font-size: 14px;
+margin:0px
 
 }
 

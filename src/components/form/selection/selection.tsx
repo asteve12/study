@@ -5,6 +5,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+//style
+import style from "./selection.module.css"
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -17,16 +19,18 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
+const courses = [
+  'Chemistry',
+  'Physics',
   
 ];
 
-function getStyles(name: string, personName: string[], theme: Theme) {
+const universities = ['FUTA', 'UNILAG'];
+
+function getStyles(course: string, schoolName: string[], theme: Theme) {
   return {
     fontWeight:
-      personName.indexOf(name) === -1
+      schoolName.indexOf(course) === -1
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
   };
@@ -34,38 +38,58 @@ function getStyles(name: string, personName: string[], theme: Theme) {
 
 export default function SelectItems() {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState<string[]>([]);
+  const [schoolName, setSchoolName] = React.useState<string[]>([]);
+   const [universityName, setUniversityName] = React.useState<string[]>([]);
 
-  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+  const handleNameChange = (event: SelectChangeEvent<typeof schoolName>) => {
     const {
       target: { value },
     } = event;
-    setPersonName(
+    setSchoolName(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value
     );
   };
+    const handleUniversityChange = (
+      event: SelectChangeEvent<typeof universityName>
+    ) => {
+      const {
+        target: { value },
+      } = event;
+      setUniversityName(
+        // On autofill we get a stringified value.
+        typeof value === 'string' ? value.split(',') : value
+      );
+    };
 
   return (
     <div>
       <FormControl
         sx={{
-          m: 0,
+          mb: 0,
           marginBottom: 1,
-          p: 0,
+          paddingTop: 0,
           width: '100%',
           '& .MuiInputLabel-root ': {
             top: 5,
             marginTop: 0,
           },
+          '& fieldset': {
+            border: 'none',
+          },
+          border: 'solid 1px #DFE3EC',
+          borderRadius: '7px',
         }}
+        className={style.chooseBx}
       >
-        <InputLabel id='demo-multiple-name-label'>Course</InputLabel>
+        <InputLabel id='demo-multiple-name-label' className={style.labelStyle}>
+          Course
+        </InputLabel>
         <Select
           labelId='demo-multiple-name-label'
           id='demo-multiple-name'
-          value={personName}
-          onChange={handleChange}
+          value={schoolName}
+          onChange={handleNameChange}
           input={<OutlinedInput label='Course' />}
           MenuProps={MenuProps}
           sx={{
@@ -76,13 +100,13 @@ export default function SelectItems() {
             },
           }}
         >
-          {names.map((name) => (
+          {courses.map((course) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
+              key={course}
+              value={course}
+              style={getStyles(course, schoolName, theme)}
             >
-              {name}
+              {course}
             </MenuItem>
           ))}
         </Select>
@@ -96,14 +120,21 @@ export default function SelectItems() {
             top: 5,
             marginTop: 0,
           },
+          '& fieldset': {
+            border: 'none',
+          },
+          border: 'solid 1px #DFE3EC',
+          borderRadius: '7px',
         }}
       >
-        <InputLabel id='demo-multiple-name-label'>School</InputLabel>
+        <InputLabel id='demo-multiple-name-label' className={style.labelStyle}>
+          School
+        </InputLabel>
         <Select
           labelId='demo-multiple-name-label'
           id='demo-multiple-name'
-          value={personName}
-          onChange={handleChange}
+          value={universityName}
+          onChange={handleUniversityChange}
           input={<OutlinedInput label='Name' />}
           MenuProps={MenuProps}
           sx={{
@@ -114,13 +145,13 @@ export default function SelectItems() {
             },
           }}
         >
-          {names.map((name) => (
+          {universities.map((university) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
+              key={university}
+              value={university}
+              style={getStyles(university, schoolName, theme)}
             >
-              {name}
+              {university}
             </MenuItem>
           ))}
         </Select>

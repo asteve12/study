@@ -1,19 +1,17 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
-
 import MenuItem from '@mui/material/MenuItem';
+import { Theme, useTheme } from '@mui/material/styles';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 //styles
 import style from './registerForm.module.css';
 
@@ -22,24 +20,29 @@ import style from './registerForm.module.css';
 
 
 
-const currencies = [
-  {
-    value: 'USD',
-    label: 'state',
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
   },
-  {
-    value: 'EUR',
-    label: 'state',
-  },
-  {
-    value: 'BTC',
-    label: 'state',
-  },
-  {
-    value: 'JPY',
-    label: 'state',
-  },
-];
+};
+
+const statesOfCoun = ['Abuja', 'Oyo'];
+
+function getStyles(states: string, stateName: string[], theme: Theme) {
+  return {
+    fontWeight:
+      stateName.indexOf(states) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}
+
+
 
 interface State {
   LegalFirstName: string;
@@ -51,6 +54,9 @@ interface State {
 }
 
 export default function RegisterForm() {
+  const theme = useTheme();
+  const [stateName, setStateName] = React.useState<string[]>([]);
+
   const inputProps = {
     border:0,
   color:"grey"
@@ -65,17 +71,20 @@ export default function RegisterForm() {
     City:""
   });
 
-   const [currency, setCurrency] = React.useState('EUR');
 
-  // const handleChange =
-  //   (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-  //     setValues({ ...values, [prop]: event.target.value });
-  //   };
 
-  //handledropdown
-   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-     setCurrency(event.target.value);
-   };
+const handleStateNameChange = (
+      event: SelectChangeEvent<typeof stateName>
+    ) => {
+      const {
+        target: { value },
+      } = event;
+      setStateName(
+     
+        typeof value === 'string' ? value.split(',') : value
+      );
+    };
+ 
 
   const handleLegalFirstNamechange =
     (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -110,14 +119,8 @@ export default function RegisterForm() {
                });
              };
 
-  // const handleLegalLastName = () => {
-  //   setValues({
-  //     ...values,
-  //     LegalLastName: !values.showPassword,
-  //   });
-  // };
 
-  const handleMouseDownPassword = (
+ const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
@@ -143,17 +146,7 @@ export default function RegisterForm() {
             type='text'
             value={values.LegalFirstName}
             onChange={handleLegalFirstNamechange('LegalFirstName')}
-            // endAdornment={
-            //   <InputAdornment position='end'>
-            //     <IconButton
-            //       aria-label='toggle password visibility'
-            //       onClick={handleClickShowPassword}
-            //       onMouseDown={handleMouseDownPassword}
-            //     >
-            //       {values.showPassword ? <VisibilityOff /> : <Visibility />}
-            //     </IconButton>
-            //   </InputAdornment>
-            // }
+          
           />
         </FormControl>
       </div>
@@ -168,7 +161,7 @@ export default function RegisterForm() {
             htmlFor='standard-adornment-password'
             className={style.labelName}
           >
-            legal last name
+            Legal last name
           </InputLabel>
           <Input
             id='standard-adornment-password'
@@ -209,65 +202,82 @@ export default function RegisterForm() {
             type='text'
             value={values.City}
             onChange={handleCitychange('City')}
-            // endAdornment={
-            //   <InputAdornment position='end'>
-            //     <IconButton
-            //       aria-label='toggle password visibility'
-            //       onClick={handleClickShowPassword}
-            //       onMouseDown={handleMouseDownPassword}
-            //     >
-            //       {values.showPassword ? <VisibilityOff /> : <Visibility />}
-            //     </IconButton>
-            //   </InputAdornment>
-            // }
           />
         </FormControl>
         <div className={style.textfield}>
-          <TextField
-          
-            className={style.disableTextFieldSTyle}
-            
-            id='standard-select-currency'
-            select
-            label='Select'
-            value={currency}
-            onChange={handleChange}
-            variant='standard'
-            inputProps={inputProps}
-            sx={{
-              border: 0,
-              bottom: 0,
-              '& .MuiInput-root::after': {
-                border: 0,
-              },
-              '& label': {
-                display: 'none',
-              },
-              '& .MuiInput-root::before': {
-                borderBottom: 0,
-              },
-              '& .MuiInput-root:hover:not(.Mui-disabled):before': {
-                borderBottom: 0,
-                backgroundColor: 'none',
-              },
-
-              '& .MuiInput-input:focus': {
-              backgroundColor:"#FFFFFF",
-              
-              },
-              
-            }}
-          >
-            {currencies.map((option) => (
-              <MenuItem
-                className={style.afterMenu}
-                key={option.value}
-                value={option.value}
+      
+          <div className={style.frmCont}>
+            <FormControl
+              className={style.courseFormWraper}
+              sx={{
+                m: 0,
+                marginBottom: 1,
+                p: 0,
+                width: '100%',
+                '& .MuiInputLabel-root ': {
+                  top: 5,
+                  marginTop: 0,
+                },
+                '& label': {
+                  color: 'yellow',
+                },
+              }}
+            >
+              <InputLabel
+                id='demo-multiple-name-label'
+                className={style.courseLabel}
               >
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
+                Course
+              </InputLabel>
+
+              <Select
+                className={style.inputBxWrapper}
+                labelId='demo-multiple-name-label'
+                id='demo-multiple-name'
+                value={stateName}
+                onChange={handleStateNameChange}
+                input={
+                  <OutlinedInput
+                    sx={{
+                      '& label:focus': {
+                        color: 'yellow',
+                      },
+                    }}
+                    label='Course'
+                  />
+                }
+                MenuProps={MenuProps}
+                sx={{
+                  '& legend': {
+                    border: 0,
+                    outline: 0,
+                    display: 'none',
+                  },
+                  '& fieldset ': {
+                    borderColor: '#DBDFE9',
+                    borderWidth: '0px',
+                    border: 'none',
+                    height: 40,
+                    width: 130,
+                    marginBottom: 0,
+                  },
+                  '& svg': {
+                    top: 20,
+                  },
+                }}
+              >
+                {statesOfCoun.map((eachState) => (
+                  <MenuItem
+                    key={eachState}
+                    value={eachState}
+                    style={getStyles(eachState, stateName, theme)}
+                  >
+                    {eachState}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
         </div>
       </div>
       <br />
@@ -290,17 +300,7 @@ export default function RegisterForm() {
             type='text'
             value={values.phonenumber}
             onChange={handlePhoneNumberchange('phonenumber')}
-            // endAdornment={
-            //   <InputAdornment position='end'>
-            //     <IconButton
-            //       aria-label='toggle password visibility'
-            //       onClick={handleClickShowPassword}
-            //       onMouseDown={handleMouseDownPassword}
-            //     >
-            //       {values.showPassword ? <VisibilityOff /> : <Visibility />}
-            //     </IconButton>
-            //   </InputAdornment>
-            // }
+            
           />
         </FormControl>
       </div>
@@ -324,17 +324,7 @@ export default function RegisterForm() {
             type='text'
             value={values.NIN}
             onChange={handleNINchange('NIN')}
-            // endAdornment={
-            //   <InputAdornment position='end'>
-            //     <IconButton
-            //       aria-label='toggle password visibility'
-            //       onClick={handleClickShowPassword}
-            //       onMouseDown={handleMouseDownPassword}
-            //     >
-            //       {values.showPassword ? <VisibilityOff /> : <Visibility />}
-            //     </IconButton>
-            //   </InputAdornment>
-            // }
+          
           />
         </FormControl>
       </div>

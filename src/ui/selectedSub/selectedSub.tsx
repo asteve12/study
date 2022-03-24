@@ -28,6 +28,7 @@ const SelectedSubject: React.FC<selectInterface> = (props) => {
   return (
     <section>
       <p className={style.subjects}>Subjects</p>
+      <br></br>
       {offeredSubject.map((eachItems, index) => {
         return (
           <div className={style.subjectBox}>

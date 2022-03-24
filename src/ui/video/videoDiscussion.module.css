@@ -55,3 +55,30 @@ color: #444F60
    justify-content:center
 
 }
+
+@media(max-width:700px){
+    .userPics{
+        width:39px;
+        height:39px;
+        border-radius:39px;
+        border: 2.29412px solid #444F60;
+    }
+    .IconCont{
+        width:45px;
+        height:45px;
+        border-radius:45px;
+    }
+ 
+
+}
+@media(max-width:400px){
+       .nameCont p{
+        font-size:10px;
+    }
+    .userMsg{
+         font-size:12px !important;
+
+    }
+    
+
+}

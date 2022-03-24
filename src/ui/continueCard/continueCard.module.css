@@ -25,8 +25,12 @@ margin-right:10px;
 }
 
 
-.continueCardDetail h1{
-  margin-bottom:10px
+.cardDetailHeader{
+  margin-bottom:0px !important;
+  font-family:'Gilroy-SemiBold' !important;
+  font-size: 19.9486px !important;
+  color: #444F60 !important;
+
 }
 
 .continueCardDetail p{

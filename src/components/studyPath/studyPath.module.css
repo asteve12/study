@@ -2,7 +2,7 @@
     width:50%;
     height:100%;
     display:flex;
-    /* align-items: center; */
+    align-items: center;
     justify-content:center;
  
  
@@ -12,11 +12,18 @@
 }
 
 .studyPathContainer{
-    height:auto;
+    height:90%;
     width:80%;
 }
+.descText{
+     color: #999999;
+ font-family: 'Gilroy-Regular';
+font-size: 14px;
+margin: 0;
 
-.studyPathContainer h1{
+}
+
+.stdyHeader{
  color: #444F60;
  font-family: 'Gilroy-Bold';
 font-size: 32px;
