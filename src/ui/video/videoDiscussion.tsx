@@ -18,7 +18,7 @@ const VideoDiscussion:React.FC<chatInterface> = (props)=>{
           &nbsp;
           <section className={style.nameCont}>
             <p>Kaiya </p>
-            <p>So amazing!!!</p>
+            <p className={style.userMsg}>So amazing!!!</p>
           </section>
         </div>
         <div>
@@ -33,20 +33,23 @@ const VideoDiscussion:React.FC<chatInterface> = (props)=>{
    }
     if (props.type === 'chatContainer') {
       return (
-        <section className={style.videoDiscus}>
-          <div className={style.profileDetailCont}>
-            <section className={style.userPics}></section>
-            &nbsp;
-            <section className={style.nameContChat}>
-              <p className={style.userName}>Kaiya </p>
-              <p className={style.userMessage}>So amazing!!!</p>
-            </section>
-          </div>
-          <div>
-            <section className={style.IconContChat}>
-              <img src={LoveIconfull} alt='' />
-            </section>
-          </div>
+     
+          <section className={style.videoDiscus}>
+          
+            <div className={style.profileDetailCont}>
+              <section className={style.userPics}></section>
+              &nbsp;
+              <section className={style.nameContChat}>
+                <p className={style.userName}>Kaiya </p>
+                <p className={style.userMessage}>So amazing!!!</p>
+              </section>
+            </div>
+            <div>
+              <section className={style.IconContChat}>
+                <img src={LoveIconfull} alt='' />
+              </section>
+            </div>
+     
         </section>
       );
     }

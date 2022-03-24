@@ -26,11 +26,19 @@ export default function UseFormControl() {
       component='form'
       noValidate
       autoComplete='off'
-      sx={{ display: 'flex', justifyContent: 'space-between' }}
+      sx={{ display: 'flex', justifyContent: 'space-between', border: 'none' }}
     >
       <FormControl
         className={style.formContainer}
-        sx={{ width: '78px', height: '78px', borderRadius: '8px' }}
+        sx={{
+          width: '78px',
+          height: '78px',
+          borderRadius: '8px',
+          '& fieldset ': {
+            border: 'none',
+          },
+          border: 'solid 1px #E9EBF1',
+        }}
       >
         <OutlinedInput
           placeholder='?'
@@ -44,7 +52,15 @@ export default function UseFormControl() {
       </FormControl>
       <FormControl
         className={style.formContainer}
-        sx={{ width: '78px', height: '78px', borderRadius: '8px' }}
+        sx={{
+          width: '78px',
+          height: '78px',
+          borderRadius: '8px',
+          '& fieldset ': {
+            border: 'none',
+          },
+          border: 'solid 1px #E9EBF1',
+        }}
       >
         <OutlinedInput
           placeholder='?'
@@ -58,7 +74,15 @@ export default function UseFormControl() {
       </FormControl>
       <FormControl
         className={style.formContainer}
-        sx={{ width: '78px', height: '78px', borderRadius: '8px' }}
+        sx={{
+          width: '78px',
+          height: '78px',
+          borderRadius: '8px',
+          '& fieldset ': {
+            border: 'none',
+          },
+          border: 'solid 1px #E9EBF1',
+        }}
       >
         <OutlinedInput
           placeholder='?'
@@ -72,7 +96,15 @@ export default function UseFormControl() {
       </FormControl>
       <FormControl
         className={style.formContainer}
-        sx={{ width: '78px', height: '78px', borderRadius: '8px' }}
+        sx={{
+          width: '78px',
+          height: '78px',
+          borderRadius: '8px',
+          '& fieldset ': {
+            border: 'none',
+          },
+          border: 'solid 1px #E9EBF1',
+        }}
       >
         <OutlinedInput
           placeholder='?'
@@ -86,7 +118,15 @@ export default function UseFormControl() {
       </FormControl>
       <FormControl
         className={style.formContainer}
-        sx={{ width: '78px', height: '78px', borderRadius: '8px' }}
+        sx={{
+          width: '78px',
+          height: '78px',
+          borderRadius: '8px',
+          '& fieldset ': {
+            border: 'none',
+          },
+          border: 'solid 1px #E9EBF1',
+        }}
       >
         <OutlinedInput
           placeholder='?'

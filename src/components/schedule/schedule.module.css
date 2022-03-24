@@ -93,10 +93,11 @@ color: #303030;
     
 }
 
-.courseAvail h1{
-    font-family: 'Gilroy-Bold';
-font-size: 22px;
-color: #303030;
+.courseText{
+    font-family: 'Gilroy-Bold' !important;
+font-size: 22px !important;
+color: #303030 !important;
+margin:0px
 }
 
 .daysContainer{
@@ -207,7 +208,9 @@ margin:0px
         display:none
     }
     .mobileCalendar{
-        display:block
+        display:flex;
+        align-items:center
+     
     }
     .availabelSche{
         width:100%;

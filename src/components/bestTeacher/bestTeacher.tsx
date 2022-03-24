@@ -18,7 +18,7 @@ const bestTeacher: React.FC<bestTeacherInt> = (props) => {
       </div>
 
       <div className={style.bestTeacherBottom}>
-        <h4 className={style.theBestTeacherHeader}>The Best Teachers </h4>
+        <p className={style.theBestTeacherHeader}>The Best Teachers </p>
         <p className={style.theBestTeacherBtText}>
           Online classes taught by dedicated teachers with decades of experience
           helping students succeed.

@@ -13,6 +13,7 @@ import SubjectCard from "../../../ui/subjectCard/subjectCard"
 import ContinueCard from "../../../ui/continueCard/continuCard";
 import {MobileSidebar} from "../sidebar/sidebar"
 import SimpleBar from 'simplebar-react';
+import {Link} from "react-router-dom"
 import 'simplebar/dist/simplebar.min.css';
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 import Carousel from 'react-multi-carousel';
@@ -213,55 +214,142 @@ const homeMainPage:React.FC = (props)=>{
                 infinite={false}
                 autoPlay={false}
               >
-                <CourseCard
-                  courseTitle='Mathematics'
-                  topic='introduction'
-                  timeElapse={5}
-                  img=''
-                  tutorName='james brown'
-                ></CourseCard>
-                <CourseCard
-                  courseTitle='Mathematics'
-                  topic='introduction'
-                  timeElapse={5}
-                  img=''
-                  tutorName='james brown'
-                ></CourseCard>
-                <CourseCard
-                  courseTitle='Mathematics'
-                  topic='introduction'
-                  timeElapse={5}
-                  img=''
-                  tutorName='james brown'
-                ></CourseCard>
-                <CourseCard
-                  courseTitle='Mathematics'
-                  topic='introduction'
-                  timeElapse={5}
-                  img=''
-                  tutorName='james brown'
-                ></CourseCard>
-                <CourseCard
-                  courseTitle='Mathematics'
-                  topic='introduction'
-                  timeElapse={5}
-                  img=''
-                  tutorName='james brown'
-                ></CourseCard>
-                <CourseCard
-                  courseTitle='Mathematics'
-                  topic='introduction'
-                  timeElapse={5}
-                  img=''
-                  tutorName='james brown'
-                ></CourseCard>
-                <CourseCard
-                  courseTitle='Mathematics'
-                  topic='introduction'
-                  timeElapse={5}
-                  img=''
-                  tutorName='james brown'
-                ></CourseCard>
+                <Link to='/courses'>
+                  <CourseCard
+                    courseTitle='Mathematics'
+                    topic='introduction'
+                    timeElapse={5}
+                    img=''
+                    tutorName='james brown'
+                  ></CourseCard>
+                </Link>
+
+                <Link to='/courses'>
+                  <CourseCard
+                    courseTitle='Mathematics'
+                    topic='introduction'
+                    timeElapse={5}
+                    img=''
+                    tutorName='james brown'
+                  ></CourseCard>
+                </Link>
+                <Link to='/courses'>
+                  <CourseCard
+                    courseTitle='Mathematics'
+                    topic='introduction'
+                    timeElapse={5}
+                    img=''
+                    tutorName='james brown'
+                  ></CourseCard>
+                </Link>
+                <Link to='/courses'>
+                  <CourseCard
+                    courseTitle='Mathematics'
+                    topic='introduction'
+                    timeElapse={5}
+                    img=''
+                    tutorName='james brown'
+                  ></CourseCard>
+                </Link>
+                <Link to='/courses'>
+                  <CourseCard
+                    courseTitle='Mathematics'
+                    topic='introduction'
+                    timeElapse={5}
+                    img=''
+                    tutorName='james brown'
+                  ></CourseCard>
+                </Link>
+                <Link to='/courses'>
+                  <CourseCard
+                    courseTitle='Mathematics'
+                    topic='introduction'
+                    timeElapse={5}
+                    img=''
+                    tutorName='james brown'
+                  ></CourseCard>
+                </Link>
+                <Link to='/courses'>
+                  <CourseCard
+                    courseTitle='Mathematics'
+                    topic='introduction'
+                    timeElapse={5}
+                    img=''
+                    tutorName='james brown'
+                  ></CourseCard>
+                </Link>
+                <Link to='/courses'>
+                  <CourseCard
+                    courseTitle='Mathematics'
+                    topic='introduction'
+                    timeElapse={5}
+                    img=''
+                    tutorName='james brown'
+                  ></CourseCard>
+                </Link>
+                <Link to='/courses'>
+                  <CourseCard
+                    courseTitle='Mathematics'
+                    topic='introduction'
+                    timeElapse={5}
+                    img=''
+                    tutorName='james brown'
+                  ></CourseCard>
+                </Link>
+                <Link to='/courses'>
+                  <CourseCard
+                    courseTitle='Mathematics'
+                    topic='introduction'
+                    timeElapse={5}
+                    img=''
+                    tutorName='james brown'
+                  ></CourseCard>
+                </Link>
+                <Link to='/courses'>
+                  <CourseCard
+                    courseTitle='Mathematics'
+                    topic='introduction'
+                    timeElapse={5}
+                    img=''
+                    tutorName='james brown'
+                  ></CourseCard>
+                </Link>
+                <Link to='/courses'>
+                  <CourseCard
+                    courseTitle='Mathematics'
+                    topic='introduction'
+                    timeElapse={5}
+                    img=''
+                    tutorName='james brown'
+                  ></CourseCard>
+                </Link>
+                <Link to='/courses'>
+                  <CourseCard
+                    courseTitle='Mathematics'
+                    topic='introduction'
+                    timeElapse={5}
+                    img=''
+                    tutorName='james brown'
+                  ></CourseCard>
+                </Link>
+                <Link to='/courses'>
+                  <CourseCard
+                    courseTitle='Mathematics'
+                    topic='introduction'
+                    timeElapse={5}
+                    img=''
+                    tutorName='james brown'
+                  ></CourseCard>
+                </Link>
+                <Link to='/courses'>
+                  <CourseCard
+                    courseTitle='Mathematics'
+                    topic='introduction'
+                    timeElapse={5}
+                    img=''
+                    tutorName='james brown'
+                  ></CourseCard>
+                </Link>
               </Carousel>
             </div>
             <br></br>
@@ -323,7 +411,7 @@ const homeMainPage:React.FC = (props)=>{
             </div>
             <br></br>
             <div className={style.SubjectCont}>
-              <h1>Subjects</h1>
+              <p className={style.subjectText}>Subjects</p>
               <p>Based on your study choice</p>'
               {/* <div className={style.subjectCardContainer}>
                 <Carousel responsive={responsive}>
@@ -362,27 +450,10 @@ const homeMainPage:React.FC = (props)=>{
             </div>
             <br />
             <div className={style.ContinueCard}>
-              <h1>Continue where you left off</h1>
+              <p className={style.continueText}>Continue where you left off</p>
               <p>Let's get you back in</p>
               <br></br>
-              {/* <div className={style.continuCardWrap}>
-                <ContinueCard
-                  course='Mathematics'
-                  chapter='Introduction'
-                ></ContinueCard>
-                <ContinueCard
-                  course='Mathematics'
-                  chapter='Introduction'
-                ></ContinueCard>
-                <ContinueCard
-                  course='Mathematics'
-                  chapter='Introduction'
-                ></ContinueCard>
-                <ContinueCard
-                  course='Mathematics'
-                  chapter='Introduction'
-                ></ContinueCard>
-              </div> */}
+             
               <Carousel
                 responsive={responsive}
                 autoPlay={false}

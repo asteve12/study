@@ -291,20 +291,6 @@ const handleChange =()=>{
   setCurrentDate(val)
  };
 
- useEffect(()=>{
-   let currentEle = dateSelector.current ;
-   //@ts-ignore
-   let selectedEle = currentEle.getElementsByClassName(
-     'DatePicker_monthYearLabel__T6Ong'
-   ); 
-  //  setCurrentDate(new Date());
-
-   selectedEle[0].style.display = "none"
-  //  selectedEle.style.border = "solid 2px red"
-  console.log(selectedEle);
-
-
- },[])
 
 
 
@@ -371,8 +357,11 @@ const handleChange =()=>{
                 </button>
               }
             />
+            <br></br>
+            <br></br>
             <div className={style.courseAvail}>
-              <h1>Courses</h1>
+              <p className={style.courseText}>Courses</p>
+              <br></br>
               <SelectCourse name='Mathematics'></SelectCourse>
               <SelectCourse name='English Language'></SelectCourse>
               <SelectCourse name='Biology'></SelectCourse>
@@ -417,12 +406,12 @@ const handleChange =()=>{
           </div>
           {/*end of responsive date header*/}
           {/* <div>new {`${currentDateMb.getDay()}`}</div> */}
-          
+
           <br></br>
           <section ref={dateSelector} className={style.mobileCalendar}>
             <DatePicker
               getSelectedDay={selectedDay}
-              endDate={9}
+              endDate={90}
               selectDate={currentDateMb}
               color={'#374e8c'}
               style={{

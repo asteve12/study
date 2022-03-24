@@ -1,12 +1,39 @@
-
 *{
-    font-family: 'Gilroy-Regular', Gilroy-Regular, sans-serif !important;
-    /* box-sizing:border-box */
+    font-family:"Gilroy-Medium",'Gilroy-Bold', "Gilroy-SemiBold",'Gilroy-Regular',"Avenir","Poppins"," sans-serif" ;
+    
+}
+
+@font-face{
+    font-family:'Gilroy-Bold';
+    src :url(../src/fonts/gilroy/Gilroy-Bold.ttf)
+}
+
+@font-face{
+    font-family:"Gilroy-Medium";
+    src: url(../src/fonts/gilroy/Gilroy-Medium.ttf)
+}
+
+@font-face{
+    font-family:"Gilroy-Regular";
+    src: url(../src/fonts/gilroy/Gilroy-Regular.ttf)
+}
+
+@font-face{
+    font-family:"Gilroy-SemiBold";
+    src: url(../src/fonts/gilroy/Gilroy-SemiBold.ttf)
+}
+@font-face{
+    font-family:"Avenir";
+    src: url(../src/fonts/avenir_ff/AvenirLTStd-Black.otf)
+}
+@font-face{
+    font-family:"Poppins";
+    src: url(../src/fonts/Poppins/Poppins-Light.ttf)
 }
 
 .react-calendar__month-view__weekdays__weekday{
     /* background-color:green */
-    font-family: 'Gilroy-Medium';
+font-family: 'Gilroy-Medium';
 font-size: 14px;
 color: #8C8C8C;
 background-color: #FCFAF5;
@@ -34,9 +61,6 @@ color:white
    
 } 
 
-
-
-
 abbr[title] {
     text-decoration: none !important;
 }
@@ -59,8 +83,8 @@ abbr[title] {
 }
 
 .activeButton{
-        border-bottom:solid 2px #7187B3; 
-          width:50%;
+    border-bottom:solid 2px #7187B3; 
+    width:50%;
     background:none;
     border:none;
     border-bottom:solid 1px #EEEFF1; 
@@ -74,14 +98,10 @@ abbr[title] {
     flex-wrap: nowrap;
     width:auto;
     height:auto;
-    /* justify-content: space-between; */
+  
     overflow-y:hidden  !important;
-       cursor:pointer;
- 
- 
-  
-  
-}
+    cursor:pointer;
+ }
 .simplebar-scroll-content{
     width:auto;
     height:100%;
@@ -92,10 +112,6 @@ abbr[title] {
     display:flex;
     justify-content:space-between;
     width:100%;
-    
-  
-
-  
 }
 
 
@@ -111,17 +127,11 @@ abbr[title] {
     display:flex;
     justify-content:space-between;
     width:auto;
-  
-
-  
 }
 
 .subject-carousel-item{
     width:auto !important;
     height:auto;
-  
-   
-   
 }
 .schedule-carousel-container{
     display:flex;

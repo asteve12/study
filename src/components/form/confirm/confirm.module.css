@@ -4,3 +4,9 @@
     justify-content:space-between;
     align-items:center;
 }
+
+.cursToConfirm{
+    font-size:18px;
+    color:#444F60;
+    font-family: 'Gilroy-SemiBold';
+}

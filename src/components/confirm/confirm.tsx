@@ -22,11 +22,14 @@ const confirmComponent:React.FC = (props)=>{
       <div className={style.confirmComponentWrapper}>
         <section className={style.confirmCompCon}>
           <BckBtn path='/chooseAStudyPath'></BckBtn>
-          <h1>Confirm your courses</h1>
+          <p className={style.confirmHeader}>Confirm your courses</p>
           <p>
             Check your course combination as selected in your exam application
           </p>
+
           <ConfirmForm></ConfirmForm>
+          {/* <br></br> */}
+          <br></br>
           <DisplaySelectedSub subjects={selectedSub}></DisplaySelectedSub>
           <br></br>
           <div className={style.addSubjectBtn}>
@@ -35,8 +38,9 @@ const confirmComponent:React.FC = (props)=>{
             </button>
             &nbsp;&nbsp;<b>Add Subject</b>
           </div>
-          <br/>
-          <ContinueBtn path="/homePage"></ContinueBtn>
+          <br />
+        
+          <ContinueBtn path='/homePage'></ContinueBtn>
         </section>
       </div>
     );

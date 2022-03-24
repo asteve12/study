@@ -7,6 +7,7 @@ import {FiHome} from "react-icons/fi"
 import {AiOutlineSchedule} from "react-icons/ai"
 import {RiChatSmile3Line} from "react-icons/ri"
 import {FiDownload} from "react-icons/fi"
+import { BsPerson } from 'react-icons/bs';
 //components
 import SideBarItems from '../../../ui/sidebaritems/sidebarItems';
 
@@ -31,6 +32,31 @@ const navigationItems = [
     links: '/Resources',
     icons: FiDownload,
   },
+ 
+];
+
+const smnavigationItems = [
+  {
+    name: 'Home',
+    links: '/homePage',
+    icons: FiHome,
+  },
+  {
+    name: 'Schedule',
+    links: '/schedule',
+    icons: AiOutlineSchedule,
+  },
+  {
+    name: 'Chats',
+    links: '/Chats',
+    icons: RiChatSmile3Line,
+  },
+  {
+    name: 'Resources',
+    links: '/Resources',
+    icons: FiDownload,
+  },
+  { name: 'Profile', links: '/Profile', icons: BsPerson },
 ];
 
 
@@ -82,7 +108,7 @@ export const MobileSidebar:React.FC = ()=>{
             </div> */}
         <br />
 
-        {navigation.map((eachItems) => {
+        {smnavigationItems.map((eachItems) => {
           return (
             <SideBarItems
               link={eachItems.links}
@@ -91,7 +117,6 @@ export const MobileSidebar:React.FC = ()=>{
             ></SideBarItems>
           );
         })}
-     
       </div>
     </section>
   );

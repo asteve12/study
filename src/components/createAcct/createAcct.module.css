@@ -3,9 +3,16 @@
     height:100%;
     box-sizing: border-box;
    
-    padding-top:1%;
+    /* padding-top:1%; */
+    display:flex;
+    align-items: center;
+    justify-content: center;
   
 
+}
+.createAcctWrapper{
+    width:auto;
+    height:auto
 }
 .ImgWrapper{
   text-align: center;
@@ -13,7 +20,7 @@
 }
 
 .createTextWrapper{
-    width:60%;
+    width:80%;
     height:80%;
    
     margin-left: auto;
@@ -45,7 +52,7 @@ color: #444F60;
     height: 48px;
 width: 100%;
 text-decoration:none;
-color: #444F60;
+color:#444F60;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -55,12 +62,21 @@ border-radius: 33px;
 background: #FFFFFF;
 border: 1px solid #F2F2F2;
 border-radius: 33px;
-/* display:block; */
+
 text-align: center;
 display: flex;
 align-items:center;
 justify-content: center;
+font:Avenir;
+font-size:16px
 
+}
+.hzRule{
+    width:162.5px;
+    /* border: 1px solid #F2F2F2; */
+    height:2px;
+    background-color:#F2F2F2;
+    align-self:center;
 }
 .signInWithGoogle div{
     display:flex;
@@ -76,9 +92,10 @@ font-size: 14px;
 text-align: center;
 color: #999999;
 
-display:block;
+display:flex;
 text-decoration: none;
 width: 100%;
+
 }
 
 .agreementSection{

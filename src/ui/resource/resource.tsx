@@ -30,3 +30,23 @@ const ResourceBox: React.FC<chatInterface> = (props) => {
 };
 
 export default ResourceBox;
+
+
+export const MobileResourceBox: React.FC<chatInterface> = (props) => {
+  return (
+    <section className={style.mbChatBoxCont} onClick={props.handleResChange}>
+      <div className={style.messageBox}>
+        <section className={style.mbPicsCont}></section>
+        <section className={style.userNameBox}>
+          <p className={style.userName}>Art-the-fvck.jpg</p>
+          <p className={style.message}>1.8 MB</p>
+        </section>
+      </div>
+      <div className={style.timeBox}>
+        <p className={style.timeText}>
+          <IoIosMore className={style.moreBtn}></IoIosMore>
+        </p>
+      </div>
+    </section>
+  );
+};

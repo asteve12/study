@@ -5,11 +5,12 @@ import style from './resource.module.css';
 
 import { MdOutlineAdd } from 'react-icons/md';
 //component
-import ResourceBox from '../../ui/resource/resource';
+import ResourceBox, { MobileResourceBox } from '../../ui/resource/resource';
 // import ChatDetail from '../chatDetail/chatDetail';
 import ResourceDetail from "../resoureceDetail/resourceDetail"
 import { Link } from 'react-router-dom';
 import ChatHeader from '../../ui/chatHeader/chatHeader';
+import {MobileSidebar} from "../../components/Home/sidebar/sidebar"
 //icons
 import searchIcon from '../../assets/resource/search.svg';
 //interface
@@ -17,7 +18,7 @@ import resourceInterface from './interface';
 
 const ChatComp: React.FC<resourceInterface> = (props) => {
   return (
-    <section className={style.ChatMainComp}>
+    <section className={style.ResourceMainComp}>
       {/* <div className={style.comHeader}>
           <p>Chats</p>
           <section className={style.comUserPics}>
@@ -30,13 +31,15 @@ const ChatComp: React.FC<resourceInterface> = (props) => {
             </Link>
           </section>
         </div> */}
-      <ChatHeader title='Chats'></ChatHeader>
+      <section className={style.resourceHeaderWrapper}>
+        <ChatHeader title='Chats'></ChatHeader>
+      </section>
 
       <div className={style.combody}>
-        <div className={style.chatCont}>
+        <div className={style.resourceCont}>
           <section className={style.chatContHeader}>
-            <div className={style.chatText}>
-              <h1>Resources</h1>
+            <div className={style.resourceText}>
+              <p className={style.resourceHeader}>Resources</p>
               <p>Class notes, PDFs, videos. All for you.</p>
             </div>
             <button className={style.chatAddBtnCon}>
@@ -45,7 +48,7 @@ const ChatComp: React.FC<resourceInterface> = (props) => {
           </section>
           <br></br>
           <br></br>
-          <div className={style.chatContainer}>
+          <div className={style.resourceContainer}>
             <ResourceBox handleResChange={props.handleResChange}></ResourceBox>
             <br></br>
             <ResourceBox handleResChange={props.handleResChange}></ResourceBox>
@@ -59,8 +62,43 @@ const ChatComp: React.FC<resourceInterface> = (props) => {
               <ChatBox></ChatBox>
               <br></br> */}
           </div>
+          {/*responsive resource box*/}
+          <div className={style.mbResourceContainer}>
+            <MobileResourceBox
+              handleResChange={props.handleResChange}
+            ></MobileResourceBox>
+            <br></br>
+            <MobileResourceBox
+              handleResChange={props.handleResChange}
+            ></MobileResourceBox>
+            <br></br>
+            <MobileResourceBox
+              handleResChange={props.handleResChange}
+            ></MobileResourceBox>
+            <br></br>
+            <MobileResourceBox
+              handleResChange={props.handleResChange}
+            ></MobileResourceBox>
+            <br></br>
+            <MobileResourceBox
+              handleResChange={props.handleResChange}
+            ></MobileResourceBox>
+            <br></br>
+            <MobileResourceBox
+              handleResChange={props.handleResChange}
+            ></MobileResourceBox>
+            <br></br>
+            <MobileResourceBox
+              handleResChange={props.handleResChange}
+            ></MobileResourceBox>
+            <br></br>
+            <MobileResourceBox
+              handleResChange={props.handleResChange}
+            ></MobileResourceBox>
+          </div>
+          {/*end of responsive resource box*/}
         </div>
-        <div className={style.chatDetailPage}>
+        <div className={style.resourceDetailPage}>
           {props.status ? (
             <ResourceDetail></ResourceDetail>
           ) : (
@@ -71,6 +109,7 @@ const ChatComp: React.FC<resourceInterface> = (props) => {
           )}
         </div>
       </div>
+      <MobileSidebar></MobileSidebar>
     </section>
   );
 };

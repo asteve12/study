@@ -15,7 +15,10 @@ const ResourcePage: React.FC = (props) => {
 
   return (
     <section className={style.ResourcePageWrapper}>
-      <Sidebar></Sidebar>
+      <div className={style.resourceSdWrapper}>
+        <Sidebar></Sidebar>
+      </div>
+
       <ResourceCom
         status={displayChatPage}
         handleResChange={handleResChange}

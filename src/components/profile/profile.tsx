@@ -1,5 +1,7 @@
 import React from "react";
+//components
 import ChatHeader from "../../ui/chatHeader/chatHeader";
+import {MobileSidebar} from "../../components/Home/sidebar/sidebar"
 //styles
 import style from "./profile.module.css"
 //icons
@@ -47,6 +49,7 @@ const ProfileComp:React.FC = (props)=>{
             </NavLink>
           </div>
         </div>
+        <MobileSidebar></MobileSidebar>
       </section>
     ); 
 }

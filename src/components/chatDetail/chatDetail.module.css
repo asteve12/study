@@ -63,8 +63,12 @@ cursor:pointer
 
 .inputMessageCont{
   position:absolute;
-  bottom:10px;
-  width:100%
+  bottom:0px;
+  width:100%;
+  z-index:100;
+  background-color:white;
+  /* display:flex;
+  justify-content:space-between */
 }
 
 .inputMsgCont{
@@ -87,7 +91,7 @@ padding:10px;
 }
 
 .inputCont{
-  width:90%;
+  width:85%;
   height:60px;
   box-sizing: border-box;
   border-radius: 43px;
@@ -121,7 +125,12 @@ padding:10px;
 
 .textContainer{
   width:100%;
+  height:100% !important;
   height:auto;
+  position:absolute;
+  overflow-y:scroll;
+  padding-right:10px;
+  box-sizing: border-box;
   
 
 }
@@ -132,5 +141,46 @@ font-style: normal;
 font-size: 12px;
 color: #999999;
 text-align: center;
+}
+
+
+@media(max-width:700px){
+  .chatDetailPage{
+    padding:0px
+  }
+  .chatDetailPageHeader{
+    height:80px;
+    width:100%;
+    padding-right:20px;
+    box-sizing:border-box;
+       padding-left:20px;
+  
+
+  }
+  .textContainer{
+ padding-right:20px;
+    box-sizing: border-box;
+     padding-left:20px;
+  }
+  .inputCont{
+    width:80%
+  }
+  .bckBtn{
+    background:none;
+    outline:none;
+    border:none;
+    font-size:20px;
+    color:grey;
+    cursor:pointer;
+display:inline;
+
+
+  }
+}
+
+@media(min-width:700px){
+  .bckBtn{
+    display:none
+  }
 }
 

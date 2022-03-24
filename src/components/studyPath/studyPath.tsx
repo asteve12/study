@@ -22,8 +22,8 @@ const StudyPathComponent: React.FC<studyPath> = (props) => {
         <br></br>
         <BackBtn path='/sure'></BackBtn>
         <br></br>
-        <h1>What are you preparing for?</h1>
-        <p>
+        <p className={style.stdyHeader}>What are you preparing for?</p>
+        <p className={style.descText}>
           This helps us get the best tutors and subjects to help you pass on
           your first try.
         </p>
@@ -38,8 +38,8 @@ const StudyPathComponent: React.FC<studyPath> = (props) => {
         <div className={style.chooseAPth}>
           <br></br>
           <h1>Choose a study path</h1>
-          <br></br>
-          <SelectItems></SelectItems>
+        <SelectItems></SelectItems>
+        <br></br>
           <ContinueBtn path='/confirmCourse'></ContinueBtn>
         </div>
 

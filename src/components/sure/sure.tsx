@@ -16,9 +16,9 @@ const SureComponent:React.FC =(props)=>{
       <section className={style.sureComponent}>
         <div className={style.contentWrapper}>
           <Backbtn path='/createAccount'></Backbtn>
-          <h1>Just To Be Sure</h1>
+          <p className={style.textHeader}>Just To Be Sure</p>
           <p>
-            We sent a code to {<Link to='/'>dukauwa.du@gmail.com.</Link>} Enter
+            We sent a code to {<Link to='/' className={style.inpuEmail}>dukauwa.du@gmail.com.</Link>} Enter
             it here to prove it is really you
           </p>
           <br></br>

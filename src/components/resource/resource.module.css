@@ -1,4 +1,4 @@
-.ChatMainComp{
+.ResourceMainComp{
     width:85%;
     height:100%;
 
@@ -7,9 +7,13 @@
         box-sizing: border-box;
      
         /* padding-left:2% */
-        padding-left:2%;
-          padding-right:2%;
+        /* padding-left:2%;
+          padding-right:2%; */
           overflow:hidden
+}
+.resourceHeaderWrapper{
+       padding-left:2%;
+          padding-right:2%;
 }
 
 .comHeader{
@@ -17,7 +21,8 @@
     justify-content:space-between;
     margin-bottom:10px;
          box-sizing: border-box;
-         overflow:hidden
+         overflow:hidden;
+           
   
 
 }
@@ -51,16 +56,19 @@ color: #303030;
     height:100%;
     /* background-color:yellow */
     display:flex;
+     
+
 }
 
-.chatCont{
-    width:30%;
+.resourceCont{
+    
     height:100%;
     background-color:#FCFCFC;
-    padding-left:1%;
+    padding-left:2%;
       padding-right:1%;
         padding-top:1%;
         border-right:solid 1px #F2F2F2;
+        flex: 0 0 350px;
         /* overflow-y:scroll */
 }
 
@@ -93,14 +101,14 @@ box-sizing: border-box
 
 }
 
-.chatText h1{
-    font-family: 'Gilroy-Bold';
-font-size: 18px;
-color: #303030;
+.resourceHeader{
+    font-family: 'Gilroy-Bold' !important;
+font-size: 18px !important;
+color: #303030 !important;
 margin:0px
 }
 
-.chatText p{
+.resourceText p{
     /* margin:0px; */
 
 font-family: 'Gilroy-Medium';
@@ -109,7 +117,7 @@ color: #999999;
 
 }
 
-.chatContainer{
+.resourceContainer{
     height:70%;
     overflow-y: hidden;
     width:100%;
@@ -117,7 +125,7 @@ color: #999999;
 
 }
 
-.chatDetailPage{
+/* .resourceDetailPage{
  
     width:70%;
     height:90%;
@@ -126,7 +134,7 @@ color: #999999;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}
+} */
 
 .selectText{
     color: #444F60;
@@ -134,7 +142,7 @@ color: #999999;
 font-size: 24px;
 }
 
-.chatDetailPage{
+.resourceDetailPage{
  
     width:70%;
     height:90%;
@@ -164,4 +172,67 @@ margin: 0px;
 font-size: 15px;
 color: #999999;
 margin: 0px;
+}
+
+@media(max-width:1084px){
+    .ResourceMainComp{
+        width:100%;
+    }
+
+}
+
+@media(min-width:1084px){
+    .ResourceMainComp{
+        width:85%;
+    }
+    
+}
+
+@media(max-width:700px){
+    .resourceDetailPage{
+        display:none
+    }
+    .resourceCont{
+        flex: 0 0 100%;
+        box-sizing:border-box;
+        padding:20px
+    }
+    .resourceText h1{
+       font-size: 24px;
+       margin:0px;
+    }
+    .resourceText p{
+    /* margin:0px; */
+
+font-family: 'Gilroy';
+font-size: 14px;
+color: #999999;
+margin:0px;
+
+}
+.mbResourceContainer{
+    display:block;
+    overflow-y:scroll;
+}
+.resourceContainer{
+    display:none
+}
+    
+
+}
+
+@media(min-width:700px){
+    .resourceContainer{
+    display:block
+}
+    .mbResourceContainer{
+    display:none
+}
+   
+     .resourceDetailPage{
+        display:flex
+    }
+    
+    
+    
 }

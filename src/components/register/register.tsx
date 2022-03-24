@@ -2,11 +2,12 @@ import React from "react";
 //components
 import RegisterForm from "../form/register/registerForm"
 import Backbtn from '../../ui/backBtn/backBtn';
+import ContinBtn from '../../ui/continueBtn/continueBtn';
 
 //styles
 import style from "./register.module.css"
 
-import ContinBtn from "../../ui/continueBtn/continueBtn"
+
 
 
 
@@ -22,7 +23,7 @@ const Register:React.FC=(props)=>{
           <br></br>
           <Backbtn path='/'></Backbtn>
           <br></br>
-          <h1>Personal Information</h1>
+          <div className={style.registedHeader}>Personal Information</div>
           <p>
             This helps us get the best tutors and subjects to help you pass on
             your first try.

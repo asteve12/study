@@ -15,8 +15,23 @@ export default function BasicTextFields() {
       autoComplete='off'
     >
       <div className={style.confirmCrsInField}>
-        <TextField id='standard-basic' label='Standard' variant='standard' sx={{width:"60%",height:"50px"}} />
-        <h3>Computer Science</h3>
+        <TextField
+          id='standard-basic'
+          label='Course'
+          variant='standard'
+          sx={{
+            width: '60%',
+            height: '50px',
+            border: 'none',
+            '& label': {
+              color: '#999999 !important',
+            },
+            '& .MuiInput-root:after': {
+              border: 'none',
+            },
+          }}
+        />
+        <h3 className={style.cursToConfirm}>Computer Science</h3>
       </div>
     </Box>
   );
