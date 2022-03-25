@@ -203,10 +203,51 @@ color: #444F60;
 
 }
 
+@media(max-width:350px){
+    .inputBox{
+        width:150px !important;
+        font-size:10px;
+    }
+    .inputMesaage{
+          font-size:10px;
+
+    }
+
+}
+
 
 
 
 @media(max-width:400px){
+    /* .ProfileBox{
+        width:30px;
+        height:30px;
+
+    } */
+    .iconContainer{
+        padding-left:10px;
+        padding-right:10px
+    }
+    .mvBckBtn{
+    width:30px;
+    height:30px;
+    font-size:12px;
+
+}
+.views{
+      font-size:12px;
+
+}
+.iconItems{
+    
+
+}
+   
+    .bottomDetails{
+        padding-right:10px;
+        padding-left:10px
+
+    }
     .lgActiveUser{
         display:none
     }
@@ -218,7 +259,7 @@ color: #444F60;
         border:none;
         outline:none;
         color:black;
-        font-size:20px;
+        font-size:12px;
         background-color:white;
         border-radius: 100%;
         /* opacity:0.5; */
@@ -228,15 +269,15 @@ color: #444F60;
     }
     .mbChatBoxWrapper{
         margin-bottom:100px;
-        padding-left:20px;
-        padding-right:20px;
+        padding-left:10px;
+        padding-right:10px;
         display:block
     }
   .ProfileBox{
         border: 2px solid rgba(68, 79, 96, 0.2);
-        width:68px;
-        height:68px;
-        border-radius:19px
+        width:40px;
+        height:40px;
+        border-radius:9px
     }
     .inputBox{
            border: 2px solid rgba(68, 79, 96, 0.2);
@@ -245,8 +286,8 @@ color: #444F60;
 
     }
     .sentBox{
-        width:45px;
-        height:45px;
+        width:40px;
+        height:40px;
         border-radius:45px
     }
     .mbChatWrapper{
@@ -322,4 +363,5 @@ color: #444F60;
 .mbAttended{
     display:none
 }
+
 }

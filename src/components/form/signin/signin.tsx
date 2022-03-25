@@ -59,7 +59,7 @@ export default function InputAdornments() {
     <Box>
       <div className={style.formContainer}>
         <FormControl
-          sx={{ width: '25ch', border: '2px' }}
+          // sx={{ width: '25ch', border: '2px' }}
           className={style.siginContainer}
           variant='standard'
         >

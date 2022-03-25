@@ -19,6 +19,7 @@ export default function BasicTextFields() {
           id='standard-basic'
           label='Course'
           variant='standard'
+          className={style.inputBx}
           sx={{
             width: '60%',
             height: '50px',
