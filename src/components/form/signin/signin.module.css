@@ -31,4 +31,22 @@ padding-bottom:10px !important;
 .inputNameField{
     margin-bottom:10px;
 }
+
+
+@media(max-width:350px){
+    .siginContainer{
+        width:80%;
+        margin-left: auto;
+        margin-right:auto;
+        font-size:12px
+
+    }
+     .formContainer{
+          width:80%;
+        margin-left: auto;
+        margin-right:auto;
+        font-size:12px
+
+    }
+}
  

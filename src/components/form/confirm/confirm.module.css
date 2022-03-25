@@ -10,3 +10,23 @@
     color:#444F60;
     font-family: 'Gilroy-SemiBold';
 }
+
+@media(max-width:500px){
+    .confirmCrsInField{
+        flex-direction:column-reverse !important;
+       
+        width:100% !important
+
+
+    }
+    .inputBx{
+        width:100%;
+    }
+    .cursToConfirm{
+        width:100%;
+        margin:0px;
+        margin-top:10px;
+          margin-bottom:10px;
+        
+    }
+}

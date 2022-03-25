@@ -147,7 +147,13 @@ font-size: 24px;
 }
 
 
+@media(max-width:350px){
+     .mbchatCont{
+         padding-left:8px !important;
+         padding-right:8px !important
+     }
 
+}
 @media(max-width:1084px){
     .ChatMainComp{
         width:100%;
@@ -237,4 +243,6 @@ margin:0px
 
 
 }
+
+
 
