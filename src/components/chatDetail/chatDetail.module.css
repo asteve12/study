@@ -63,7 +63,7 @@ cursor:pointer
 
 .inputMessageCont{
   position:absolute;
-  bottom:0px;
+  bottom:-80px;
   width:100%;
   z-index:100;
   background-color:white;

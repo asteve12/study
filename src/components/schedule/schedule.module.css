@@ -134,7 +134,7 @@ margin:0px
     font-size: 14px;
     color: #999999;
     height:100%;
-    padding-top:5px
+  
 }
 .dateDetail p {
     margin:0px;
@@ -145,7 +145,8 @@ margin:0px
 font-style: normal;
 font-size: 44px;
 color: #444F60;
-margin:0px
+margin-top:-5px;
+
 }
 .mnthForBtn{
     width:100%;
@@ -204,6 +205,17 @@ margin:0px
 
 
 @media(max-width:400px){
+    .dateDetail{
+        padding-top:5px
+    }
+    
+    .scheduleMain{
+        padding-top:10px
+    }
+    .scheduleComp{
+        padding-bottom:8%;
+        padding-top:0px
+    }
     .HeaderWrapper{
         display:none
     }

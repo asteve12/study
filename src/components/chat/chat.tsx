@@ -142,6 +142,15 @@ export const MobileChatComp: React.FC<mbChatProps> = (props) => {
             <MbChatBox handleChatPage={props.handleChatPage}></MbChatBox>
             <br></br>
             <MbChatBox handleChatPage={props.handleChatPage}></MbChatBox>
+            <MbChatBox handleChatPage={props.handleChatPage}></MbChatBox>
+            <br></br>
+            <MbChatBox handleChatPage={props.handleChatPage}></MbChatBox>
+            <br></br>
+            <MbChatBox handleChatPage={props.handleChatPage}></MbChatBox>
+            <br></br>
+            <MbChatBox handleChatPage={props.handleChatPage}></MbChatBox>
+            <br></br>
+            <MbChatBox handleChatPage={props.handleChatPage}></MbChatBox>
           </div>
           <MobileSidebar></MobileSidebar>
         </div>

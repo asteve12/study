@@ -9,7 +9,8 @@
         /* padding-left:2% */
         /* padding-left:2%;
           padding-right:2%; */
-          overflow:hidden
+          overflow-y:scroll;
+          padding-bottom:30%;
 }
 .resourceHeaderWrapper{
        padding-left:2%;
@@ -56,6 +57,7 @@ color: #303030;
     height:100%;
     /* background-color:yellow */
     display:flex;
+    padding-bottom:10%
      
 
 }
@@ -212,7 +214,9 @@ margin:0px;
 }
 .mbResourceContainer{
     display:block;
-    overflow-y:scroll;
+    overflow-y:scroll !important;
+    padding-bottom:10%;
+    background-color:#FCFCFC;
 }
 .resourceContainer{
     display:none
