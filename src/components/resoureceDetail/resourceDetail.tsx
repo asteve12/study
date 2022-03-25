@@ -12,7 +12,7 @@ const ResourceDetail: React.FC = (props) => {
         <section className={style.picsCon}>
           <div className={style.profilePic}></div>
           <div className={style.userName}>
-            <h3>Art the fvck.jpg</h3>
+            <p className={style.fileSize}>Art the fvck.jpg</p>
             <p>1.8 MB</p>
           </div>
         </section>
