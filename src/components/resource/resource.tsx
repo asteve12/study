@@ -56,6 +56,14 @@ const ChatComp: React.FC<resourceInterface> = (props) => {
             <ResourceBox handleResChange={props.handleResChange}></ResourceBox>
             <br></br>
             <ResourceBox handleResChange={props.handleResChange}></ResourceBox>
+            <ResourceBox handleResChange={props.handleResChange}></ResourceBox>
+            <br></br>
+            <ResourceBox handleResChange={props.handleResChange}></ResourceBox>
+            <br></br>
+            <ResourceBox handleResChange={props.handleResChange}></ResourceBox>
+            <br></br>
+            <ResourceBox handleResChange={props.handleResChange}></ResourceBox>
+
             <br></br>
             {/* <ChatBox></ChatBox>
               <br></br>

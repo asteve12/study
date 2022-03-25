@@ -1,10 +1,11 @@
 .chatDetailPage{
     width:100%;
-    height:100%;
+    height:100vh;
     padding-left:3%;
       
       box-sizing: border-box;
-      position:relative
+      position:relative;
+      
 
 }
 .chatDetailPageHeader{
@@ -63,12 +64,12 @@ cursor:pointer
 
 .inputMessageCont{
   position:absolute;
-  bottom:-80px;
+  bottom:0px;
   width:100%;
   z-index:100;
   background-color:white;
-  /* display:flex;
-  justify-content:space-between */
+  /* display:flex; 
+  justify-content:space-between  */
 }
 
 .inputMsgCont{

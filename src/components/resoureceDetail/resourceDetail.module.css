@@ -4,14 +4,19 @@
     padding-left:3%;
       
       box-sizing: border-box;
-      position:relative
+      position:relative;
+      
+   
 
 }
 .chatDetailPageHeader{
   width:100%;
   display:flex;
   align-items:center;
-  justify-content:space-between
+  justify-content:space-between;
+  margin-bottom:20px;
+  box-sizing: border-box;
+  padding-right:35px;
 }
 .profilePic{
   width:40px;
@@ -28,11 +33,11 @@
 .userName{
   margin-left:15px
 }
-.userName h3{
-  margin:0px;
-  font-family: 'Gilroy-SemiBold';
-font-size: 18px;
-color: #000000;
+.fileSize{
+  margin:0px !important;
+  font-family: 'Gilroy-SemiBold' !important;
+font-size: 18px !important;
+color: #000000 !important;
 }
 
 .userName p{

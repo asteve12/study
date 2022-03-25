@@ -127,13 +127,14 @@ margin:0px
 .dateContainer{
     display:flex;
     /* align-items:center; */
+    height:0px
 }
 
 .dateDetail{
     font-family: 'Gilroy';
     font-size: 14px;
     color: #999999;
-    height:100%;
+    /* height:100%; */
   
 }
 .dateDetail p {

@@ -48,6 +48,7 @@ const ScheduleCom:React.FC = (props)=>{
   const nextBtn = useRef();
  
   const changeDefaultStyle=()=>{
+  
    if (listDay) {
      //@ts-ignore
 
@@ -183,33 +184,40 @@ const ScheduleCom:React.FC = (props)=>{
          a++;
        }
        //@ts-ignore
-       if (y.className === activeDay) {
-         if (greyPosition === prevGreyPosition && action === 'plusOne') {
-           //@ts-ignore
-           y.style.backgroundColor = '#F6F5F2';
-           action = 'plusSeven';
-           nextPosition += 6;
+       let f = y.className
+       if(f){
+         let r = f.match(/react-calendar__tile--active/);
+         //@ts-ignore
+         if (r) {
+           if (greyPosition === prevGreyPosition && action === 'plusOne') {
+             //@ts-ignore
+             y.style.backgroundColor = '#F6F5F2';
+             action = 'plusSeven';
+             nextPosition += 6;
+             greyPosition++;
+             prevGreyPosition++;
+             a++;
+             continue;
+           }
+           if (nextPosition === prevGreyPosition && action === 'plusSeven') {
+             //@ts-ignore
+             y.style.backgroundColor = '#F6F5F2';
+             action = 'plusOne';
+             nextPosition += 1;
+             greyPosition++;
+             prevGreyPosition++;
+             a++;
+
+             continue;
+           }
+
            greyPosition++;
            prevGreyPosition++;
            a++;
-           continue;
          }
-         if (nextPosition === prevGreyPosition && action === 'plusSeven') {
-           //@ts-ignore
-           y.style.backgroundColor = '#F6F5F2';
-           action = 'plusOne';
-           nextPosition += 1;
-           greyPosition++;
-           prevGreyPosition++;
-           a++;
-
-           continue;
-         }
-
-         greyPosition++;
-         prevGreyPosition++;
-         a++;
        }
+     
+     
      }
    }
   }
@@ -341,6 +349,13 @@ const handleChange =()=>{
             <Calendar
               calendarType='US'
               // showNavigation={false}
+
+              onClickDay={() => {
+               handleChange()
+                changeDefaultStyle();
+              }}
+              onDrillDown={changeDefaultStyle}
+              onDrillUp={changeDefaultStyle}
               onChange={onChange}
               value={value}
               className={style.calendarStyle}
