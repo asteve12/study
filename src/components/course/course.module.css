@@ -216,9 +216,9 @@ color: #444F60;
 }
 
 
+/*400px*/
 
-
-@media(max-width:400px){
+@media(max-width:700px){
     /* .ProfileBox{
         width:30px;
         height:30px;
@@ -262,7 +262,7 @@ color: #444F60;
         font-size:12px;
         background-color:white;
         border-radius: 100%;
-        /* opacity:0.5; */
+        opacity:0.8;
         display:flex;
         align-items:center;
         justify-content:center
@@ -279,9 +279,10 @@ color: #444F60;
         height:40px;
         border-radius:9px
     }
+    /*changes for new 700px*/
     .inputBox{
            border: 2px solid rgba(68, 79, 96, 0.2);
-           width:200px;
+           width:70%;
            height:42px;
 
     }
@@ -349,8 +350,8 @@ color: #444F60;
     }
 
 }
-
-@media(min-width:400px){
+/*400px*/
+@media(min-width:700px){
     .showMore{
      display:none !important
     }

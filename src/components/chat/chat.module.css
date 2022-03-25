@@ -200,6 +200,7 @@ margin:0px
     height:100%;
     overflow-y: scroll;
     width:100%;
+   
   
 
 }
@@ -207,6 +208,8 @@ margin:0px
     display:block;
     width:100%;
     box-sizing: border-box;
+    overflow-y:scroll;
+    padding-bottom:5%
 }
 
 }
