@@ -1,3 +1,13 @@
+.ErrorMsg{
+    color:red;
+    position:absolute;
+    bottom:-30px;
+    width:300px
+}
+
+
+
+
 .inputOutline{
     display:flex !important;
     justify-content:center !important;

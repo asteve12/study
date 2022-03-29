@@ -13,31 +13,36 @@ import CoursePage from "./pages/courses/course"
 
 
 
+
 //@ts-ignore
 import {Routes, Route} from 'react-router-dom';
 
 import './App.css';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 
 
 
 function App() {
   return (
-    <div className='App'>
-      <Routes>
-        <Route path='/' element={<OnBoard></OnBoard>}></Route>
-        <Route path='/createAccount' element={<Register />}></Route>
-        <Route path='/sure' element={<SurePage />}></Route>
-        <Route path='/chooseAStudyPath' element={<StudyPath />}></Route>
-        <Route path='/confirmCourse' element={<ConfirmCourse />}></Route>
-        <Route path='/homePage' element={<HomePage />}></Route>
-        <Route path='/Chats' element={<ChatHomePage />}></Route>
-        <Route path='/Profile' element={<Profile />}></Route>
-        <Route path='/Resources' element={<ResourcePage />}></Route>
-        <Route path='/schedule' element={<SchedulePage />}></Route>
-        <Route path='/Courses' element={<CoursePage />}></Route>
-      </Routes>
-    </div>
+    <Provider store={store}>
+      <div className='App'>
+        <Routes>
+          <Route path='/' element={<OnBoard></OnBoard>}></Route>
+          <Route path='/createAccount' element={<Register />}></Route>
+          <Route path='/sure' element={<SurePage />}></Route>
+          <Route path='/chooseAStudyPath' element={<StudyPath />}></Route>
+          <Route path='/confirmCourse' element={<ConfirmCourse />}></Route>
+          <Route path='/homePage' element={<HomePage />}></Route>
+          <Route path='/Chats' element={<ChatHomePage />}></Route>
+          <Route path='/Profile' element={<Profile />}></Route>
+          <Route path='/Resources' element={<ResourcePage />}></Route>
+          <Route path='/schedule' element={<SchedulePage />}></Route>
+          <Route path='/Courses' element={<CoursePage />}></Route>
+        </Routes>
+      </div>
+    </Provider>
   );
 }
 

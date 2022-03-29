@@ -46,7 +46,7 @@ const createAcct:React.FC = (props)=>{
               <br></br>
               <SigninForm></SigninForm>
               <br></br>
-              <div className={style.agreementSection}>
+              {/* <div className={style.agreementSection}>
                 <Checkbox
                   checked={true}
                   icon={<img src={checkBoxIcon} alt='' />}
@@ -59,22 +59,22 @@ const createAcct:React.FC = (props)=>{
                   Terms or use
                   <br></br>
                 </div>
-              </div>
+              </div> */}
               <br></br>
 
-              <Link className={style.createAccount} to='/createAccount'>
+              {/* <button className={style.createAccount} onClick={()=> alert("D")} type="submit" >
                 Create Account
-              </Link>
+              </button> */}
               <br />
 
-              <section className={style.createAccoutEnding}>
+              {/* <section className={style.createAccoutEnding}>
                 <span>
                   Already a member?{' '}
                   <Link to='/'>
                     <b>Log in</b>
                   </Link>
                 </span>
-              </section>
+              </section> */}
             </div>
           </div>
         </section>

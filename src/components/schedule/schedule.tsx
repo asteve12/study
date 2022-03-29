@@ -187,8 +187,10 @@ const ScheduleCom:React.FC = (props)=>{
        let f = y.className
        if(f){
          let r = f.match(/react-calendar__tile--active/);
+        
+         let l = f.match(/react-calendar__tile--now/);
          //@ts-ignore
-         if (r) {
+         if (r || l) {
            if (greyPosition === prevGreyPosition && action === 'plusOne') {
              //@ts-ignore
              y.style.backgroundColor = '#F6F5F2';

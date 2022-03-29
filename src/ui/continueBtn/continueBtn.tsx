@@ -9,11 +9,11 @@ import continueBtnInterface from "./interface"
 
 
 
-const ContinuBtn: React.FC<continueBtnInterface> = (props) => {
+const ContinuBtn: React.FC = () => {
   return (
-    <Link to={props.path} className={style.continueBtn}>
+    <button type="submit" className={style.continueBtn}>
       continue
-    </Link>
+    </button>
   );
 };
 

@@ -2,7 +2,7 @@ import React from "react";
 //components
 import RegisterForm from "../form/register/registerForm"
 import Backbtn from '../../ui/backBtn/backBtn';
-import ContinBtn from '../../ui/continueBtn/continueBtn';
+
 
 //styles
 import style from "./register.module.css"
@@ -30,7 +30,7 @@ const Register:React.FC=(props)=>{
           </p>
           <RegisterForm></RegisterForm>
           <br></br>
-          <ContinBtn path="/sure" ></ContinBtn>
+         
         </div>
       </section>
     );

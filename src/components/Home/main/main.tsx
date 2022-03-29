@@ -24,50 +24,136 @@ const responsive = {
     breakpoint: { max: 3000, min: 1090 },
     items: 3,
     slidesToSlide: 1, // optional, default to 1.
+    paritialVisibilityGutter: 40,
   },
+
   tablet: {
-    breakpoint: { max: 1090, min: 464 },
+    breakpoint: { max: 1090, min: 700 },
     items: 2,
     slidesToSlide: 1, // optional, default to 1.
+    paritialVisibilityGutter: 40,
+  },
+  smaller: {
+    breakpoint: { max: 700, min: 464 },
+    items: 1.5,
+    slidesToSlide: 1,
+    paritialVisibilityGutter: 40,
   },
   mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
+    breakpoint: { max: 464, min: 320 },
+    items: 1.1,
     slidesToSlide: 1, // optional, default to 1.
+    paritialVisibilityGutter: 20,
+  },
+  xtraSmall: {
+    breakpoint: { max: 320, min: 0 },
+    items: 1,
+    slidesToSlide: 1,
+    
   },
 };
+
+
 
 const subresponsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1090 },
-    items: 5,
+    items: 4,
     slidesToSlide: 1, // optional, default to 1.
+    paritialVisibilityGutter: 40,
   },
   tablet: {
-    breakpoint: { max: 1090, min: 464 },
-    items: 3,
+    breakpoint: { max: 1090, min: 920 },
+    items: 2,
     slidesToSlide: 1, // optional, default to 1.
+    paritialVisibilityGutter: 100,
   },
   mobile: {
-    breakpoint: { max: 464, min: 0 },
+    breakpoint: { max: 464, min: 307 },
+    items: 1.1,
+    slidesToSlide: 1, // optional, default to 1.
+    paritialVisibilityGutter: 40,
+  },
+  xtraSmall: {
+    breakpoint: { max: 307, min: 0 },
     items: 1,
     slidesToSlide: 1, // optional, default to 1.
+ 
   },
 };
 
-const responsiveSchedule =  {
+const responsiveSchedule = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1090 },
+    items: 2.3,
+    slidesToSlide: 1, // optional, default to 1.
+    paritialVisibilityGutter: 40,
+  },
+  tablet: {
+    breakpoint: { max: 1090, min: 920 },
+    items: 1.9,
+    slidesToSlide: 1, // optional, default to 1.
+    paritialVisibilityGutter: 30,
+  },
+  medium: {
+    breakpoint: { max: 920, min: 750 },
+    items: 2,
+    slidesToSlide: 1, // optional, default to 1.
+    paritialVisibilityGutter: 40,
+  },
+  lowerMedium: {
+    breakpoint: { max: 750, min: 517 },
+    items: 1.4,
+    slidesToSlide: 1, // optional, default to 1.
+    paritialVisibilityGutter: 30,
+  },
+  mobile: {
+    breakpoint: { max: 517, min: 0 },
+    items: 1,
+    slidesToSlide: 1, // optional, default to 1.
+    paritialVisibilityGutter: 30,
+  },
+  xtraSmall: {
+    breakpoint: { max: 359, min: 0 },
+    items: 1,
+    slidesToSlide: 1, // optional, default to 1.
+
+  },
+};
+
+const leftOffResponsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1090 },
     items: 3,
     slidesToSlide: 1, // optional, default to 1.
+    paritialVisibilityGutter: 40,
   },
   tablet: {
-    breakpoint: { max: 1090, min: 464 },
+    breakpoint: { max: 1090, min: 920 },
     items: 2,
     slidesToSlide: 1, // optional, default to 1.
+    paritialVisibilityGutter: 30,
+  },
+  medium: {
+    breakpoint: { max: 920, min: 750 },
+    items: 2.1,
+    slidesToSlide: 1, // optional, default to 1.
+    paritialVisibilityGutter: 40,
+  },
+  lowerMedium: {
+    breakpoint: { max: 750, min: 517 },
+    items: 1.4,
+    slidesToSlide: 1, // optional, default to 1.
+    paritialVisibilityGutter: 30,
   },
   mobile: {
-    breakpoint: { max: 464, min: 0 },
+    breakpoint: { max: 517, min: 0 },
+    items: 1,
+    slidesToSlide: 1, // optional, default to 1.
+    paritialVisibilityGutter: 30,
+  },
+  xtraSmall: {
+    breakpoint: { max: 359, min: 0 },
     items: 1,
     slidesToSlide: 1, // optional, default to 1.
   },
@@ -206,13 +292,16 @@ const homeMainPage:React.FC = (props)=>{
                 ></CourseCard>
               </ScrollMenu>
             </div> */}
-            <div style={{ width: '100%' }}>
+            {/*large Device*/}
+            <div>
               <Carousel
+                partialVisbile={true}
                 responsive={responsive}
                 containerClass='carousel-container'
                 itemClass='carousel-item'
                 infinite={false}
                 autoPlay={false}
+                // centerMode={true}
               >
                 <Link to='/courses'>
                   <CourseCard
@@ -352,6 +441,7 @@ const homeMainPage:React.FC = (props)=>{
                 </Link>
               </Carousel>
             </div>
+
             <br></br>
             <div className={style.scheduleContainer}>
               <p className={style.scheduleText}>
@@ -359,13 +449,15 @@ const homeMainPage:React.FC = (props)=>{
               </p>
               <p className={style.nextLesson}>Next Lessons</p>
               <br></br>
-              <div style={{ width: '100%' }}>
+              <div>
                 <Carousel
+                  partialVisbile={true}
                   responsive={responsiveSchedule}
                   autoPlay={false}
                   infinite={false}
-                  containerClass='schedule-carousel-container'
-                  itemClass='schedule-carousel-item'
+                  // containerClass='schedule-carousel-container'
+                  // itemClass='schedule-carousel-item'
+                  // centerMode={true}
                 >
                   <section className={style.scheduleCard}>
                     <ScheduleCard></ScheduleCard>
@@ -427,13 +519,15 @@ const homeMainPage:React.FC = (props)=>{
                   })}
                 </Carousel>
               </div> */}
-              <div style={{ width: '100%' }}>
+              <div>
                 <Carousel
+                  partialVisbile={true}
                   responsive={subresponsive}
                   autoPlay={false}
                   infinite={false}
-                  containerClass='subject-carousel-container'
-                  itemClass='subject-carousel-item'
+                  // centerMode={true}
+                  // containerClass='subject-carousel-container'
+                  // itemClass='subject-carousel-item'
                 >
                   {subjects.map((eachItems) => {
                     return (
@@ -453,13 +547,15 @@ const homeMainPage:React.FC = (props)=>{
               <p className={style.continueText}>Continue where you left off</p>
               <p>Let's get you back in</p>
               <br></br>
-             
+
               <Carousel
-                responsive={responsive}
+                responsive={leftOffResponsive}
                 autoPlay={false}
                 infinite={false}
-                containerClass='continue-carousel-container'
-                itemClass='continue-carousel-item'
+                partialVisbile={true}
+                // containerClass='continue-carousel-container'
+                // itemClass='continue-carousel-item'
+                // centerMode={true}
               >
                 <ContinueCard
                   course='Mathematics'

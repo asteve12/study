@@ -1,6 +1,11 @@
 *{
-    font-family:"Gilroy-Medium",'Gilroy-Bold', "Gilroy-SemiBold",'Gilroy-Regular',"Avenir","Poppins"," sans-serif" ;
+    font-family:'Gilroy',"Gilroy-Medium",'Gilroy-Bold', "Gilroy-SemiBold",'Gilroy-Regular',"Avenir","Poppins"," sans-serif" ;
     
+}
+
+@font-face{
+    font-family:'Gilroy';
+    src :url(../src/fonts/gilroy/Gilroy-Medium.ttf)
 }
 
 @font-face{
@@ -66,10 +71,10 @@ abbr[title] {
 }
 
 .react-calendar__tile--now:enabled:focus{
-    background: none !important;
+    background: #7187B3 !important;
 }
 .react-calendar__tile--now:enabled:hover{
-        background:#000000
+        background:#F2F3F8
 
 }
 
@@ -108,20 +113,27 @@ abbr[title] {
     display:flex;
 }
 
-.carousel-container{
+/* .carousel-container{
     display:flex;
     justify-content:space-between;
-    width:100%;
+    width:auto;
+    background-color:yellow;
+     box-sizing: border-box;
+     padding-right:1000px
 }
+ */
 
-
-.carousel-item{
-    width:100% !important;
+/* .carousel-item{
+    width:300px !important;
     height:auto;
+ margin: 0px;
+    
+flex:0 0 300px
   
+  
+} */
    
-   
-}
+/*  
 
 .subject-carousel-container{
     display:flex;
@@ -130,24 +142,23 @@ abbr[title] {
 }
 
 .subject-carousel-item{
-    width:auto !important;
-    height:auto;
-}
-.schedule-carousel-container{
+    /* width:auto !important; */
+    /* height:auto;
+} */
+/* .schedule-carousel-container{
     display:flex;
     justify-content:space-between;
     width:auto;
   
 
   
-}
+} */
 
-.schedule-carousel-item{
-    width:auto !important;
-    height:auto;
+.schedule-carousel-item{ 
+
   
    
-   
+
 }
 
 .continue-carousel-container{
@@ -160,7 +171,7 @@ abbr[title] {
 }
 
 .continue-carousel-item{
-    width:auto !important;
+    /* width:auto !important; */
     height:auto;
   
    

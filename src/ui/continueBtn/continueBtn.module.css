@@ -10,5 +10,8 @@ display:flex;
 align-items:center;
 justify-content:center;
 text-decoration:none;
-color:white
+color:white;
+border:none;
+outline:none;
+cursor:pointer
 }
