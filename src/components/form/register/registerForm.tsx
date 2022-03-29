@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React,{useState} from 'react';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -12,8 +12,15 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import MenuItem from '@mui/material/MenuItem';
 import { Theme, useTheme } from '@mui/material/styles';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import ContinuBtn from "../../../ui/continueBtn/continueBtn"
+import {useDispatch} from "react-redux"
+import {addUser} from "../../../redux/reducers/signup"
+import {Navigate} from "react-router-dom"
+
+import { useFormik } from 'formik';
 //styles
 import style from './registerForm.module.css';
+
 
 
 
@@ -56,6 +63,8 @@ interface State {
 export default function RegisterForm() {
   const theme = useTheme();
   const [stateName, setStateName] = React.useState<string[]>([]);
+  const addUserInfo = useDispatch()
+  const [redirectPage,setRedirect] = useState(false)
 
   const inputProps = {
     border:0,
@@ -125,209 +134,314 @@ const handleStateNameChange = (
   ) => {
     event.preventDefault();
   };
+    interface validateInput {
+      firstName: string;
+      lastName: string;
+      city: string;
+      course: string;
+      phoneNumber: string;
+      NIN: string;
+    }
+    interface emailInterface {
+      firstName?: string;
+      lastName?: string;
+      city?: string;
+      course?: string;
+      phoneNumber?: string;
+      NIN?: string;
+    }
+
+    const validate = (value: validateInput) => {
+      const errors: emailInterface = {};
+      if (!value.firstName) {
+        errors.firstName = 'Required';
+      }
+       if (!value.lastName) {
+         errors.lastName = 'Required';
+       }
+        if (!value.city) {
+          errors.city = 'Required';
+        }
+         if (!value.course) {
+           errors.course = 'Required';
+         }
+          if (!value.phoneNumber) {
+            errors.phoneNumber = 'Required';
+          }
+          else if (!/^\d{11}$/.test(value.phoneNumber)){
+               errors.phoneNumber = 'invalid Number';
+
+          }
+            if (!value.NIN) {
+              errors.NIN = 'Required';
+            }
+            else if (!/^\d{11}$/.test(value.NIN)) {
+              errors.NIN = 'invalid NIN';
+            }
+
+      return errors;
+    };
+  const registerFormObj = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName:"",
+      city:"",
+      course:"",
+      phoneNumber:"",
+      NIN:""
+
+
+    },
+    validate,
+    onSubmit:(values)=>{
+      if(values.firstName && values.lastName && values.city && values.course && values.phoneNumber && values.NIN){
+        addUserInfo(addUser(values));
+        setRedirect(true)
+
+
+      }
+
+    }
+  });
+
+
 
   return (
     <Box>
-      <div className={style.formContainer}>
-        <FormControl
-          sx={{ width: '25ch', border: '2px' }}
-          className={style.siginContainer}
-          variant='standard'
-        >
-          <InputLabel
-            htmlFor='standard-adornment-password'
-            className={style.labelName}
+      {redirectPage ? <Navigate to="/sure"/>:null}
+      <form onSubmit={registerFormObj.handleSubmit}>
+        <div className={style.formContainer}>
+          <FormControl
+            sx={{ width: '25ch', border: '2px' }}
+            className={style.siginContainer}
+            variant='standard'
           >
-            Legal first name
-          </InputLabel>
-          <Input
-            id='standard-adornment-password'
-            className={style.disableInputStyle}
-            type='text'
-            value={values.LegalFirstName}
-            onChange={handleLegalFirstNamechange('LegalFirstName')}
-          
-          />
-        </FormControl>
-      </div>
-      <br />
-      <div className={style.formContainer}>
-        <FormControl
-          sx={{ width: '25ch', border: '2px' }}
-          className={style.siginContainer}
-          variant='standard'
-        >
-          <InputLabel
-            htmlFor='standard-adornment-password'
-            className={style.labelName}
-          >
-            Legal last name
-          </InputLabel>
-          <Input
-            id='standard-adornment-password'
-            className={style.disableInputStyle}
-            type={values.showPassword ? 'text' : 'password'}
-            value={values.LegalLastName}
-            onChange={handleLegalLastNamechange('LegalLastName')}
-            endAdornment={
-              <InputAdornment position='end'>
-                <IconButton
-                  aria-label='toggle password visibility'
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                >
-                  {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-      </div>
-      <br />
-      <div className={style.FormContainer}>
-        <FormControl
-          sx={{ width: '25ch', border: '2px' }}
-          className={style.siginContainerForm}
-          variant='standard'
-        >
-          <InputLabel
-            htmlFor='standard-adornment-password'
-            className={style.labelName}
-          >
-            City
-          </InputLabel>
-          <Input
-            id='standard-adornment-password'
-            className={style.disableInputStyle}
-            type='text'
-            value={values.City}
-            onChange={handleCitychange('City')}
-          />
-        </FormControl>
-        <div className={style.textfield}>
-      
-          <div className={style.frmCont}>
-            <FormControl
-              className={style.courseFormWraper}
-              sx={{
-                m: 0,
-                marginBottom: 1,
-                p: 0,
-                width: '100%',
-                '& .MuiInputLabel-root ': {
-                  top: 5,
-                  marginTop: 0,
-                },
-                '& label': {
-                  color: 'yellow',
-                },
-              }}
+            <InputLabel
+              htmlFor='standard-adornment-password'
+              className={style.labelName}
             >
-              <InputLabel
-                id='demo-multiple-name-label'
-                className={style.courseLabel}
-              >
-                Course
-              </InputLabel>
+              Legal first name
+            </InputLabel>
+            <Input
+              id='firstName'
+              name='firstName'
+              className={style.disableInputStyle}
+              type='text'
+              value={registerFormObj.values.firstName}
+              onChange={registerFormObj.handleChange}
+              onBlur={registerFormObj.handleBlur}
+            />
+          </FormControl>
+        </div>
+        {registerFormObj.touched.firstName &&
+        registerFormObj.errors.firstName ? (
+          <div className={style.ErrorMsg}>
+            {registerFormObj.errors.firstName}
+          </div>
+        ) : null}
+        <br />
+        <div className={style.formContainer}>
+          <FormControl
+            sx={{ width: '25ch', border: '2px' }}
+            className={style.siginContainer}
+            variant='standard'
+          >
+            <InputLabel
+              htmlFor='standard-adornment-password'
+              className={style.labelName}
+            >
+              Legal last name
+            </InputLabel>
+            <Input
+              id='lastName'
+              name='lastName'
+              className={style.disableInputStyle}
+              // type={values.showPassword ? 'text' : 'password'}
+              value={registerFormObj.values.lastName}
+              onChange={registerFormObj.handleChange}
+              onBlur={registerFormObj.handleBlur}
+            />
+          </FormControl>
+        </div>
+        {registerFormObj.touched.lastName && registerFormObj.errors.lastName ? (
+          <div className={style.ErrorMsg}>
+            {registerFormObj.errors.lastName}
+          </div>
+        ) : null}
+        <br />
+        <div className={style.FormContainer}>
+          <FormControl
+            sx={{ width: '25ch', border: '2px' }}
+            className={style.siginContainerForm}
+            variant='standard'
+          >
+            <InputLabel
+              htmlFor='standard-adornment-password'
+              className={style.labelName}
+            >
+              City
+            </InputLabel>
+            <Input
+              id='city'
+              name='city'
+              className={style.disableInputStyle}
+              type='text'
+              value={registerFormObj.values.city}
+              onChange={registerFormObj.handleChange}
+              onBlur={registerFormObj.handleBlur}
+            />
+            {registerFormObj.touched.city && registerFormObj.errors.city ? (
+              <div className={style.ErrorMsg}>
+                {registerFormObj.errors.city}
+              </div>
+            ) : null}
+          </FormControl>
 
-              <Select
-                className={style.inputBxWrapper}
-                labelId='demo-multiple-name-label'
-                id='demo-multiple-name'
-                value={stateName}
-                onChange={handleStateNameChange}
-                input={
-                  <OutlinedInput
-                    sx={{
-                      '& label:focus': {
-                        color: 'yellow',
-                      },
-                    }}
-                    label='Course'
-                  />
-                }
-                MenuProps={MenuProps}
+          <div className={style.textfield}>
+            <div className={style.frmCont}>
+              <FormControl
+                className={style.courseFormWraper}
                 sx={{
-                  '& legend': {
-                    border: 0,
-                    outline: 0,
-                    display: 'none',
+                  m: 0,
+                  marginBottom: 1,
+                  p: 0,
+                  width: '100%',
+                  '& .MuiInputLabel-root ': {
+                    top: 5,
+                    marginTop: 0,
                   },
-                  '& fieldset ': {
-                    borderColor: '#DBDFE9',
-                    borderWidth: '0px',
-                    border: 'none',
-                    height: 40,
-                    width: 130,
-                    marginBottom: 0,
-                  },
-                  '& svg': {
-                    top: 20,
+                  '& label': {
+                    color: 'yellow',
                   },
                 }}
               >
-                {statesOfCoun.map((eachState) => (
-                  <MenuItem
-                    key={eachState}
-                    value={eachState}
-                    style={getStyles(eachState, stateName, theme)}
-                  >
-                    {eachState}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+                <InputLabel
+                  id='demo-multiple-name-label'
+                  className={style.courseLabel}
+                >
+                  Course
+                </InputLabel>
+
+                <Select
+                  className={style.inputBxWrapper}
+                  labelId='demo-multiple-name-label'
+                  id='course'
+                  name='course'
+                  value={registerFormObj.values.course}
+                  onChange={registerFormObj.handleChange}
+                  onBlur={registerFormObj.handleBlur}
+                  input={
+                    <OutlinedInput
+                      sx={{
+                        '& label:focus': {
+                          color: 'yellow',
+                        },
+                      }}
+                      label='Course'
+                    />
+                  }
+                  MenuProps={MenuProps}
+                  sx={{
+                    '& legend': {
+                      border: 0,
+                      outline: 0,
+                      display: 'none',
+                    },
+                    '& fieldset ': {
+                      borderColor: '#DBDFE9',
+                      borderWidth: '0px',
+                      border: 'none',
+                      height: 40,
+                      width: 130,
+                      marginBottom: 0,
+                    },
+                    '& svg': {
+                      top: 20,
+                    },
+                  }}
+                >
+                  {statesOfCoun.map((eachState) => (
+                    <MenuItem
+                      key={eachState}
+                      value={eachState}
+                      style={getStyles(eachState, stateName, theme)}
+                    >
+                      {eachState}
+                    </MenuItem>
+                  ))}
+                </Select>
+                {registerFormObj.touched.course &&
+                registerFormObj.errors.course ? (
+                  <div className={style.ErrorMsg}>
+                    {registerFormObj.errors.course}
+                  </div>
+                ) : null}
+              </FormControl>
+            </div>
           </div>
         </div>
-      </div>
-      <br />
+        <br />
 
-      <div className={style.formContainer}>
-        <FormControl
-          sx={{ width: '25ch', border: '2px' }}
-          className={style.siginContainer}
-          variant='standard'
-        >
-          <InputLabel
-            htmlFor='standard-adornment-password'
-            className={style.labelName}
+        <div className={style.formContainer}>
+          <FormControl
+            sx={{ width: '25ch', border: '2px' }}
+            className={style.siginContainer}
+            variant='standard'
           >
-            phone number
-          </InputLabel>
-          <Input
-            id='standard-adornment-password'
-            className={style.disableInputStyle}
-            type='text'
-            value={values.phonenumber}
-            onChange={handlePhoneNumberchange('phonenumber')}
-            
-          />
-        </FormControl>
-      </div>
+            <InputLabel
+              htmlFor='standard-adornment-password'
+              className={style.labelName}
+            >
+              phone number
+            </InputLabel>
+            <Input
+              id='phoneNumber'
+              name='phoneNumber'
+              className={style.disableInputStyle}
+              type='text'
+              value={registerFormObj.values.phoneNumber}
+              onChange={registerFormObj.handleChange}
+              onBlur={registerFormObj.handleBlur}
+            />
+          </FormControl>
+          {registerFormObj.touched.phoneNumber &&
+          registerFormObj.errors.phoneNumber ? (
+            <div className={style.ErrorMsg}>
+              {registerFormObj.errors.phoneNumber}
+            </div>
+          ) : null}
+        </div>
 
-      <br />
-      <div className={style.formContainer}>
-        <FormControl
-          sx={{ width: '25ch', border: '2px' }}
-          className={style.siginContainer}
-          variant='standard'
-        >
-          <InputLabel
-            htmlFor='standard-adornment-password'
-            className={style.labelName}
+        <br />
+        <div className={style.formContainer}>
+          <FormControl
+            sx={{ width: '25ch', border: '2px' }}
+            className={style.siginContainer}
+            variant='standard'
           >
-            NIN
-          </InputLabel>
-          <Input
-            id='standard-adornment-password'
-            className={style.disableInputStyle}
-            type='text'
-            value={values.NIN}
-            onChange={handleNINchange('NIN')}
-          
-          />
-        </FormControl>
-      </div>
+            <InputLabel
+              htmlFor='standard-adornment-password'
+              className={style.labelName}
+            >
+              NIN
+            </InputLabel>
+            <Input
+              id='NIN'
+              name='NIN'
+              className={style.disableInputStyle}
+              type='text'
+              value={registerFormObj.values.NIN}
+              onChange={registerFormObj.handleChange}
+              onBlur={registerFormObj.handleBlur}
+            />
+          </FormControl>
+          {registerFormObj.touched.NIN && registerFormObj.errors.NIN ? (
+            <div className={style.ErrorMsg}>{registerFormObj.errors.NIN}</div>
+          ) : null}
+        </div>
+        <br></br>
+        <ContinuBtn></ContinuBtn>
+      </form>
     </Box>
   );
 }

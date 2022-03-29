@@ -9,7 +9,7 @@ import style from "./sure.module.css"
 import Backbtn from '../../ui/backBtn/backBtn';
 import SureForm from "../form/sure/sure"
 import {Link} from "react-router-dom"
-import ContinueBtn from "../../ui/continueBtn/continueBtn"
+
 
 const SureComponent:React.FC =(props)=>{
     return (
@@ -40,9 +40,9 @@ const SureComponent:React.FC =(props)=>{
           </div>
           <br></br>
           <br></br>
-          <div className={style.contBtnWrapper}>
-            <ContinueBtn path='/chooseAStudyPath'></ContinueBtn>
-          </div>
+          {/* <div className={style.contBtnWrapper}>
+            <ContinueBtn ></ContinueBtn>
+          </div> */}
         </div>
       </section>
     );

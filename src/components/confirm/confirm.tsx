@@ -40,7 +40,7 @@ const confirmComponent:React.FC = (props)=>{
           </div>
           <br />
         
-          <ContinueBtn path='/homePage'></ContinueBtn>
+          <ContinueBtn ></ContinueBtn>
         </section>
       </div>
     );

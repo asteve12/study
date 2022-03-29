@@ -40,7 +40,7 @@ const StudyPathComponent: React.FC<studyPath> = (props) => {
           <h1>Choose a study path</h1>
         <SelectItems></SelectItems>
         <br></br>
-          <ContinueBtn path='/confirmCourse'></ContinueBtn>
+          <ContinueBtn ></ContinueBtn>
         </div>
 
         <br />
