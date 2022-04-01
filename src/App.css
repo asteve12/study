@@ -3,6 +3,14 @@
     
 }
 
+.loaderWrapper{
+    width:100%;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
 @font-face{
     font-family:'Gilroy';
     src :url(../src/fonts/gilroy/Gilroy-Medium.ttf)

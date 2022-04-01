@@ -9,17 +9,26 @@ import style from "./sure.module.css"
 import Backbtn from '../../ui/backBtn/backBtn';
 import SureForm from "../form/sure/sure"
 import {Link} from "react-router-dom"
+import { useSelector } from 'react-redux';
 
 
 const SureComponent:React.FC =(props)=>{
+  
+    const currentEmail = useSelector((state:any) => state.signin);
+  
     return (
       <section className={style.sureComponent}>
         <div className={style.contentWrapper}>
           <Backbtn path='/createAccount'></Backbtn>
           <p className={style.textHeader}>Just To Be Sure</p>
           <p>
-            We sent a code to {<Link to='/' className={style.inpuEmail}>dukauwa.du@gmail.com.</Link>} Enter
-            it here to prove it is really you
+            We sent a code to{' '}
+            {
+              <Link to='/' className={style.inpuEmail}>
+                {currentEmail.Email}
+              </Link>
+            }{' '}
+            Enter it here to prove it is really you
           </p>
           <br></br>
           <SureForm></SureForm>

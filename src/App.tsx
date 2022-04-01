@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import OnBoard from "./pages/onbaord/onbaord"
 import SurePage from "./pages/sure/sure"
 import StudyPath from './pages/studyPath/studyPath';
@@ -10,40 +10,148 @@ import Profile from "../src/pages/profile/profile"
 import ResourcePage from "../src/pages/resources/resources"
 import SchedulePage from "./pages/schedule/schedule"
 import CoursePage from "./pages/courses/course"
-
+import LoginPage from "./pages/login/log"
+import {useSelector,useDispatch} from "react-redux"
+import { getUsers } from './redux/reducers/login';
+import { BrowserRouter } from 'react-router-dom';
+import { Circles } from 'react-loader-spinner';
 
 
 
 //@ts-ignore
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route,Navigate} from 'react-router-dom';
 
 import './App.css';
-import { Provider } from 'react-redux';
-import store from './redux/store';
+
+// import store from './redux/store';
 
 
 
 
 function App() {
+  //@ts-ignore
+ const signedinUser = useSelector((state) => state.login);
+ const [loading, setLoading] = useState(true)
+ const dispatchAuthentication = useDispatch();
+
+
+
+
+ useEffect(()=>{
+   dispatchAuthentication(getUsers());
+    console.log('mysin', signedinUser.email);
+     console.log('my currr user useEffect', signedinUser);
+
+
+ })
+  
+if (signedinUser.loading){
   return (
-    <Provider store={store}>
-      <div className='App'>
-        <Routes>
-          <Route path='/' element={<OnBoard></OnBoard>}></Route>
-          <Route path='/createAccount' element={<Register />}></Route>
-          <Route path='/sure' element={<SurePage />}></Route>
-          <Route path='/chooseAStudyPath' element={<StudyPath />}></Route>
-          <Route path='/confirmCourse' element={<ConfirmCourse />}></Route>
-          <Route path='/homePage' element={<HomePage />}></Route>
-          <Route path='/Chats' element={<ChatHomePage />}></Route>
-          <Route path='/Profile' element={<Profile />}></Route>
-          <Route path='/Resources' element={<ResourcePage />}></Route>
-          <Route path='/schedule' element={<SchedulePage />}></Route>
-          <Route path='/Courses' element={<CoursePage />}></Route>
-        </Routes>
+    <section className='loaderWrapper'>
+      <div>
+        <Circles color='#315292' ariaLabel='loading-indicator' />
       </div>
-    </Provider>
+    </section>
   );
+}
+
+
+
+return(<>
+ <BrowserRouter>
+        <div className='App'>
+           <Routes>
+             <Route path='/' element={<OnBoard />}></Route>
+
+           <Route path='/login' element={<LoginPage />}></Route>
+            <Route
+              path='/createAccount'
+              element={<Register />}
+            ></Route>
+            <Route
+              path='/sure'
+              element={
+               
+                  <SurePage />
+               
+              }
+            ></Route>
+            <Route
+              path='/chooseAStudyPath'
+              element={
+                
+                  <StudyPath />
+               
+              }
+            ></Route>
+            <Route path='/confirmCourse' element={<ConfirmCourse />}></Route>
+            <Route
+              path='/homePage'
+              element={
+                signedinUser.email ? (
+                  <HomePage />
+                ) : (
+                  <Navigate replace to='/login' />
+                )
+              }
+            ></Route>
+            <Route
+              path='/Chats'
+              element={
+                signedinUser.email ? (
+                  <ChatHomePage />
+                ) : (
+                  <Navigate replace to='/login' />
+                )
+              }
+            ></Route>
+            <Route
+              path='/Profile'
+              element={
+                signedinUser.email ? (
+                  <Profile />
+                ) : (
+                  <Navigate replace to='/login' />
+                )
+              }
+            ></Route>
+            <Route
+              path='/Resources'
+              element={
+                signedinUser.email ? (
+                  <ResourcePage />
+                ) : (
+                  <Navigate replace to='/login' />
+                )
+              }
+            ></Route>
+            <Route
+              path='/schedule'
+              element={
+                signedinUser.email ? (
+                  <SchedulePage />
+                ) : (
+                  <Navigate replace to='/login' />
+                )
+              }
+            ></Route>
+            <Route
+              path='/Courses'
+              element={
+                signedinUser.email ? (
+                  <CoursePage />
+                ) : (
+                  <Navigate replace to='/login' />
+                )
+              }
+            ></Route>
+          </Routes>
+        </div>
+      </BrowserRouter>
+</>)
+
+  
+ 
 }
 
 export default App;
