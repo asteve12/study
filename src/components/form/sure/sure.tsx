@@ -5,7 +5,9 @@ import Box from '@mui/material/Box';
 import FormHelperText from '@mui/material/FormHelperText';
 import ContinueBtn from '../../../ui/continueBtn/continueBtn';
 import { useFormik } from 'formik';
+import { ThreeCircles } from 'react-loader-spinner';
 import {Navigate} from "react-router-dom"
+
 //styles
 import style from "./sure.module.css"
 
@@ -33,6 +35,8 @@ function MyFormHelperText() {
 
 export default function UseFormControl() {
   const [allowRedirect,setRedirect] = useState(false)
+  const [showLoader,setLoader] = useState(false)
+ 
   interface validateInput {
     firstNumber: string;
     secondNumber: string;
@@ -86,6 +90,7 @@ export default function UseFormControl() {
          values.fourthNumber &&
          values.fifthNumber
        ) {
+         setLoader(true)
            console.log('my test number', new Array(values.firstNumber));
          setRedirect(true);
        }
@@ -93,7 +98,9 @@ export default function UseFormControl() {
    });
   return (
     <div>
-      {allowRedirect  ? <Navigate to="/homePage"></Navigate>:null}
+      {allowRedirect ? (
+        <Navigate replace={true} to='/chooseAStudyPath'></Navigate>
+      ) : null}
       <form onSubmit={formChangeObj.handleSubmit}>
         <Box
           component='form'
@@ -121,11 +128,10 @@ export default function UseFormControl() {
               placeholder='?'
               name='firstNumber'
               id='firstNumber'
-              
               className={style.inputOutline}
               onChange={formChangeObj.handleChange}
               onBlur={formChangeObj.handleBlur}
-              value={formChangeObj.values.firstNumber}
+              value={formChangeObj.values.firstNumber.split('')[0]}
               sx={{
                 '& .MuiOutlinedInput-input': {
                   textAlign: 'center',
@@ -158,7 +164,7 @@ export default function UseFormControl() {
               className={style.inputOutline}
               onChange={formChangeObj.handleChange}
               onBlur={formChangeObj.handleBlur}
-              value={formChangeObj.values.secondNumber}
+              value={formChangeObj.values.secondNumber.split('')[0]}
               sx={{
                 '& .MuiOutlinedInput-input': {
                   textAlign: 'center',
@@ -191,7 +197,7 @@ export default function UseFormControl() {
               id='thirdNumber'
               onChange={formChangeObj.handleChange}
               onBlur={formChangeObj.handleBlur}
-              value={formChangeObj.values.thirdNumber}
+              value={formChangeObj.values.thirdNumber.split('')[0]}
               sx={{
                 '& .MuiOutlinedInput-input': {
                   textAlign: 'center',
@@ -224,7 +230,7 @@ export default function UseFormControl() {
               id='fourthNumber'
               onChange={formChangeObj.handleChange}
               onBlur={formChangeObj.handleBlur}
-              value={formChangeObj.values.fourthNumber}
+              value={formChangeObj.values.fourthNumber.split('')[0]}
               sx={{
                 '& .MuiOutlinedInput-input': {
                   textAlign: 'center',
@@ -257,7 +263,7 @@ export default function UseFormControl() {
               id='fifthNumber'
               onChange={formChangeObj.handleChange}
               onBlur={formChangeObj.handleBlur}
-              value={formChangeObj.values.fifthNumber}
+              value={formChangeObj.values.fifthNumber.split('')[0]}
               sx={{
                 '& .MuiOutlinedInput-input': {
                   textAlign: 'center',
@@ -277,7 +283,18 @@ export default function UseFormControl() {
         <br></br>
 
         <div className={style.contBtnWrapper}>
-          <ContinueBtn></ContinueBtn>
+          {showLoader ? (
+            <div className={style.loaderCont}>
+              <ThreeCircles
+                color='#315292'
+                height={50}
+                width={50}
+                ariaLabel='three-circles-rotating'
+              />
+            </div>
+          ) : (
+            <ContinueBtn></ContinueBtn>
+          )}
         </div>
         <br></br>
       </form>

@@ -1,3 +1,10 @@
+.loaderCont{
+    width:100%;
+    display:flex;
+    justify-content:center
+}
+
+
 .ErrorMsg{
     color:red;
     position:absolute;

@@ -17,7 +17,12 @@ const signinSlice = createSlice({
           if(state.firstName !== ""){
               
                     registerNewUser.post("/signup.json",state).then((response)=>{
-                        console.log(response)
+                        const {name} = response.data
+                        console.log("mh signup response",response)
+                        return name
+                    })
+                    .then((response)=>{
+                        console.log("respondedWith",response)
                     })
                     .catch((error)=>{
                         console.log(error)

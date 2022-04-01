@@ -1,3 +1,11 @@
+.errorMsg{
+    color:red
+}
+
+.loaderContainer{
+    display:flex;
+    justify-content: center;
+}
 .createAccoutEnding{
     display: flex;
     align-items: center;

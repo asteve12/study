@@ -16,6 +16,9 @@ import ContinuBtn from "../../../ui/continueBtn/continueBtn"
 import {useDispatch} from "react-redux"
 import {addUser} from "../../../redux/reducers/signup"
 import {Navigate} from "react-router-dom"
+import { ThreeCircles } from 'react-loader-spinner';
+//@ts-ignore
+import {sendCode,verifyCode,verifyToken,verifyBoth} from 'email-verification-code';
 
 import { useFormik } from 'formik';
 //styles
@@ -65,6 +68,8 @@ export default function RegisterForm() {
   const [stateName, setStateName] = React.useState<string[]>([]);
   const addUserInfo = useDispatch()
   const [redirectPage,setRedirect] = useState(false)
+  const [showLoader,setShowLoader] = useState(false)
+
 
   const inputProps = {
     border:0,
@@ -138,7 +143,7 @@ const handleStateNameChange = (
       firstName: string;
       lastName: string;
       city: string;
-      course: string;
+      state: string;
       phoneNumber: string;
       NIN: string;
     }
@@ -146,7 +151,7 @@ const handleStateNameChange = (
       firstName?: string;
       lastName?: string;
       city?: string;
-      course?: string;
+      state?: string;
       phoneNumber?: string;
       NIN?: string;
     }
@@ -162,8 +167,8 @@ const handleStateNameChange = (
         if (!value.city) {
           errors.city = 'Required';
         }
-         if (!value.course) {
-           errors.course = 'Required';
+         if (!value.state) {
+           errors.state = 'Required';
          }
           if (!value.phoneNumber) {
             errors.phoneNumber = 'Required';
@@ -186,7 +191,7 @@ const handleStateNameChange = (
       firstName: '',
       lastName:"",
       city:"",
-      course:"",
+       state:"",
       phoneNumber:"",
       NIN:""
 
@@ -194,9 +199,11 @@ const handleStateNameChange = (
     },
     validate,
     onSubmit:(values)=>{
-      if(values.firstName && values.lastName && values.city && values.course && values.phoneNumber && values.NIN){
+      if(values.firstName && values.lastName && values.city && values.state && values.phoneNumber && values.NIN){
         addUserInfo(addUser(values));
         setRedirect(true)
+        setShowLoader(true)
+     
 
 
       }
@@ -208,7 +215,7 @@ const handleStateNameChange = (
 
   return (
     <Box>
-      {redirectPage ? <Navigate to="/sure"/>:null}
+      {redirectPage ? <Navigate replace={true} to='/sure' /> : null}
       <form onSubmit={registerFormObj.handleSubmit}>
         <div className={style.formContainer}>
           <FormControl
@@ -319,15 +326,15 @@ const handleStateNameChange = (
                   id='demo-multiple-name-label'
                   className={style.courseLabel}
                 >
-                  Course
+                  state
                 </InputLabel>
 
                 <Select
                   className={style.inputBxWrapper}
                   labelId='demo-multiple-name-label'
-                  id='course'
-                  name='course'
-                  value={registerFormObj.values.course}
+                  id='state'
+                  name='state'
+                  value={registerFormObj.values.state}
                   onChange={registerFormObj.handleChange}
                   onBlur={registerFormObj.handleBlur}
                   input={
@@ -337,7 +344,7 @@ const handleStateNameChange = (
                           color: 'yellow',
                         },
                       }}
-                      label='Course'
+                      label='state'
                     />
                   }
                   MenuProps={MenuProps}
@@ -370,10 +377,10 @@ const handleStateNameChange = (
                     </MenuItem>
                   ))}
                 </Select>
-                {registerFormObj.touched.course &&
-                registerFormObj.errors.course ? (
+                {registerFormObj.touched.state &&
+                registerFormObj.errors.state ? (
                   <div className={style.ErrorMsg}>
-                    {registerFormObj.errors.course}
+                    {registerFormObj.errors.state}
                   </div>
                 ) : null}
               </FormControl>
@@ -440,7 +447,18 @@ const handleStateNameChange = (
           ) : null}
         </div>
         <br></br>
-        <ContinuBtn></ContinuBtn>
+        {showLoader ? (
+          <div>
+            <ThreeCircles
+              color='#315292'
+              height={50}
+              width={50}
+              ariaLabel='three-circles-rotating'
+            />
+          </div>
+        ) : (
+          <ContinuBtn></ContinuBtn>
+        )}
       </form>
     </Box>
   );

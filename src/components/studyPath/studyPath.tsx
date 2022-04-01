@@ -5,7 +5,8 @@ import style from "./studyPath.module.css"
 import BackBtn from "../../ui/backBtn/backBtn"
 import SelectStudyPath from "../form/selectStudyPath/selecySTudyPath"
 import SelectItems from '../form/selection/selection';
-import ContinueBtn from "../../ui/continueBtn/continueBtn"
+
+
 
 
 //interface
@@ -16,7 +17,7 @@ import studyPath from "./interface"
 
 
 const StudyPathComponent: React.FC<studyPath> = (props) => {
-  return (
+ return (
     <section className={style.studyPathPageWrapper}>
       <div className={style.studyPathContainer}>
         <br></br>
@@ -40,7 +41,7 @@ const StudyPathComponent: React.FC<studyPath> = (props) => {
           <h1>Choose a study path</h1>
         <SelectItems></SelectItems>
         <br></br>
-          <ContinueBtn ></ContinueBtn>
+       
         </div>
 
         <br />
