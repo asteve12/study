@@ -44,10 +44,12 @@ const loginSlice = createSlice({
     NIN: '',
     loading: true,
     userExist:"",
-    loginFormStatus:""
+    loginFormStatus:"",
+    showFormLoader:false
   },
   reducers: {
     addSigninUser: (state: any, action: any) => {
+      state.showFormLoader =  true
       console.log('my payloader', action.payload);
       if (action.payload.type === 'loginByForm') {
         let { myDetail } = action.payload;
@@ -63,7 +65,10 @@ const loginSlice = createSlice({
               response.data[eachUser].Email === userEmail &&
               response.data[eachUser].password === userPassword
             ) {
+              state.showFormLoader = false;
               state.email = userEmail;
+
+                localStorage.setItem('userId', eachUser);
               console.log('passed');
             }
           }
@@ -116,7 +121,8 @@ const loginSlice = createSlice({
         NIN: '',
         loading: true,
         userExist:"unknown", 
-        loginFormStatus:""
+        loginFormStatus:"",
+        showFormLoader:false
         
 
       };
@@ -180,28 +186,31 @@ const loginSlice = createSlice({
           }
           console.log('filllll', payload);
         }
-        let tokenId = localStorage.getItem('token');
-        let userId = localStorage.getItem('userId');
-        let expireIn = localStorage.getItem('tokenExpireIn');
-        console.log('my payload', userId);
-        let keysOfUser = Object.keys(payload);
 
-        for (let eachUserObj of keysOfUser) {
-          if (userId === eachUserObj) {
-            let loggedInUser = payload[eachUserObj];
-            console.log('jjjjjj', current(state));
-
-            state.firstName = loggedInUser.firstName;
-            state.lastName = loggedInUser.lastName;
-            state.email = loggedInUser.Email;
-            state.phoneNumber = loggedInUser.phoneNumber;
-            state.city = loggedInUser.city;
-            state.NIN = loggedInUser.NIN;
-
-            // return loggedInUser;
-          }
+   
+    
         }
-        }
+            let tokenId = localStorage.getItem('token'); 
+            let userId = localStorage.getItem('userId');
+            let expireIn = localStorage.getItem('tokenExpireIn');
+            console.log('my stephen', userId);
+            let keysOfUser = Object.keys(payload);
+
+            for (let eachUserObj of keysOfUser) {
+              if (userId === eachUserObj) {
+                let loggedInUser = payload[eachUserObj];
+                console.log('jjjjjj', current(state));
+
+                state.firstName = loggedInUser.firstName;
+                state.lastName = loggedInUser.lastName;
+                state.email = loggedInUser.Email;
+                state.phoneNumber = loggedInUser.phoneNumber;
+                state.city = loggedInUser.city;
+                state.NIN = loggedInUser.NIN;
+
+                // return loggedInUser;
+              }
+            }
        
       state.loading = false;
     },

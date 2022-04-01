@@ -461,7 +461,7 @@ export  function LoginForm() {
           </FormControl>
         </div>
 
-        {signinUser.loginFormStatus === "No" ? (
+        {signinUser.loginFormStatus === 'No' ? (
           <div className={style.errorMsg}>user does not exist</div>
         ) : null}
         {formChangeObj.touched.Email && formChangeObj.errors.Email ? (
@@ -536,7 +536,7 @@ export  function LoginForm() {
           <div className={style.ErrorMsg}>check the box Above</div>
         ) : null}
         <br />
-        {showLoader ? (
+        {signinUser.showFormLoader ? (
           <div className={style.loaderContainer}>
             <ThreeCircles
               color='#315292'
