@@ -125,6 +125,9 @@ const loginSlice = createSlice({
 
       };
     },
+    changeLoginStatus:(state:any)=>{
+      state.loginFormStatus = ""
+    }
   },
   extraReducers: {
     //@ts-ignore
@@ -189,9 +192,7 @@ const loginSlice = createSlice({
               state.loginFormStatus = "No"
                 // state.userExist = 'No';
                 state.showFormLoader = false;
-                setTimeout(()=>{
-                    state.loginFormStatus = '';
-                },1000)
+             
             
             }
           }
@@ -236,5 +237,6 @@ const loginSlice = createSlice({
 export default loginSlice.reducer;
 const addSigninUser = loginSlice.actions.addSigninUser;
 const clearState = loginSlice.actions.clearState;
+const changeLoginStatus = loginSlice.actions.changeLoginStatus;
 // const authenticateUser = loginSlice.actions.authenticateUser;
-export { addSigninUser, getUsers, clearState};
+export { addSigninUser, getUsers, clearState, changeLoginStatus };
