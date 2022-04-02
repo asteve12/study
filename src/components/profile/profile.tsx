@@ -10,12 +10,14 @@ import pencilIcon from "../../assets/profile/pencil.svg"
 import {NavLink,Navigate} from "react-router-dom"
 import {logout} from "../../redux/reducers/logout"
 import {clearState} from "../../redux/reducers/login"
-import {useDispatch} from "react-redux"
+import {useDispatch,useSelector} from "react-redux"
 
 
 
 const ProfileComp:React.FC = (props)=>{
   let [islogout,setLogout] = useState(false)
+  //@ts-ignore
+  const signinUser = useSelector((state)=> state.login)
 
   const logUserOut = useDispatch()
   const clearuserState = useDispatch()
@@ -39,8 +41,10 @@ const ProfileComp:React.FC = (props)=>{
             <br></br>
             <br></br>
             <div className={style.profileNameCont}>
-              <h3>Ukauwa David</h3>
-              <p>dukauwa.du@gmail.com</p>
+              <h3>
+                {signinUser.firstName} {signinUser.lastName}
+              </h3>
+              <p>{signinUser.email}</p>
             </div>
             <div className={style.linkCont}>
               <NavLink to='' className={style.linkStyle}>
@@ -58,7 +62,6 @@ const ProfileComp:React.FC = (props)=>{
               <button
                 className={style.logout}
                 onClick={() => {
-                 
                   logUserOut(logout());
                   clearuserState(clearState());
                   setLogout(true);
