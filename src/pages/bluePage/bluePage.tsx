@@ -18,7 +18,7 @@ const BluePage:React.FC = ()=>{
           <br></br>
           <div className={style.welcomeCont}>
             <Link className={style.linkStyle} to='/login'>
-              WELCOME
+              <b>WELCOME</b>
             </Link>
           </div>
         </div>
