@@ -111,21 +111,21 @@ const checkUserExist = (userEmail: string) => {
                 onFailure={handleLogin}
                 cookiePolicy={'single_host_origin'}
               /> */}
-              <GoogleLogin
+              {/* <GoogleLogin
                 clientId='715423435625-7d590qpf3nbd6t9brb1hgvmjmjuousf6.apps.googleusercontent.com'
                 buttonText='Login'
                 onSuccess={handleLogin}
                 onFailure={handleLogin}
                 cookiePolicy={'single_host_origin'}
-                // redirectUri="/sure"
-                // render={(renderProps) => (
-                //   <button
-                //     onClick={renderProps.onClick}
-                //     disabled={renderProps.disabled}
-                //   >
-                //     This is my custom Google button
-                //   </button>
-                // )}
+                redirectUri="/sure"
+                render={(renderProps) => (
+                  <button
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                  >
+                    This is my custom Google button
+                  </button>
+                )}
                 render={(renderProps) => (
                   <button
                     className={style.signInWithGoogle}
@@ -137,8 +137,17 @@ const checkUserExist = (userEmail: string) => {
                     Sign Up With Google
                   </button>
                 )}
-              />
-              <div className={style.errorMsg}>{errorMsg}</div>
+              /> */}
+              {/* <div className={style.errorMsg}>{errorMsg}</div> */}
+              <button
+                className={style.signInWithGoogle}
+                // onClick={renderProps.onClick}
+              >
+                <div>
+                  <FcGoogle></FcGoogle>
+                </div>
+                Sign Up With Google
+              </button>
               <br></br>
               <div className={style.signUpWithEmail}>
                 <div className={style.hzRule}></div>&nbsp; Sign Up With

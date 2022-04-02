@@ -5,9 +5,9 @@ import {registerNewUser} from "../../axios"
 const getUsers = createAsyncThunk(
   'get/getUsers',
   async (thunkAPI, userDetail?: any) => {
-      console.log('cont', userDetail);
+  
      if (userDetail.type === "validategoogleform") {
-       console.log('cont', userDetail);
+   
      }
     let res = registerNewUser.get('/signup.json').then((response) => {
       return response.data;
@@ -49,18 +49,18 @@ const loginSlice = createSlice({
   },
   reducers: {
     addSigninUser: (state: any, action: any) => {
-      state.showFormLoader =  true
-      console.log('my payloader', action.payload);
+      // state.showFormLoader =  true
+
       if (action.payload.type === 'loginByForm') {
         let { myDetail } = action.payload;
         let userEmail = myDetail.email;
         let userPassword = myDetail.password;
-        console.log('kkkkkkkkkkkk', { userEmail, userPassword });
+  
         registerNewUser.get('/signup.json').then((response) => {
           let userObjKey = Object.keys(response.data);
-          console.log('my feedback', response.data);
+         
           for (let eachUser of userObjKey) {
-            console.log('tyuser', eachUser);
+         
             if (
               response.data[eachUser].Email === userEmail &&
               response.data[eachUser].password === userPassword
@@ -69,7 +69,7 @@ const loginSlice = createSlice({
               state.email = userEmail;
 
                 localStorage.setItem('userId', eachUser);
-              console.log('passed');
+           
             }
           }
         });
@@ -79,7 +79,7 @@ const loginSlice = createSlice({
         state.firstName = userDetail.familyName;
         state.lastName = userDetail.givenName;
         state.email = userDetail.email;
-        console.log('tokenise', userDetail.email);
+    
         state.accessTokenDetail = {
           tokenId: tokenDetail.access_token,
           expireIn: tokenDetail.expires_in,
@@ -91,9 +91,7 @@ const loginSlice = createSlice({
 
           for (let eachItems of arrayOfObjectKey) {
             let eachUser = response.data[eachItems];
-            console.log('userId', userDetail.email);
-            console.log('userdetail', response.data[eachItems].Email);
-            console.log('validate');
+           
             if (response.data[eachItems].Email === userDetail.email) {
               //  console.log('userId', eachItems);
               localStorage.setItem('userId', eachItems);
@@ -130,29 +128,35 @@ const loginSlice = createSlice({
   },
   extraReducers: {
     //@ts-ignore
-    [getUsers.pending]: (state) => {
-      //   state.loading = true;
+    [getUsers.pending]: (state,{meta}) => {
+   
+      if(meta.arg){
+        if(meta.arg.type === "loginByForm"){
+            state.showFormLoader = true;
+
+        }
+
+      }
+      console.log("pending",meta)
     },
     //@ts-ignore
     [getUsers.fulfilled]: (state, { payload, meta }) => {
+       state.showFormLoader = false;
  
       if(meta.arg){
-        console.log('uuuu', meta.arg);
+    
     
         if (meta.arg.type === 'validategoogleform') {
-              console.log('my plll', meta.arg.userDetail);
-              console.log('jjjjkkk', payload);
+            
           const userObj = meta.arg.userDetail;
           const userEmail = userObj.email;
           let userObjKeys = Object.keys(payload);
           for(let eachItems of userObjKeys){
-                     console.log('key', eachItems);
+                
             if (payload[eachItems].Email === userEmail) {
               state.email = userEmail; 
              
-             console.log('mu>>>',payload[eachItems].Email === userEmail);
-             console.log('userEmail', userEmail);
-             console.log('haveemial', payload[eachItems].Email);
+          
            
             }
             else{
@@ -163,6 +167,7 @@ const loginSlice = createSlice({
         }
 
         if (meta.arg.type === 'loginByForm') {
+         
           const { myDetail } = meta.arg;
           // state.email = myDetail.email;
           let userEmail = myDetail.email;
@@ -171,20 +176,26 @@ const loginSlice = createSlice({
 
           for (let eachItem of userObjKeys) {
             let selectedUser = payload[eachItem];
-            console.log('eachItems', selectedUser);
+         
             if (
               userEmail === selectedUser.Email &&
               userPassword === selectedUser.password
             ) {
               state.email = selectedUser.Email;
               localStorage.setItem('userId', eachItem);
+                 state.showFormLoader = false;
             }
             else{
               state.loginFormStatus = "No"
+                // state.userExist = 'No';
+                state.showFormLoader = false;
+                setTimeout(()=>{
+                    state.loginFormStatus = '';
+                },1000)
             
             }
           }
-          console.log('filllll', payload);
+     
         }
 
    
@@ -193,13 +204,13 @@ const loginSlice = createSlice({
             let tokenId = localStorage.getItem('token'); 
             let userId = localStorage.getItem('userId');
             let expireIn = localStorage.getItem('tokenExpireIn');
-            console.log('my stephen', userId);
+         
             let keysOfUser = Object.keys(payload);
 
             for (let eachUserObj of keysOfUser) {
               if (userId === eachUserObj) {
                 let loggedInUser = payload[eachUserObj];
-                console.log('jjjjjj', current(state));
+               
 
                 state.firstName = loggedInUser.firstName;
                 state.lastName = loggedInUser.lastName;

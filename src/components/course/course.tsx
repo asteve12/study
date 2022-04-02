@@ -7,6 +7,7 @@ import eyesIcon from "../../assets/course/eyes.svg"
 import VideoDiscussion from "../../ui/video/videoDiscussion"
 import ChatMessage from "../../ui/video/videoDiscussion"
 import Attended from "../../ui/Attendees/attenndeed"
+import ReactPlayer from 'react-player';
 import {Link} from "react-router-dom"
 //icons
 import svgIcons from "../../assets/chatdetail/chatdetail.svg"
@@ -56,8 +57,7 @@ const hideMreBtn = useRef<any>();
       <section className={style.CourseComp}>
         <div className={style.videoCont}>
           <section className={style.iconContainer}>
-            <Link to="/homePage" className={style.mvBckBtn}>
-          
+            <Link to='/homePage' className={style.mvBckBtn}>
               <IoChevronBackSharp></IoChevronBackSharp>
             </Link>
             <div className={style.iconItems}>
@@ -66,10 +66,16 @@ const hideMreBtn = useRef<any>();
               <p className={style.views}>142</p>
             </div>
           </section>
-          <video
-            className={style.videoItem}
+
+          <div className={style.videoItem}>
+            {/* <p className={style.doubleTap}>double tap to view fullscreen</p> */}
+            <ReactPlayer width="100%" height="100%"  url='https://www.youtube.com/watch?v=ysz5S6PUM-U' />
+          </div>
+          {/* <video
+          
+            controls
             src='https://www.w3schools.com/html/mov_bbb.mp4'
-          ></video>
+          ></video> */}
           <section className={style.bottomDetails}>
             <div className={style.lgActiveUser}>
               <VideoDiscussion type='videoOverlay'></VideoDiscussion>
