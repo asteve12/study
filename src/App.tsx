@@ -132,12 +132,7 @@ return (
           <Route
             path='/bluePage'
             element={
-              signedinUser.email ? (
-                <BluePage />
-              ) : (
-                <Navigate replace to='/login' />
-              )
-            }
+          <BluePage />}
           ></Route>
         </Routes>
       </div>
