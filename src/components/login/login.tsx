@@ -95,7 +95,7 @@ const Login: React.FC = (props) => {
 
   return (
     <>
-      {signinUserDetail.email ? <Navigate to={`/bluePage`} /> : null}
+      {signinUserDetail.email ? <Navigate to={`/homePage`} /> : null}
       <section className={style.createAcctContainer}>
         <div className={style.createAcctWrapper}>
           <div className={style.ImgWrapper}>

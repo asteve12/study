@@ -11,12 +11,14 @@ const BluePage:React.FC = ()=>{
     return (
       <div className={style.bluePageWrapper}>
         <div className={style.blueContWrapper}>
-          <div>
+          <div className={style.welcomeCont}>
             <img src={whiteLogo} alt='' />
           </div>
-          <div>
-            <Link className={style.linkStyle} to='/homePage'>
-              GO TO CLASSROOM
+          <br></br>
+          <br></br>
+          <div className={style.welcomeCont}>
+            <Link className={style.linkStyle} to='/login'>
+              WELCOME
             </Link>
           </div>
         </div>
