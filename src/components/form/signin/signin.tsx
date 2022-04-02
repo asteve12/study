@@ -101,6 +101,7 @@ export default function InputAdornments() {
    
 
     registerNewUser.get("/signup.json").then((response)=>{
+     
      let availaBleUser = Object.keys(response.data)
      for(let eachItems of availaBleUser ){
     
@@ -132,7 +133,7 @@ export default function InputAdornments() {
 
     })
     .catch((error)=>{
-      console.log("user validation",error)
+      console.log("user validation1",error)
     })
 
   }
@@ -390,6 +391,7 @@ export  function LoginForm() {
       })
       .catch((error) => {
         console.log('user validation', error);
+         setShowLoader(false);
       });
   };
   const validate = (value: validateInput) => {
