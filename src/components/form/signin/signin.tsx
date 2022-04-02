@@ -573,7 +573,7 @@ export  function LoginForm() {
         <section className={style.createAccoutEnding}>
           <span>
             {alreadyMember ? 'Already a member' : null}&nbsp;
-            <Link to='/'>
+            <Link to='/register'>
               <b>Create Account</b>
             </Link>
           </span>
