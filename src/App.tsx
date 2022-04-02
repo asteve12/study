@@ -63,7 +63,7 @@ return (
     <BrowserRouter>
       <div className='App'>
         <Routes>
-          <Route path='/' element={<OnBoard />}></Route>
+          <Route path='/register' element={<OnBoard />}></Route>
           <Route path='/login' element={<LoginPage />}></Route>
           <Route path='/createAccount' element={<Register />}></Route>
           <Route path='/sure' element={<SurePage />}></Route>
@@ -130,7 +130,7 @@ return (
             }
           ></Route>
           <Route
-            path='/bluePage'
+            path='/'
             element={
           <BluePage />}
           ></Route>
