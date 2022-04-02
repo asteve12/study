@@ -213,9 +213,11 @@ const handleStateNameChange = (
           if (!value.phoneNumber) {
             errors.phoneNumber = 'Required';
           }
-          else if (!/^\d{11}$/.test(value.phoneNumber)){
-               errors.phoneNumber = 'invalid Number';
-
+          else if (
+            !/^\d{11}$/.test(value.phoneNumber) &&
+            !/^[+]234\d{10}$/.test(value.phoneNumber)
+          ) {
+            errors.phoneNumber = 'invalid Number';
           }
             if (!value.NIN) {
               errors.NIN = 'Required';
