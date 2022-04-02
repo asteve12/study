@@ -42,6 +42,7 @@ export default function InputAdornments() {
     const addUserDispatch = useDispatch<any>()
     const[alreadyMember,setMember] = useState(false)
     const[showLoader,setShowLoader] = useState(false)
+   
   
  
       const[isCheck,setIsCheck]= React.useState(true)
@@ -306,6 +307,7 @@ export  function LoginForm() {
   const signinInfo = useSelector<any>((storeState) => storeState.signin);
   //@ts-ignore
   const signinUser = useSelector((storeState) => storeState.login);
+  console.log('my bell', signinUser);
   const [redirectPage, setRedirect] = useState(false);
   const [userExist, setUser] = useState(false);
   const loginUserInDispatch = useDispatch<any>();
@@ -462,14 +464,14 @@ export  function LoginForm() {
         </div>
 
         {signinUser.loginFormStatus === 'No' ? (
-          <div className={style.errorMsg}>user does not exist</div>
+          <div className={style.errorMsg}>user does not exist or password incorrect</div>
         ) : null}
         {formChangeObj.touched.Email && formChangeObj.errors.Email ? (
           <div className={style.ErrorMsg}>{formChangeObj.errors.Email}</div>
         ) : null}
-        {userExist ? (
-          <div className={style.ErrorMsg}>user Already Exist</div>
-        ) : null}
+        {/* {userExist ? (
+          <div className={style.ErrorMsg}>user Already Exist or passwi</div>
+        ) : null} */}
         <br></br>
         <div className={style.formContainer}>
           <FormControl

@@ -43,16 +43,16 @@ const ProfileComp:React.FC = (props)=>{
               <p>dukauwa.du@gmail.com</p>
             </div>
             <div className={style.linkCont}>
-              <NavLink to='/notification' className={style.linkStyle}>
+              <NavLink to='' className={style.linkStyle}>
                 Notification
               </NavLink>
-              <NavLink to='/payment' className={style.linkStyle}>
+              <NavLink to='' className={style.linkStyle}>
                 Payment
               </NavLink>
-              <NavLink to='/legal' className={style.linkStyle}>
+              <NavLink to='' className={style.linkStyle}>
                 Legal
               </NavLink>
-              <NavLink to='/speackWithUs' className={style.linkStyle}>
+              <NavLink to='' className={style.linkStyle}>
                 Speak with us
               </NavLink>
               <button

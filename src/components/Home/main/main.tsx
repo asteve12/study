@@ -18,6 +18,7 @@ import 'simplebar/dist/simplebar.min.css';
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import {useSelector} from "react-redux"
 
 const responsive = {
   desktop: {
@@ -221,7 +222,12 @@ const subjects = [
 
 
 
-const homeMainPage:React.FC = (props)=>{
+const HomeMainPage:React.FC = (props)=>{
+  
+  const obtainUserName = useSelector<any>((state)=> state)
+  console.log("obtainer",obtainUserName);
+
+console.log("Aaa")
 //   function LeftArrow() {
 //   const { isFirstItemVisible, scrollPrev } =
 //     React.useContext(VisibilityContext);
@@ -237,7 +243,8 @@ const homeMainPage:React.FC = (props)=>{
         <div className={style.homeMainPageWrapper}>
           <section className={style.welcomeMessage}>
             <p className={style.welcomeText}>
-              <b>Welcome David!</b>
+              {/*@ts-ignore*/}
+              <b>Welcome {obtainUserName.login.firstName}!</b>
             </p>
             &nbsp; &nbsp;
             <div className={style.circle}></div>
@@ -594,4 +601,4 @@ const homeMainPage:React.FC = (props)=>{
     );
 }
 
-export default homeMainPage;
+export default HomeMainPage;
