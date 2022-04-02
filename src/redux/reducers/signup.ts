@@ -4,7 +4,7 @@ import {registerNewUser} from "../../axios"
 
 const signinSlice = createSlice({
     name:'signin',
-    initialState:{firstName:"",lastName:"",city:"",course:"",phoneNumber:"",NIN:"",Email:"",password:""},
+    initialState:{firstName:"",lastName:"",city:"",course:"",phoneNumber:"",NIN:"",Email:"",password:"",},
     reducers:{
         addUser:(state:any,action:any)=>{
             try{

@@ -24,7 +24,12 @@ import {useSelector,useDispatch} from "react-redux"
 import {addUser} from "../../../redux/reducers/signup"
 import {registerNewUser} from "../../../axios"
 import { AnyARecord } from 'dns';
-import { addSigninUser, getUsers } from '../../../redux/reducers/login';
+import {
+  addSigninUser,
+  getUsers,
+  changeLoginStatus,
+} from '../../../redux/reducers/login';
+
 
 
 interface State {
@@ -42,6 +47,7 @@ export default function InputAdornments() {
     const addUserDispatch = useDispatch<any>()
     const[alreadyMember,setMember] = useState(false)
     const[showLoader,setShowLoader] = useState(false)
+    const changeErrorStatus = useDispatch<any>()
    
   
  
@@ -169,6 +175,7 @@ export default function InputAdornments() {
     onSubmit: (values) => {
       setShowLoader(true)
        checkUserExist(values);
+       changeErrorStatus(changeLoginStatus());
      
      
     },
@@ -316,6 +323,8 @@ export  function LoginForm() {
   const [alreadyMember, setMember] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
   const [showLoginSta,setLoginSta] = useState(false)
+   const changeErrorStatus = useDispatch<any>();
+  
 
   const [isCheck, setIsCheck] = React.useState(true);
   const [values, setValues] = React.useState<State>({
@@ -415,6 +424,7 @@ export  function LoginForm() {
     },
     validate,
     onSubmit: (values) => {
+          changeErrorStatus(changeLoginStatus());
       setShowLoader(true);
       // checkUserExist(values);
       let logincredential = {
@@ -437,13 +447,15 @@ export  function LoginForm() {
     },
   });
 
+ 
+
   return (
     <Box>
       {redirectPage == true ? <Navigate to='/createAccount'></Navigate> : null}
       <form onSubmit={formChangeObj.handleSubmit}>
         <div className={style.formContainer}>
           <FormControl
-            // sx={{ width: '25ch', border: '2px' }}
+            // sx={{ width: '25ch', border: '2px' }}k
             className={style.siginContainer}
             variant='standard'
           >
@@ -466,7 +478,9 @@ export  function LoginForm() {
         </div>
 
         {signinUser.loginFormStatus === 'No' ? (
-          <div className={style.errorMsg}>user does not exist or password incorrect</div>
+          <div className={style.errorMsg}>
+            user does not exist or password incorrect
+          </div>
         ) : null}
         {formChangeObj.touched.Email && formChangeObj.errors.Email ? (
           <div className={style.ErrorMsg}>{formChangeObj.errors.Email}</div>
