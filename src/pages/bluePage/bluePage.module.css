@@ -1,0 +1,21 @@
+.bluePageWrapper{
+    width:100%;
+    height:100vh;
+    background-color:#4c689f;
+    display:flex;
+    align-items:center;
+    justify-content:center
+}
+
+.linkStyle{
+    width:auto;
+    padding:2px;
+    border-radius: 10px;
+    height:50px;
+    color:#4c689f;
+    background-color:white;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    text-decoration: none;
+}
