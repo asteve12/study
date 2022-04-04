@@ -68,7 +68,7 @@ const Login: React.FC = (props) => {
       });
   };
   const handleLogin = (googleData: any) => {
-    console.log('myfind signin with google', googleData);
+ 
     if (googleData.error) {
       setErrorMsg('sorry,an error occurred try again');
     }
@@ -91,7 +91,7 @@ const Login: React.FC = (props) => {
   if (signinUserDetail.email) {
   }
 
-  console.log('my uu', signinUserDetail.email);
+ 
 
   return (
     <>
@@ -141,7 +141,7 @@ const Login: React.FC = (props) => {
              />
             {signinUserDetail.userExist === 'No' ? (
               <div className={style.errorMsg}>
-                user does not Exist or invalid password
+                user does not Exist 
               </div>
             ) : null}
             <br></br>
