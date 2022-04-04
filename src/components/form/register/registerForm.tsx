@@ -48,11 +48,11 @@ const statesOfCoun = [
   'Oyo',
   'Adamawa',
   'Akwa Ibom',
-  'Anambra',
-  'Bauchi',
-  'Bayelsa',
-  'Benue',
-  "Borno",
+'Anambra',
+'Bauchi',
+'Bayelsa',
+'Benue',
+"Borno",
 "Cross River",
 "Delta",
 "Ebonyi",
@@ -73,15 +73,12 @@ const statesOfCoun = [
 "Ogun",
 "Ondo",
 "Osun",
-"Oyo",
 "Plateau",
 "Rivers",
 "Sokoto",
 "Taraba",
 "Yobe",
-"Zamfara"
-
-];
+"Zamfara"];
 
 function getStyles(states: string, stateName: string[], theme: Theme) {
   return {
