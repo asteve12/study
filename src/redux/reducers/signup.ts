@@ -1,10 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit"
+
+
 import {registerNewUser} from "../../axios"
 
 
 const signinSlice = createSlice({
     name:'signin',
-    initialState:{firstName:"",lastName:"",city:"",course:"",phoneNumber:"",NIN:"",Email:"",password:"",},
+    initialState:{firstName:"",lastName:"",city:"",course:"",phoneNumber:"",NIN:"",Email:"",password:""},
     reducers:{
         addUser:(state:any,action:any)=>{
             try{
@@ -18,6 +20,7 @@ const signinSlice = createSlice({
               
                     registerNewUser.post("/signup.json",state).then((response)=>{
                         const {name} = response.data
+                        localStorage.setItem('userId', name);
                         console.log("mh signup response",response)
                         return name
                     })
@@ -41,6 +44,22 @@ const signinSlice = createSlice({
             }
           
           
+        },
+        clearSigninDetails:(state:any)=>{
+
+
+            return {
+              firstName: '',
+              lastName: '',
+              city: '',
+              course: '',
+              phoneNumber: '',
+              NIN: '',
+              Email: '',
+              password: '',
+            };
+
+
         }
 
     }
@@ -48,4 +67,5 @@ const signinSlice = createSlice({
 
 export default signinSlice.reducer;
 const addUser = signinSlice.actions.addUser 
-export { addUser };
+const  clearSigninDetails = signinSlice.actions.clearSigninDetails
+export { addUser, clearSigninDetails };

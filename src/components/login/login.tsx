@@ -31,7 +31,7 @@ const Login: React.FC = (props) => {
   const [userExist, setUserExist] = useState(false);
   let location = useLocation();
 
-  console.log('my looog', location);
+
 
   const checkUserExist = (userEmail: string) => {
     registerNewUser
@@ -103,7 +103,7 @@ const Login: React.FC = (props) => {
           </div>
           <div className={style.createTextWrapper}>
             <p className={style.createAccHeader}>Welcome Back To Success</p>
-               <button
+               {/* <button
               className={style.signInWithGoogle}
                   // onClick={renderProps.onClick}
             >
@@ -111,7 +111,7 @@ const Login: React.FC = (props) => {
                    <FcGoogle></FcGoogle>
                  </div>
                  Sign in With Google
-                </button>
+                </button> */}
 
             {/* <GoogleLogin
                 clientId='715423435625-7d590qpf3nbd6t9brb1hgvmjmjuousf6.apps.googleusercontent.com'
@@ -120,34 +120,25 @@ const Login: React.FC = (props) => {
                 onFailure={handleLogin}
                 cookiePolicy={'single_host_origin'}
               /> */}
-            {/* <GoogleLogin
+            <GoogleLogin
               clientId='715423435625-7d590qpf3nbd6t9brb1hgvmjmjuousf6.apps.googleusercontent.com'
               buttonText='Login'
               onSuccess={handleLogin}
               onFailure={handleLogin}
-              cookiePolicy={'single_host_origin'} */}
-            {/* // redirectUri="/sure"
-              // render={(renderProps) => ( */}
-            {/* <button */}
-
-            {/* //     onClick={renderProps.onClick}
-              //     disabled={renderProps.disabled}
-              //   >
-              //     This is my custom Google button
-              //   </button>
-              // )}
-            //   render={(renderProps) => ( */}
-            {/* //     <button */}
-            {/* //       className={style.signInWithGoogle}
-            //       onClick={renderProps.onClick}
-            //     >
-            //       <div>
-            //         <FcGoogle></FcGoogle>
-            //       </div>
-            //       Sign in With Google
-            //     </button>
-            //   )}
-            // /> */}
+              cookiePolicy={'single_host_origin'}
+             redirectUri="/sure"
+              render={(renderProps) => ( 
+              <button 
+                   className={style.signInWithGoogle}
+                   onClick={renderProps.onClick}
+                 >
+                   <div>
+                    <FcGoogle></FcGoogle>
+                   </div>
+                   Sign in With Google
+                 </button>
+               )}
+             />
             {signinUserDetail.userExist === 'No' ? (
               <div className={style.errorMsg}>
                 user does not Exist or invalid password

@@ -8,6 +8,8 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useFormik } from 'formik';
 import {Navigate} from "react-router-dom"
 import ContinueBtn from '../../../ui/continueBtn/continueBtn';
+import { getUsers } from '../../../redux/reducers/login';
+import {useDispatch,useSelector} from "react-redux"
 //style
 import style from "./selection.module.css"
 
@@ -45,6 +47,9 @@ export default function SelectItems() {
   const [schoolName, setSchoolName] = React.useState<string[]>([]);
    const [universityName, setUniversityName] = React.useState<string[]>([]);
    const [redirectPage,setRedirect] = useState(false)
+   const dispathcSignin = useDispatch()
+   //@ts-ignore
+   const signinUser = useSelector(state=> state.login)
 
   const handleNameChange = (event: SelectChangeEvent<typeof schoolName>) => {
     const {
@@ -99,8 +104,10 @@ export default function SelectItems() {
                 
                ) {
               
-                //  setRedirect(true)
-                //  console.log('my test number', new Array(values.firstNumber));
+              
+                dispathcSignin(getUsers());
+               
+                
                  setRedirect(true);
                }
              },
