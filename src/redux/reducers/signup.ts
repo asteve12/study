@@ -21,11 +21,11 @@ const signinSlice = createSlice({
                     registerNewUser.post("/signup.json",state).then((response)=>{
                         const {name} = response.data
                         localStorage.setItem('userId', name);
-                        console.log("mh signup response",response)
+                     
                         return name
                     })
                     .then((response)=>{
-                        console.log("respondedWith",response)
+                
                     })
                     .catch((error)=>{
                         console.log(error)

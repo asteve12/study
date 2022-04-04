@@ -45,7 +45,8 @@ const loginSlice = createSlice({
     loading: true,
     userExist:"",
     loginFormStatus:"",
-    showFormLoader:false
+    showFormLoader:false,
+    error:false
   },
   reducers: {
     addSigninUser: (state: any, action: any) => {
@@ -118,11 +119,10 @@ const loginSlice = createSlice({
         city: '',
         NIN: '',
         loading: true,
-        userExist:"unknown", 
-        loginFormStatus:"",
-        showFormLoader:false
-        
-
+        userExist: 'unknown',
+        loginFormStatus: '',
+        showFormLoader: false,
+        error: false,
       };
     },
     changeLoginStatus:(state:any)=>{
@@ -231,6 +231,7 @@ const loginSlice = createSlice({
     //@ts-ignore
     [getUsers.rejected]: (state) => {
       //   state.loading = false;
+      state.error = true;
     },
   },
 });
