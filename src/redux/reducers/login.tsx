@@ -93,7 +93,7 @@ const loginSlice = createSlice({
             let eachUser = response.data[eachItems];
            
             if (response.data[eachItems].Email === userDetail.email) {
-              //  console.log('userId', eachItems);
+     
               localStorage.setItem('userId', eachItems);
               break;
             }
@@ -140,7 +140,7 @@ const loginSlice = createSlice({
         }
 
       }
-      console.log("pending",meta)
+  
     },
     //@ts-ignore
     [getUsers.fulfilled]: (state, { payload, meta }) => {

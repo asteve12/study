@@ -11,6 +11,7 @@ import {NavLink,Navigate} from "react-router-dom"
 import {logout} from "../../redux/reducers/logout"
 import {clearState} from "../../redux/reducers/login"
 import {useDispatch,useSelector} from "react-redux"
+import {clearSigninDetails} from "../../redux/reducers/signup"
 
 
 
@@ -21,6 +22,7 @@ const ProfileComp:React.FC = (props)=>{
 
   const logUserOut = useDispatch()
   const clearuserState = useDispatch()
+  const clearSignupState = useDispatch()
     return (
       <>
         {islogout === true ? (
@@ -64,6 +66,7 @@ const ProfileComp:React.FC = (props)=>{
                 onClick={() => {
                   logUserOut(logout());
                   clearuserState(clearState());
+                  clearSignupState(clearSigninDetails());
                   setLogout(true);
                 }}
               >

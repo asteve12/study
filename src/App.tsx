@@ -31,117 +31,104 @@ import './App.css';
 
 function App() {
   //@ts-ignore
- const signedinUser = useSelector((state) => state.login);
- const [loading, setLoading] = useState(true)
- const dispatchAuthentication = useDispatch();
+  const signedinUser = useSelector((state) => state.login);
+  //@ts-ignore
+  const signedupUser = useSelector((state) => state.signin);
+  const [loading, setLoading] = useState(true);
+  const dispatchAuthentication = useDispatch();
 
+  useEffect(() => {
+    dispatchAuthentication(getUsers());
+   
+  });
 
+  if (signedinUser.loading) {
+    return (
+      <section className='loaderWrapper'>
+        <div>
+          <Circles color='#315292' ariaLabel='loading-indicator' />
+        </div>
+      </section>
+    );
+  }
 
-
- useEffect(()=>{
-   dispatchAuthentication(getUsers());
-    console.log('mysin', signedinUser.email);
-     console.log('my currr user useEffect', signedinUser);
-
-
- })
-  
-if (signedinUser.loading){
   return (
-    <section className='loaderWrapper'>
-      <div>
-        <Circles color='#315292' ariaLabel='loading-indicator' />
-      </div>
-    </section>
+    <>
+      <BrowserRouter>
+        <div className='App'>
+          <Routes>
+            <Route path='/register' element={<OnBoard />}></Route>
+            <Route path='/login' element={<LoginPage />}></Route>
+            <Route path='/createAccount' element={<Register />}></Route>
+            <Route path='/sure' element={<SurePage />}></Route>
+            <Route path='/chooseAStudyPath' element={<StudyPath />}></Route>
+            <Route path='/confirmCourse' element={<ConfirmCourse />}></Route>
+            <Route
+              path='/homePage'
+              element={
+                signedinUser.email || signedupUser.Email ? (
+                  <HomePage />
+                ) : (
+                  <Navigate replace to='/login' />
+                )
+              }
+            ></Route>
+            <Route
+              path='/Chats'
+              element={
+                signedinUser.email || signedupUser.Email ? (
+                  <ChatHomePage />
+                ) : (
+                  <Navigate replace to='/login' />
+                )
+              }
+            ></Route>
+            <Route
+              path='/Profile'
+              element={
+                signedinUser.email || signedupUser.Email ? (
+                  <Profile />
+                ) : (
+                  <Navigate replace to='/login' />
+                )
+              }
+            ></Route>
+            <Route
+              path='/Resources'
+              element={
+                signedinUser.email || signedupUser.Email ? (
+                  <ResourcePage />
+                ) : (
+                  <Navigate replace to='/login' />
+                )
+              }
+            ></Route>
+            <Route
+              path='/schedule'
+              element={
+                signedinUser.email || signedupUser.Email ? (
+                  <SchedulePage />
+                ) : (
+                  <Navigate replace to='/login' />
+                )
+              }
+            ></Route>
+            <Route
+              path='/Courses'
+              element={
+                signedinUser.email || signedupUser.Email ? (
+                  <CoursePage />
+                ) : (
+                  <Navigate replace to='/login' />
+                )
+              }
+            ></Route>
+            <Route path='/' element={<BluePage />}></Route>
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </>
   );
-}
-
-
-
-return (
-  <>
-    <BrowserRouter>
-      <div className='App'>
-        <Routes>
-          <Route path='/register' element={<OnBoard />}></Route>
-          <Route path='/login' element={<LoginPage />}></Route>
-          <Route path='/createAccount' element={<Register />}></Route>
-          <Route path='/sure' element={<SurePage />}></Route>
-          <Route path='/chooseAStudyPath' element={<StudyPath />}></Route>
-          <Route path='/confirmCourse' element={<ConfirmCourse />}></Route>
-          <Route
-            path='/homePage'
-            element={
-              signedinUser.email ? (
-                <HomePage />
-              ) : (
-                <Navigate replace to='/login' />
-              )
-            }
-          ></Route>
-          <Route
-            path='/Chats'
-            element={
-              signedinUser.email ? (
-                <ChatHomePage />
-              ) : (
-                <Navigate replace to='/login' />
-              )
-            }
-          ></Route>
-          <Route
-            path='/Profile'
-            element={
-              signedinUser.email ? (
-                <Profile />
-              ) : (
-                <Navigate replace to='/login' />
-              )
-            }
-          ></Route>
-          <Route
-            path='/Resources'
-            element={
-              signedinUser.email ? (
-                <ResourcePage />
-              ) : (
-                <Navigate replace to='/login' />
-              )
-            }
-          ></Route>
-          <Route
-            path='/schedule'
-            element={
-              signedinUser.email ? (
-                <SchedulePage />
-              ) : (
-                <Navigate replace to='/login' />
-              )
-            }
-          ></Route>
-          <Route
-            path='/Courses'
-            element={
-              signedinUser.email ? (
-                <CoursePage />
-              ) : (
-                <Navigate replace to='/login' />
-              )
-            }
-          ></Route>
-          <Route
-            path='/'
-            element={
-          <BluePage />}
-          ></Route>
-        </Routes>
-      </div>
-    </BrowserRouter>
-  </>
-);
-
-  
- 
 }
 
 export default App;

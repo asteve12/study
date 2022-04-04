@@ -35,7 +35,7 @@ const CreateAcct:React.FC = (props)=>{
 
 const checkUserExist = (userEmail: string) => {
 
-  registerNewUser.get('/signup.json').then((response) => {
+let isUserExst = registerNewUser.get('/signup.json').then((response) => {
  
       let availaBleUser = Object.keys(response.data);
       let alreadyExist=false
@@ -61,17 +61,21 @@ const checkUserExist = (userEmail: string) => {
       if (response) {
       ;
         setErrorMsg('user already exist');
+        return true
         // setTimeout(() => setErrorMsg(''), 1000);
       } else  if (response === false) {
         
         setRedirectPage(true);
+         return false
       }
     })
     .catch((error) => {
       console.log('user already exist', error);
     });
+
+    return isUserExst;
 };
-  const handleLogin =  (googleData:any) => {
+  const handleLogin =  async(googleData:any) => {
      if(googleData.error){
        setErrorMsg("sorry,an error occurred try again");
 }
@@ -82,8 +86,19 @@ const checkUserExist = (userEmail: string) => {
           firstName: familyName,
           lastName: givenName,
         };
-        checkUserExist(email);
-        addNewUser(addUser(userToAdd));
+       let checkUserExistence = await checkUserExist(email);
+       if (checkUserExistence){
+            setErrorMsg('user already exist');
+        
+
+       }
+       else{
+         setRedirectPage(true)
+               addNewUser(addUser(userToAdd));
+       }
+      
+        
+       
        
       
      
@@ -92,8 +107,10 @@ const checkUserExist = (userEmail: string) => {
   };
     return (
       <>
-        {signinUserDetail.email ? <Navigate to={`/homePage`} /> : null}
-        {redirectPage ? <Navigate to='/createAccount' /> : null}
+        {/* {signinUserDetail.email || redirectPage ? (
+          <Navigate to={`/homePage`} />
+        ) : null} */}
+        {redirectPage ? <Navigate to='/homePage' /> : null}
         <section className={style.createAcctContainer}>
           <div className={style.createAcctWrapper}>
             <div className={style.ImgWrapper}>
@@ -111,21 +128,13 @@ const checkUserExist = (userEmail: string) => {
                 onFailure={handleLogin}
                 cookiePolicy={'single_host_origin'}
               /> */}
-              {/* <GoogleLogin
+              <GoogleLogin
                 clientId='715423435625-7d590qpf3nbd6t9brb1hgvmjmjuousf6.apps.googleusercontent.com'
                 buttonText='Login'
                 onSuccess={handleLogin}
                 onFailure={handleLogin}
                 cookiePolicy={'single_host_origin'}
-                redirectUri="/sure"
-                render={(renderProps) => (
-                  <button
-                    onClick={renderProps.onClick}
-                    disabled={renderProps.disabled}
-                  >
-                    This is my custom Google button
-                  </button>
-                )}
+                redirectUri='/sure'
                 render={(renderProps) => (
                   <button
                     className={style.signInWithGoogle}
@@ -137,9 +146,9 @@ const checkUserExist = (userEmail: string) => {
                     Sign Up With Google
                   </button>
                 )}
-              /> */}
-              {/* <div className={style.errorMsg}>{errorMsg}</div> */}
-              <button
+              />
+              <div className={style.errorMsg}>{errorMsg}</div>
+              {/* <button
                 className={style.signInWithGoogle}
                 // onClick={renderProps.onClick}
               >
@@ -147,7 +156,7 @@ const checkUserExist = (userEmail: string) => {
                   <FcGoogle></FcGoogle>
                 </div>
                 Sign Up With Google
-              </button>
+              </button> */}
               <br></br>
               <div className={style.signUpWithEmail}>
                 <div className={style.hzRule}></div>&nbsp; Sign Up With

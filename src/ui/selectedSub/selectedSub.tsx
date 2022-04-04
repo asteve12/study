@@ -15,7 +15,7 @@ const SelectedSubject: React.FC<selectInterface> = (props) => {
 
    const removeCourse =(event:React.MouseEvent):void=>{
      const courseToRemove = event.currentTarget as HTMLButtonElement
-  console.log(courseToRemove);
+
    const updatedCourse = offeredSubject.filter(
      (eachItems) => courseToRemove.id !== eachItems.name
    );

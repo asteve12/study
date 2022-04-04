@@ -315,7 +315,7 @@ export  function LoginForm() {
   const signinInfo = useSelector<any>((storeState) => storeState.signin);
   //@ts-ignore
   const signinUser = useSelector((storeState) => storeState.login);
-  console.log('my bell', signinUser);
+
   const [redirectPage, setRedirect] = useState(false);
   const [userExist, setUser] = useState(false);
   const loginUserInDispatch = useDispatch<any>();
@@ -335,7 +335,7 @@ export  function LoginForm() {
     showPassword: false,
   });
 
-  console.log('signeduser101', signinUser);
+
 
   // const handleChange =
   //   (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -442,7 +442,7 @@ export  function LoginForm() {
       setLoginSta(false);
       },1000)
    
-      console.log(signinUser);
+  
     
     },
   });
