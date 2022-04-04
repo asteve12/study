@@ -78,6 +78,7 @@ let isUserExst = registerNewUser.get('/signup.json').then((response) => {
   const handleLogin =  async(googleData:any) => {
      if(googleData.error){
        setErrorMsg("sorry,an error occurred try again");
+       console.log(googleData.error);
 }
       if(googleData.profileObj){
         const { email, familyName, givenName } = googleData.profileObj;
@@ -134,7 +135,7 @@ let isUserExst = registerNewUser.get('/signup.json').then((response) => {
                 onSuccess={handleLogin}
                 onFailure={handleLogin}
                 cookiePolicy={'single_host_origin'}
-                redirectUri='/sure'
+               
                 render={(renderProps) => (
                   <button
                     className={style.signInWithGoogle}

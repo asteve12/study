@@ -152,16 +152,18 @@ const loginSlice = createSlice({
         if (meta.arg.type === 'validategoogleform') {
             
           const userObj = meta.arg.userDetail;
+          console.log("my userDetails",userObj);
           const userEmail = userObj.email;
+          const userFirstName = userObj.familyName;
+          const userLastName = userObj.givenName
           let userObjKeys = Object.keys(payload);
           for(let eachItems of userObjKeys){
                 
             if (payload[eachItems].Email === userEmail) {
               state.email = userEmail; 
-             
-          
-           
-            }
+              state.firstName = userFirstName;
+              state.lastName = userLastName;
+             }
             else{
               state.userExist = "No"
             }
