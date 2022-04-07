@@ -68,15 +68,10 @@ const hideMreBtn = useRef<any>();
           </section>
 
           <div className={style.videoItem}>
-            {/* <p className={style.doubleTap}>double tap to view fullscreen</p> */}
+          
             <ReactPlayer width="100%" height="100%"  url='https://www.youtube.com/watch?v=ysz5S6PUM-U' />
           </div>
-          {/* <video
-          
-            controls
-            src='https://www.w3schools.com/html/mov_bbb.mp4'
-          ></video> */}
-          <section className={style.bottomDetails}>
+       <section className={style.bottomDetails}>
             <div className={style.lgActiveUser}>
               <VideoDiscussion type='videoOverlay'></VideoDiscussion>
               <br></br>
@@ -114,8 +109,7 @@ const hideMreBtn = useRef<any>();
 
             <div className={style.mbChatCont} ref={mkDivVisible}>
               <button className={style.showMore} onClick={lessBtnHandler}>
-                {/* <MdOutlineArrowDownward></MdOutlineArrowDownward> */}
-                <MdOutlineExpandMore></MdOutlineExpandMore>
+                  <MdOutlineExpandMore></MdOutlineExpandMore>
               </button>
               <div className={style.mbAttended}>
                 <MobileChatCont></MobileChatCont>

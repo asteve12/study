@@ -91,7 +91,7 @@ export default function UseFormControl() {
          values.fifthNumber
        ) {
          setLoader(true)
-           console.log('my test number', new Array(values.firstNumber));
+         
          setRedirect(true);
        }
      },

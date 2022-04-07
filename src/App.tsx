@@ -38,7 +38,11 @@ function App() {
   const dispatchAuthentication = useDispatch();
 
   useEffect(() => {
-    dispatchAuthentication(getUsers());
+   
+  
+   
+      dispatchAuthentication(getUsers({type:"keepuser"}));
+  
    
   });
 

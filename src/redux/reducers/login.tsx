@@ -1,19 +1,90 @@
 import { createSlice, current, createAsyncThunk } from '@reduxjs/toolkit';
+import { getDatabase, ref, child, get } from 'firebase/database';
+import { initializeApp } from 'firebase/app';
 import {registerNewUser} from "../../axios"
+import logUserIn from "../../firebaseConfig/firebaselogin"
 
+const firebaseConfig = {
+  apiKey: 'AIzaSyDT-zrQbWvHt15SiNKCcDofxl1ubVj9mLE',
+  authDomain: 'yourstudypath-ysp.firebaseapp.com',
+  databaseURL: 'https://yourstudypath-ysp-default-rtdb.firebaseio.com',
+  projectId: 'yourstudypath-ysp',
+  storageBucket: 'yourstudypath-ysp.appspot.com',
+  messagingSenderId: '899670359755',
+  appId: '1:899670359755:web:53d7178f926074ec6c654e',
+  measurementId: 'G-RZKLL82KYC',
+};
+
+const app = initializeApp(firebaseConfig);
+
+
+
+
+const db = getDatabase(app);
 
 const getUsers = createAsyncThunk(
   'get/getUsers',
-  async (thunkAPI, userDetail?: any) => {
-  
-     if (userDetail.type === "validategoogleform") {
-   
-     }
-    let res = registerNewUser.get('/signup.json').then((response) => {
-      return response.data;
-    });
+  async (userDetail?: any) => {
+    if (userDetail.type === "loginByForm"){
+          let { email, password } = userDetail.myDetail;
 
-    return res;
+          let loginReply = logUserIn(email, password).then((response) => {
+            console.log('res', response);
+
+            if (response.status) {
+              //@ts-ignore
+              let userDetail = response.userDetail;
+              let userId = userDetail.uid;
+              localStorage.setItem('userId', userId);
+              const dbRef = ref(getDatabase());
+              let loginDetails = get(child(dbRef, `signup/${userId}`))
+                .then((snapshot) => {
+                  if (snapshot.exists()) {
+                    console.log('snapshot', snapshot.val());
+                    return snapshot.val();
+                  } else {
+                    console.log('No data available');
+                  }
+                })
+                .catch((error) => {
+                  console.error(error);
+                  return error
+                });
+
+              return loginDetails;
+            } else {
+              return response
+            }
+          });
+
+          return loginReply;
+      
+    }
+      if (userDetail.type === 'keepuser') {
+        let userId = localStorage.getItem('userId');
+
+        if (!userId) {
+          return false;
+        }
+        const dbRef = ref(getDatabase());
+        let loginDetails = get(child(dbRef, `signup/${userId}`))
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              console.log('snapshot', snapshot.val());
+              return snapshot.val();
+            } else {
+              console.log('No data available');
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+
+        console.log('usdeat', loginDetails);
+
+        return loginDetails;
+      } 
+
   }
 );
 
@@ -43,10 +114,10 @@ const loginSlice = createSlice({
     city: '',
     NIN: '',
     loading: true,
-    userExist:"",
-    loginFormStatus:"",
-    showFormLoader:false,
-    error:false
+    userExist: '',
+    loginFormStatus: '',
+    showFormLoader: false,
+    errorMsg: '',
   },
   reducers: {
     addSigninUser: (state: any, action: any) => {
@@ -56,12 +127,12 @@ const loginSlice = createSlice({
         let { myDetail } = action.payload;
         let userEmail = myDetail.email;
         let userPassword = myDetail.password;
-  
+        // logUserIn(userEmail, userPassword);
+
         registerNewUser.get('/signup.json').then((response) => {
           let userObjKey = Object.keys(response.data);
-         
+
           for (let eachUser of userObjKey) {
-         
             if (
               response.data[eachUser].Email === userEmail &&
               response.data[eachUser].password === userPassword
@@ -69,8 +140,7 @@ const loginSlice = createSlice({
               state.showFormLoader = false;
               state.email = userEmail;
 
-                localStorage.setItem('userId', eachUser);
-           
+              localStorage.setItem('userId', eachUser);
             }
           }
         });
@@ -80,7 +150,7 @@ const loginSlice = createSlice({
         state.firstName = userDetail.familyName;
         state.lastName = userDetail.givenName;
         state.email = userDetail.email;
-    
+
         state.accessTokenDetail = {
           tokenId: tokenDetail.access_token,
           expireIn: tokenDetail.expires_in,
@@ -92,9 +162,8 @@ const loginSlice = createSlice({
 
           for (let eachItems of arrayOfObjectKey) {
             let eachUser = response.data[eachItems];
-           
+
             if (response.data[eachItems].Email === userDetail.email) {
-     
               localStorage.setItem('userId', eachItems);
               break;
             }
@@ -122,116 +191,84 @@ const loginSlice = createSlice({
         userExist: 'unknown',
         loginFormStatus: '',
         showFormLoader: false,
-        error: false,
+        errorMsg: '',
       };
     },
-    changeLoginStatus:(state:any)=>{
-      state.loginFormStatus = ""
-    }
+    changeLoginStatus: (state: any) => {
+      state.loginFormStatus = '';
+    },
   },
   extraReducers: {
     //@ts-ignore
-    [getUsers.pending]: (state,{meta}) => {
-   
-      if(meta.arg){
-        if(meta.arg.type === "loginByForm"){
-            state.showFormLoader = true;
-
+    [getUsers.pending]: (state, { meta }) => {
+      if (meta.arg) {
+        if (meta.arg.type === 'loginByForm') {
+          state.showFormLoader = true;
         }
-
       }
-  
     },
     //@ts-ignore
     [getUsers.fulfilled]: (state, { payload, meta }) => {
-       state.showFormLoader = false;
- 
-      if(meta.arg){
-    
-    
+   
+
+      if (meta.arg) {
         if (meta.arg.type === 'validategoogleform') {
-            
           const userObj = meta.arg.userDetail;
-          console.log("my userDetails",userObj);
+          console.log('my userDetails', userObj);
           const userEmail = userObj.email;
           const userFirstName = userObj.familyName;
-          const userLastName = userObj.givenName
+          const userLastName = userObj.givenName;
           let userObjKeys = Object.keys(payload);
-          for(let eachItems of userObjKeys){
-                
+          for (let eachItems of userObjKeys) {
             if (payload[eachItems].Email === userEmail) {
-              state.email = userEmail; 
+              state.email = userEmail;
               state.firstName = userFirstName;
               state.lastName = userLastName;
-             }
-            else{
-              state.userExist = "No"
+            } else {
+              state.userExist = 'No';
             }
-
           }
         }
 
-        if (meta.arg.type === 'loginByForm') {
-         
-          const { myDetail } = meta.arg;
-          // state.email = myDetail.email;
-          let userEmail = myDetail.email;
-          let userPassword = myDetail.password;
-          let userObjKeys = Object.keys(payload);
-
-          for (let eachItem of userObjKeys) {
-            let selectedUser = payload[eachItem];
-         
-            if (
-              userEmail === selectedUser.Email &&
-              userPassword === selectedUser.password
-            ) {
-              state.email = selectedUser.Email;
-              localStorage.setItem('userId', eachItem);
-                 state.showFormLoader = false;
+        if (meta.arg.type === 'loginByForm' || meta.arg.type === 'keepuser') {
+          console.log('mypayy', payload);
+          if (!payload.status) {
+               state.showFormLoader = false;
+          
+            switch (payload.errorMsg) {
+              case 'Firebase: Error (auth/user-not-found).':
+                state.errorMsg = "user does not exist" 
             }
-            else{
-              state.loginFormStatus = "No"
-                // state.userExist = 'No';
-                state.showFormLoader = false;
+          }
+          if (!payload) {
+            state.loading = false;
              
-            
-            }
           }
-     
+          const { Email, NIN, city, course, firstName, lastName, phoneNumber } =
+            payload;
+          let userState = payload.state;
+
+          state.email = Email;
+          state.NIN = NIN;
+          state.city = city;
+
+          state.firstName = firstName;
+          state.lastName = lastName;
+          state.phoneNumber = phoneNumber;
+          state.loading = false;
         }
 
-   
-    
-        }
-            let tokenId = localStorage.getItem('token'); 
-            let userId = localStorage.getItem('userId');
-            let expireIn = localStorage.getItem('tokenExpireIn');
-         
-            let keysOfUser = Object.keys(payload);
-
-            for (let eachUserObj of keysOfUser) {
-              if (userId === eachUserObj) {
-                let loggedInUser = payload[eachUserObj];
-               
-
-                state.firstName = loggedInUser.firstName;
-                state.lastName = loggedInUser.lastName;
-                state.email = loggedInUser.Email;
-                state.phoneNumber = loggedInUser.phoneNumber;
-                state.city = loggedInUser.city;
-                state.NIN = loggedInUser.NIN;
-
-                // return loggedInUser;
-              }
-            }
+        state.loading = false;
+           state.showFormLoader = false;
        
-      state.loading = false;
+      }
+
+      // state.loading = false;
     },
     //@ts-ignore
     [getUsers.rejected]: (state) => {
       //   state.loading = false;
-      state.error = true;
+     
     },
   },
 });

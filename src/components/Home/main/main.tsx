@@ -225,9 +225,9 @@ const subjects = [
 const HomeMainPage:React.FC = (props)=>{
   
   const obtainUserName = useSelector<any>((state)=> state)
-  console.log("obtainer",obtainUserName);
 
-console.log("Aaa")
+
+
 //   function LeftArrow() {
 //   const { isFirstItemVisible, scrollPrev } =
 //     React.useContext(VisibilityContext);
