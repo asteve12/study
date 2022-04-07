@@ -29,6 +29,7 @@ import {
   getUsers,
   changeLoginStatus,
 } from '../../../redux/reducers/login';
+import {addNewUser} from "../../../redux/reducers/signup"
 
 
 
@@ -48,6 +49,8 @@ export default function InputAdornments() {
     const[alreadyMember,setMember] = useState(false)
     const[showLoader,setShowLoader] = useState(false)
     const changeErrorStatus = useDispatch<any>()
+    //@ts-ignore
+     const signUpDetail = useSelector(state=>state.signin)
    
   
  
@@ -132,8 +135,9 @@ export default function InputAdornments() {
             values.password 
             
           ) {
-            addUserDispatch(addUser(values));
-            setRedirect(true);
+            
+            addUserDispatch(addNewUser(values));
+            // setRedirect(true);
           }
        }
 
@@ -173,9 +177,11 @@ export default function InputAdornments() {
     },
     validate,
     onSubmit: (values) => {
-      setShowLoader(true)
-       checkUserExist(values);
-       changeErrorStatus(changeLoginStatus());
+      // setShowLoader(true)
+      //  checkUserExist(values);
+      const signUpObj = { type: 'signUserUp', values};
+         addUserDispatch(addNewUser(signUpObj));
+      //changeErrorStatus(changeLoginStatus());
      
      
     },
@@ -183,7 +189,9 @@ export default function InputAdornments() {
 
   return (
     <Box>
-      {redirectPage == true ? <Navigate to='/createAccount'></Navigate> : null}
+      {signUpDetail.redirectFromSignup == true ? (
+        <Navigate to='/createAccount'></Navigate>
+      ) : null}
       <form onSubmit={formChangeObj.handleSubmit}>
         <div className={style.formContainer}>
           <FormControl
@@ -208,6 +216,7 @@ export default function InputAdornments() {
             />
           </FormControl>
         </div>
+        <div className={style.ErrorMsg}>{signUpDetail.errorMsg}</div>
         {formChangeObj.touched.Email && formChangeObj.errors.Email ? (
           <div className={style.ErrorMsg}>{formChangeObj.errors.Email}</div>
         ) : null}
@@ -280,7 +289,7 @@ export default function InputAdornments() {
           <div className={style.ErrorMsg}>check the box Above</div>
         ) : null}
         <br />
-        {showLoader ? (
+        {signUpDetail.loading ? (
           <div className={style.loaderContainer}>
             <ThreeCircles
               color='#315292'
@@ -324,6 +333,7 @@ export  function LoginForm() {
   const [showLoader, setShowLoader] = useState(false);
   const [showLoginSta,setLoginSta] = useState(false)
    const changeErrorStatus = useDispatch<any>();
+  
   
 
   const [isCheck, setIsCheck] = React.useState(true);
@@ -424,8 +434,8 @@ export  function LoginForm() {
     },
     validate,
     onSubmit: (values) => {
-          changeErrorStatus(changeLoginStatus());
-      setShowLoader(true);
+         
+    
       // checkUserExist(values);
       let logincredential = {
         type: 'loginByForm',
@@ -436,12 +446,7 @@ export  function LoginForm() {
       };
       //@ts-ignore
       loginUserInDispatch(getUsers(logincredential));
-      // setLoginSta(true)
-      setShowLoader(false);
-      setTimeout(()=>{
-      setLoginSta(false);
-      },1000)
-   
+    
   
     
     },
@@ -476,7 +481,9 @@ export  function LoginForm() {
             />
           </FormControl>
         </div>
-
+        {signinUser.errorMsg ? (
+          <div className={style.errorMsg} >{signinUser.errorMsg}</div>
+        ) : null}
         {signinUser.loginFormStatus === 'No' ? (
           <div className={style.errorMsg}>
             user does not exist or password incorrect
@@ -557,7 +564,7 @@ export  function LoginForm() {
         {signinUser.showFormLoader ? (
           <div className={style.loaderContainer}>
             <ThreeCircles
-              color='#315292'
+              color='#292a2c'
               height={50}
               width={50}
               ariaLabel='three-circles-rotating'

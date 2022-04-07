@@ -108,9 +108,7 @@ let isUserExst = registerNewUser.get('/signup.json').then((response) => {
   };
     return (
       <>
-        {/* {signinUserDetail.email || redirectPage ? (
-          <Navigate to={`/homePage`} />
-        ) : null} */}
+       
         {redirectPage ? <Navigate to='/homePage' /> : null}
         <section className={style.createAcctContainer}>
           <div className={style.createAcctWrapper}>
@@ -122,13 +120,7 @@ let isUserExst = registerNewUser.get('/signup.json').then((response) => {
                 Take Your First Step Towards Success
               </p>
 
-              {/* <GoogleLogin
-                clientId='715423435625-7d590qpf3nbd6t9brb1hgvmjmjuousf6.apps.googleusercontent.com'
-                buttonText='Log in with Google'
-                onSuccess={handleLogin}
-                onFailure={handleLogin}
-                cookiePolicy={'single_host_origin'}
-              /> */}
+             
               <GoogleLogin
                 clientId='715423435625-7d590qpf3nbd6t9brb1hgvmjmjuousf6.apps.googleusercontent.com'
                 buttonText='Login'
@@ -149,15 +141,7 @@ let isUserExst = registerNewUser.get('/signup.json').then((response) => {
                 )}
               />
               <div className={style.errorMsg}>{errorMsg}</div>
-              {/* <button
-                className={style.signInWithGoogle}
-                // onClick={renderProps.onClick}
-              >
-                <div>
-                  <FcGoogle></FcGoogle>
-                </div>
-                Sign Up With Google
-              </button> */}
+            
               <br></br>
               <div className={style.signUpWithEmail}>
                 <div className={style.hzRule}></div>&nbsp; Sign Up With
@@ -166,36 +150,7 @@ let isUserExst = registerNewUser.get('/signup.json').then((response) => {
               <br></br>
               <SigninForm></SigninForm>
               <br></br>
-              {/* <div className={style.agreementSection}>
-                <Checkbox
-                  checked={true}
-                  icon={<img src={checkBoxIcon} alt='' />}
-                  borderColor='#E6E9ED'
-                  borderRadius={3}
-                  size={18}
-                />
-                <div>
-                  By creating an account you agree Yourstudypath’s Privacy and
-                  Terms or use
-                  <br></br>
-                </div>
-              </div> */}
-              <br></br>
-
-              {/* <button className={style.createAccount} onClick={()=> alert("D")} type="submit" >
-                Create Account
-              </button> */}
-              <br />
-
-              {/* <section className={style.createAccoutEnding}>
-                <span>
-                  Already a member?{' '}
-                  <Link to='/'>
-                    <b>Log in</b>
-                  </Link>
-                </span>
-              </section> */}
-            </div>
+               </div>
           </div>
         </section>
       </>

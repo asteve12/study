@@ -113,69 +113,21 @@ export default function RegisterForm() {
   color:"grey"
   };
   
-  const [values, setValues] = React.useState<State>({
-    LegalFirstName: '',
-    LegalLastName: '',
-    phonenumber: "",
-    NIN: "",
-    showPassword: false,
-    City:""
-  });
+  // const [values, setValues] = React.useState<State>({
+  //   LegalFirstName: '',
+  //   LegalLastName: '',
+  //   phonenumber: "",
+  //   NIN: "",
+  //   showPassword: false,
+  //   City:""
+  // });
 
 
 
-const handleStateNameChange = (
-      event: SelectChangeEvent<typeof stateName>
-    ) => {
-      const {
-        target: { value },
-      } = event;
-      setStateName(
-     
-        typeof value === 'string' ? value.split(',') : value
-      );
-    };
+
  
 
-  const handleLegalFirstNamechange =
-    (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValues({ ...values, [prop]: event.target.value });
-    };
-
-
-      const handleCitychange =
-        (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-          setValues({ ...values, [prop]: event.target.value });
-        };
-      const handleNINchange =
-        (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-          setValues({ ...values, [prop]: event.target.value });
-        };
-
-     const handleLegalLastNamechange =
-       (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-         setValues({ ...values, [prop]: event.target.value });
-       };
-
-         const handlePhoneNumberchange =
-           (prop: keyof State) =>
-           (event: React.ChangeEvent<HTMLInputElement>) => {
-             setValues({ ...values, [prop]: event.target.value });
-           };
-
-             const handleClickShowPassword = () => {
-               setValues({
-                 ...values,
-                 showPassword: !values.showPassword,
-               });
-             };
-
-
- const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
+ 
     interface validateInput {
       firstName: string;
       lastName: string;

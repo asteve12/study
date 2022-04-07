@@ -1,5 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 
+import firebaseSignout from "../../firebaseConfig/firebasesignout"
+
 
 
 const logoutlice = createSlice({
@@ -8,6 +10,7 @@ const logoutlice = createSlice({
     reducers:{
         logout:(state:any)=>{
             localStorage.clear();
+            firebaseSignout()
           
             return true
         }

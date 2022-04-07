@@ -7,7 +7,7 @@ import { MdOutlineAdd } from 'react-icons/md';
 //component
 import ChatBox, { MbChatBox } from '../../ui/Chat/chat';
 import ChatDetail from "../chatDetail/chatDetail"
-import {Link} from "react-router-dom"
+
 import ChatHeader from "../../ui/chatHeader/chatHeader"
 import {MobileSidebar} from "../../components/Home/sidebar/sidebar"
 //icons

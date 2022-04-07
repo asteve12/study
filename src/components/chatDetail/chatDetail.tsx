@@ -53,11 +53,7 @@ const ChatDetailCom: React.FC<showChatInterface> = (props) => {
         <DisplayMsg identity='receiver'></DisplayMsg>
         <DisplayMsg identity='sender'></DisplayMsg>
 
-        {/* <DisplayMsg identity='chatter'></DisplayMsg>
-          <DisplayMsg identity='sender'></DisplayMsg>
-          <DisplayMsg identity='chatter'></DisplayMsg>
-          <DisplayMsg identity='sender'></DisplayMsg>
-          <DisplayMsg identity='chatter'></DisplayMsg> */}
+  
       </div>
 
       <div className={style.inputMessageCont}>
