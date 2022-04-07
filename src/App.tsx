@@ -55,7 +55,9 @@ function App() {
       </section>
     );
   }
-
+if (signedinUser.netWorkError){
+  return <div>network error try again</div>
+}
   return (
     <>
       <BrowserRouter>
