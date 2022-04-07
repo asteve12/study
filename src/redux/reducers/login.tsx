@@ -77,7 +77,11 @@ const getUsers = createAsyncThunk(
             }
           })
           .catch((error) => {
-            console.error(error);
+            console.error("when error occurred",error);
+            return {
+              status: false,
+              errorMsg: error,
+            };
           });
 
         console.log('usdeat', loginDetails);
@@ -118,6 +122,7 @@ const loginSlice = createSlice({
     loginFormStatus: '',
     showFormLoader: false,
     errorMsg: '',
+    netWorkError:""
   },
   reducers: {
     addSigninUser: (state: any, action: any) => {
@@ -137,7 +142,7 @@ const loginSlice = createSlice({
               response.data[eachUser].Email === userEmail &&
               response.data[eachUser].password === userPassword
             ) {
-              state.showFormLoader = false;
+              // state.showFormLoader = false;
               state.email = userEmail;
 
               localStorage.setItem('userId', eachUser);
@@ -192,6 +197,7 @@ const loginSlice = createSlice({
         loginFormStatus: '',
         showFormLoader: false,
         errorMsg: '',
+        netWorkError:""
       };
     },
     changeLoginStatus: (state: any) => {
@@ -237,8 +243,14 @@ const loginSlice = createSlice({
           
             switch (payload.errorMsg) {
               case 'Firebase: Error (auth/user-not-found).':
-                state.errorMsg = "user does not exist" 
+                state.errorMsg = "user does not exist"
+                break; 
+              case "client Error":
+                  state.netWorkError = 'network error try again'; 
+
             }
+
+
           }
           if (!payload) {
             state.loading = false;
@@ -259,7 +271,7 @@ const loginSlice = createSlice({
         }
 
         state.loading = false;
-           state.showFormLoader = false;
+          //  state.showFormLoader = false;
        
       }
 
