@@ -120,7 +120,7 @@ const Login: React.FC = (props) => {
                 onFailure={handleLogin}
                 cookiePolicy={'single_host_origin'}
               /> */}
-            <GoogleLogin
+            {/* <GoogleLogin
               clientId='715423435625-7d590qpf3nbd6t9brb1hgvmjmjuousf6.apps.googleusercontent.com'
               buttonText='Login'
               onSuccess={handleLogin}
@@ -143,7 +143,7 @@ const Login: React.FC = (props) => {
               <div className={style.errorMsg}>
                 user does not Exist 
               </div>
-            ) : null}
+            ) : null} */}
             <br></br>
             <div className={style.signUpWithEmail}>
               <div className={style.hzRule}></div>&nbsp; Sign in With
@@ -152,35 +152,7 @@ const Login: React.FC = (props) => {
             <br></br>
             <LoginForm></LoginForm>
             <br></br>
-            {/* <div className={style.agreementSection}>
-                <Checkbox
-                  checked={true}
-                  icon={<img src={checkBoxIcon} alt='' />}
-                  borderColor='#E6E9ED'
-                  borderRadius={3}
-                  size={18}
-                />
-                <div>
-                  By creating an account you agree Yourstudypath’s Privacy and
-                  Terms or use
-                  <br></br>
-                </div>
-              </div> */}
-            <br></br>
-
-            {/* <button className={style.createAccount} onClick={()=> alert("D")} type="submit" >
-                Create Account
-              </button> */}
-            <br />
-
-            {/* <section className={style.createAccoutEnding}>
-                <span>
-                  Already a member?{' '}
-                  <Link to='/'>
-                    <b>Log in</b>
-                  </Link>
-                </span>
-              </section> */}
+          
           </div>
         </div>
       </section>

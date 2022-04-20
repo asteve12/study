@@ -308,7 +308,7 @@ export default function InputAdornments() {
         <section className={style.createAccoutEnding}>
           <span>
             {alreadyMember ? 'Already a member' : null}&nbsp;
-            <Link to='/login'>
+            <Link to='/'>
               <b>Log in</b>
             </Link>
           </span>

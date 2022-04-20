@@ -64,7 +64,7 @@ if (signedinUser.netWorkError){
         <div className='App'>
           <Routes>
             <Route path='/register' element={<OnBoard />}></Route>
-            <Route path='/login' element={<LoginPage />}></Route>
+            <Route path='/' element={<LoginPage />}></Route>
             <Route path='/createAccount' element={<Register />}></Route>
             <Route path='/sure' element={<SurePage />}></Route>
             <Route path='/chooseAStudyPath' element={<StudyPath />}></Route>
@@ -75,7 +75,7 @@ if (signedinUser.netWorkError){
                 signedinUser.email || signedupUser.Email ? (
                   <HomePage />
                 ) : (
-                  <Navigate replace to='/login' />
+                  <Navigate replace to='/' />
                 )
               }
             ></Route>
@@ -105,7 +105,7 @@ if (signedinUser.netWorkError){
                 signedinUser.email || signedupUser.Email ? (
                   <ResourcePage />
                 ) : (
-                  <Navigate replace to='/login' />
+                  <Navigate replace to='/' />
                 )
               }
             ></Route>
@@ -115,7 +115,7 @@ if (signedinUser.netWorkError){
                 signedinUser.email || signedupUser.Email ? (
                   <SchedulePage />
                 ) : (
-                  <Navigate replace to='/login' />
+                  <Navigate replace to='/' />
                 )
               }
             ></Route>
@@ -125,11 +125,11 @@ if (signedinUser.netWorkError){
                 signedinUser.email || signedupUser.Email ? (
                   <CoursePage />
                 ) : (
-                  <Navigate replace to='/login' />
+                  <Navigate replace to='/' />
                 )
               }
             ></Route>
-            <Route path='/' element={<BluePage />}></Route>
+          
           </Routes>
         </div>
       </BrowserRouter>

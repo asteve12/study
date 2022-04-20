@@ -238,20 +238,21 @@ const loginSlice = createSlice({
 
         if (meta.arg.type === 'loginByForm' || meta.arg.type === 'keepuser') {
           console.log('mypayy', payload);
-          if (!payload.status) {
-               state.showFormLoader = false;
-          
-            switch (payload.errorMsg) {
-              case 'Firebase: Error (auth/user-not-found).':
-                state.errorMsg = "user does not exist"
-                break; 
-              case "client Error":
-                  state.netWorkError = 'network error try again'; 
+          if (payload.errorMsg){
+            if (!payload.status) {
+              state.showFormLoader = false;
 
+              switch (payload.errorMsg) {
+                case 'Firebase: Error (auth/user-not-found).':
+                  state.errorMsg = 'user does not exist';
+                  break;
+                case 'client Error':
+                  state.netWorkError = 'network error try again';
+              }
             }
 
-
           }
+            
           if (!payload) {
             state.loading = false;
              
