@@ -504,7 +504,7 @@ export default function RegisterForm() {
         </Box>
       ) : null}
 
-      {true ? (
+      {formStage.secondStage ? (
         <Box>
           {redirectPage ? <Navigate replace={true} to='/sure' /> : null}
           <form onSubmit={registerFormObj.handleSubmit}>
