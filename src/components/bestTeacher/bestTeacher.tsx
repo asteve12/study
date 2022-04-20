@@ -8,34 +8,38 @@ import { symbolName } from "typescript";
 import Indicator from "../indicator/indicator"
 //interface
 import bestTeacherInt from "./interface"
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+import NavItemArray from "./itemsObj"
+
 
 
 const bestTeacher: React.FC<bestTeacherInt> = (props) => {
   return (
     <section className={style.bestTeacher}>
-      <div className={style.BestTeacherImgWrapper}>
-        <img src={BlueBg} className={style.bestTeacherBgImg} alt='' />
-      </div>
+      <Carousel autoPlay={true} interval={5000} showStatus={false} showArrows={false}  infiniteLoop={true} className={style.carouselWrapper}>
+        {NavItemArray.map((eachItems) => {
+          return (
+            <>
+              <div className={style.BestTeacherImgWrapper}>
+                <img
+                  src={eachItems.img}
+                  className={style.bestTeacherBgImg}
+                  alt=''
+                />
+              </div>
 
-      <div className={style.bestTeacherBottom}>
-        <p className={style.theBestTeacherHeader}>The Best Teachers </p>
-        <p className={style.theBestTeacherBtText}>
-          Online classes taught by dedicated teachers with decades of experience
-          helping students succeed.
-        </p>
-        {
-           props.isIndicatorOn.map((eachBtn,index)=>{
-            return(
-              <Indicator status={eachBtn.btnStatus}  handleIndicator={props.handleIndicator} indexed={index} ></Indicator>
-            )
-          })
-
-          }
-        
-
-        
-       
-      </div>
+              <div className={style.bestTeacherBottom}>
+                <p className={style.theBestTeacherHeader}>{eachItems.header}</p>
+                <p className={style.theBestTeacherBtText}>
+                  {eachItems.bodyText}
+                </p>
+                
+              </div>
+            </>
+          );
+        })}
+      </Carousel>
     </section>
   );
 };

@@ -21,6 +21,8 @@ import {Navigate} from "react-router-dom"
 import {FcGoogle} from "react-icons/fc"
 import Logo from '../../assets/createAcct/logo.svg';
 
+import sigupWithGoogle from "../../firebaseConfig/firebaseGoogle"
+
 
 
 
@@ -108,7 +110,6 @@ let isUserExst = registerNewUser.get('/signup.json').then((response) => {
   };
     return (
       <>
-       
         {redirectPage ? <Navigate to='/homePage' /> : null}
         <section className={style.createAcctContainer}>
           <div className={style.createAcctWrapper}>
@@ -120,8 +121,7 @@ let isUserExst = registerNewUser.get('/signup.json').then((response) => {
                 Take Your First Step Towards Success
               </p>
 
-             
-              <GoogleLogin
+              {/* <GoogleLogin
                 clientId='715423435625-7d590qpf3nbd6t9brb1hgvmjmjuousf6.apps.googleusercontent.com'
                 buttonText='Login'
                 onSuccess={handleLogin}
@@ -139,9 +139,18 @@ let isUserExst = registerNewUser.get('/signup.json').then((response) => {
                     Sign Up With Google
                   </button>
                 )}
-              />
-              <div className={style.errorMsg}>{errorMsg}</div>
-            
+              /> */}
+              {/* <button
+                className={style.signInWithGoogle}
+                onClick={sigupWithGoogle}
+              >
+                <div>
+                  <FcGoogle></FcGoogle>
+                </div>
+                Sign Up aje With Google
+              </button>
+              <div className={style.errorMsg}>{errorMsg}</div> */}
+
               <br></br>
               <div className={style.signUpWithEmail}>
                 <div className={style.hzRule}></div>&nbsp; Sign Up With
@@ -150,7 +159,7 @@ let isUserExst = registerNewUser.get('/signup.json').then((response) => {
               <br></br>
               <SigninForm></SigninForm>
               <br></br>
-               </div>
+            </div>
           </div>
         </section>
       </>
