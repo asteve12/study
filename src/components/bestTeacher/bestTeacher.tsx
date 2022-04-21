@@ -17,7 +17,15 @@ import NavItemArray from "./itemsObj"
 const bestTeacher: React.FC<bestTeacherInt> = (props) => {
   return (
     <section className={style.bestTeacher}>
-      <Carousel autoPlay={true} interval={5000} showStatus={false} showArrows={false}  infiniteLoop={true} className={style.carouselWrapper}>
+      <Carousel
+        autoPlay={true}
+        showThumbs={false}
+         interval={5000}
+        showStatus={false}
+        showArrows={false}
+        infiniteLoop={true}
+        className={style.carouselWrapper}
+      >
         {NavItemArray.map((eachItems) => {
           return (
             <>
@@ -34,7 +42,6 @@ const bestTeacher: React.FC<bestTeacherInt> = (props) => {
                 <p className={style.theBestTeacherBtText}>
                   {eachItems.bodyText}
                 </p>
-                
               </div>
             </>
           );
