@@ -53,9 +53,9 @@ dispatchAuthentication(getUsers({type:"keepuser"}));
       </section>
     );
   }
-if (signedinUser.netWorkError ){
-  return <div>network error try again</div>
-}
+// if (signedinUser.netWorkError ){
+//   return <div>network error try again</div>
+// }
   return (
     <>
       <BrowserRouter>
