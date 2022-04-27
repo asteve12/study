@@ -616,7 +616,7 @@ useEffect(()=>{
                   // containerClass='subject-carousel-container'
                   // itemClass='subject-carousel-item'
                 >
-                  {subjects.map((eachItems) => {
+                  {/* {subjects.map((eachItems) => {
                     return (
                       <SubjectCard
                         colors={eachItems.colors}
@@ -625,9 +625,9 @@ useEffect(()=>{
                         symbol={eachItems.symbol}
                       ></SubjectCard>
                     );
-                  })}
+                  })} */}
 
-                   {/* {!courses ? (
+                   {!courses ? (
                   <div
                     style={{
                       width: '100%',
@@ -649,7 +649,7 @@ useEffect(()=>{
                       //@ts-ignore
                       courses.map((eachCourse,index)=>{
                         return (
-                          <div>
+                          <div style={{margin:"0px !important"}}>
                           <Link to={`/details/:${eachCourse.slug}`}>
                             <SubjectCard
                               colors={subjects[index].colors}
@@ -666,7 +666,7 @@ useEffect(()=>{
                       }</>:<section></section>
                    
                   }</>
-                )} */}
+                )}
 
 
                   
