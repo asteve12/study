@@ -93,7 +93,7 @@ const getUsers = createAsyncThunk(
              {
                headers: {
                  //@ts-ignore
-                 Authorization: userToken,
+                 Authorization: `Bearer ${userToken}`,
                },
              }
            )

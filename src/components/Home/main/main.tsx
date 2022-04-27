@@ -238,7 +238,7 @@ useEffect(()=>{
   BaseUrl.get('/api/courses/list/', {
     headers: {
       //@ts-ignore
-      Authorization:`${userTk}`,
+      Authorization:`Bearer ${userTk}`,
     },
   })
     .then((response) => {
@@ -338,6 +338,18 @@ useEffect(()=>{
                 autoPlay={false}
                 // centerMode={true}
               >
+                <div
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    display: 'flex',
+                    justifyContent: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  No Live Session Available yet! 
+                  <br></br>
+                </div>
                 {/* {!courses ? (
                   <div
                     style={{
@@ -374,11 +386,11 @@ useEffect(()=>{
                       })
                       
                       }</div>:
-                    <div style={{width:"100%",height:"100%",display:"flex",justifyContent:"flex",alignItems:"center"}}>no course available yet</div>
+                   
                   }</>
                 )} */}
-                
-                <Link to='/courses'>
+
+                {/* <Link to='/courses'>
                   <CourseCard
                     courseTitle='Mathematics'
                     topic='introduction'
@@ -513,7 +525,7 @@ useEffect(()=>{
                     img=''
                     tutorName='james brown'
                   ></CourseCard>
-                </Link>
+                </Link> */}
               </Carousel>
             </div>
 
@@ -604,7 +616,7 @@ useEffect(()=>{
                   // containerClass='subject-carousel-container'
                   // itemClass='subject-carousel-item'
                 >
-                  {subjects.map((eachItems) => {
+                  {/* {subjects.map((eachItems) => {
                     return (
                       <SubjectCard
                         colors={eachItems.colors}
@@ -613,7 +625,51 @@ useEffect(()=>{
                         symbol={eachItems.symbol}
                       ></SubjectCard>
                     );
-                  })}
+                  })} */}
+
+                   {!courses ? (
+                  <div
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Grid ariaLabel='loading-indicator' color='#4E6AA0' />
+                  </div>
+                ) : (
+                  <>
+                  
+                  {
+                    //@ts-ignore
+                  courses.length > 0 ?
+                    <>{
+                      //@ts-ignore
+                      courses.map((eachCourse,index)=>{
+                        return (
+                          <div style={{margin:"0px !important"}}>
+                          <Link to={`/details/:${eachCourse.slug}`}>
+                            <SubjectCard
+                              colors={subjects[index].colors}
+                              name={eachCourse.title}
+                              svgColor={subjects[index].svgColor}
+                              symbol={subjects[index].symbol}
+                            ></SubjectCard>
+                           </Link>
+                           </div>
+                        );
+
+                      })
+                      
+                      }</>:<section></section>
+                   
+                  }</>
+                )}
+
+
+                  
                 </Carousel>
               </div>
             </div>

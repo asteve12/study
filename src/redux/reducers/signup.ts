@@ -64,7 +64,7 @@ const addNewUser = createAsyncThunk('addNewUser',async (userDetail: SignupTypes.
           password1: password,
           password2: password,
         };
-
+      console.log("registerData",data)
         let signupResponse = BaseUrl.post('/api/auth/register/', data)
           .then((response) => {
             console.log('my-details', response);
