@@ -347,7 +347,7 @@ useEffect(()=>{
                     alignItems: 'center',
                   }}
                 >
-                  No Live Session Available yet! 
+                  No Live Session Available yet!
                   <br></br>
                 </div>
                 {/* {!courses ? (
@@ -606,12 +606,12 @@ useEffect(()=>{
                   })}
                 </Carousel>
               </div> */}
-              <div>
+              
                 <Carousel
-                  partialVisbile={true}
+                  // partialVisbile={true}
                   responsive={subresponsive}
-                  autoPlay={false}
-                  infinite={false}
+                  // autoPlay={false}
+                  // infinite={false}
                   // centerMode={true}
                   // containerClass='subject-carousel-container'
                   // itemClass='subject-carousel-item'
@@ -627,52 +627,51 @@ useEffect(()=>{
                     );
                   })} */}
 
-                   {!courses ? (
-                  <div
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Grid ariaLabel='loading-indicator' color='#4E6AA0' />
-                  </div>
-                ) : (
-                  <>
-                  
-                  {
-                    //@ts-ignore
-                  courses.length > 0 ?
-                    <>{
-                      //@ts-ignore
-                      courses.map((eachCourse,index)=>{
-                        return (
-                          <div style={{margin:"0px !important"}}>
-                          <Link to={`/details/:${eachCourse.slug}`}>
-                            <SubjectCard
-                              colors={subjects[index].colors}
-                              name={eachCourse.title}
-                              svgColor={subjects[index].svgColor}
-                              symbol={subjects[index].symbol}
-                            ></SubjectCard>
-                           </Link>
-                           </div>
-                        );
-
-                      })
-                      
-                      }</>:<section></section>
-                   
-                  }</>
-                )}
-
-
-                  
+                  {!courses ? (
+                    <div
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Grid ariaLabel='loading-indicator' color='#4E6AA0' />
+                    </div>
+                  ) : (
+                    <>
+                      {
+                        //@ts-ignore
+                        courses.length > 0 ? (
+                          <>
+                            {
+                              //@ts-ignore
+                              courses.map((eachCourse, index) => {
+                                return (
+                                  <div style={{ margin: '0px !important' }}>
+                                    <Link to={`/details/${eachCourse.slug}`}>
+                                      <SubjectCard
+                                        colors={subjects[index].colors}
+                                        name={eachCourse.title}
+                                        svgColor={subjects[index].svgColor}
+                                        symbol={subjects[index].symbol}
+                                      ></SubjectCard>
+                                    </Link>
+                                  </div>
+                                );
+                              })
+                            }
+                          </>
+                        ) : (
+                          <section></section>
+                        )
+                      }
+                    </>
+                  )}
                 </Carousel>
               </div>
-            </div>
+            
             <br />
             <div className={style.ContinueCard}>
               <p className={style.continueText}>Continue where you left off</p>
