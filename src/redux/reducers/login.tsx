@@ -1,96 +1,138 @@
 import { createSlice, current, createAsyncThunk } from '@reduxjs/toolkit';
-import { getDatabase, ref, child, get } from 'firebase/database';
-import { initializeApp } from 'firebase/app';
-import {registerNewUser} from "../../axios"
-import logUserIn from "../../firebaseConfig/firebaselogin"
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyDT-zrQbWvHt15SiNKCcDofxl1ubVj9mLE',
-  authDomain: 'yourstudypath-ysp.firebaseapp.com',
-  databaseURL: 'https://yourstudypath-ysp-default-rtdb.firebaseio.com',
-  projectId: 'yourstudypath-ysp',
-  storageBucket: 'yourstudypath-ysp.appspot.com',
-  messagingSenderId: '899670359755',
-  appId: '1:899670359755:web:53d7178f926074ec6c654e',
-  measurementId: 'G-RZKLL82KYC',
-};
-
-const app = initializeApp(firebaseConfig);
+import ForwardLoginReq from "../../axios"
+import axios from "axios"
 
 
+type loginType = {
+  myDetail?:{
+    email:string,
+    password:string,
 
+  },
+  type:string
+}
 
-const db = getDatabase(app);
 
 const getUsers = createAsyncThunk(
   'get/getUsers',
-  async (userDetail?: any) => {
-    if (userDetail.type === "loginByForm"){
-          let { email, password } = userDetail.myDetail;
+  async (userDetail: loginType) => {
+      let userToken = localStorage.getItem('accessToken');
+      console.log('useTOken', userToken);
 
-          let loginReply = logUserIn(email, password).then((response) => {
-            console.log('res', response);
 
-            if (response.status) {
+      if (userDetail.type === 'keepuser' && userToken) {
+        let name = 'asteve4345yspcom';
+        let profileDetail = ForwardLoginReq.get(
+          `/api/auth/profile/update/${name}/`,
+          {
+            headers: {
               //@ts-ignore
-              let userDetail = response.userDetail;
-              let userId = userDetail.uid;
-              localStorage.setItem('userId', userId);
-              const dbRef = ref(getDatabase());
-              let loginDetails = get(child(dbRef, `signup/${userId}`))
-                .then((snapshot) => {
-                  if (snapshot.exists()) {
-                    console.log('snapshot', snapshot.val());
-                    return snapshot.val();
-                  } else {
-                    console.log('No data available');
-                  }
-                })
-                .catch((error) => {
-                  console.error(error);
-                  return error
-                });
+              Authorization: userToken,
+            },
+          }
+        )
+          .then((response) => {
+            console.log('req user res new', response);
 
-              return loginDetails;
-            } else {
-              return response
-            }
-          });
-
-          return loginReply;
-      
-    }
-      if (userDetail.type === 'keepuser') {
-        let userId = localStorage.getItem('userId');
-
-        if (!userId) {
-          return false;
-        }
-        const dbRef = ref(getDatabase());
-        let loginDetails = get(child(dbRef, `signup/${userId}`))
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              console.log('snapshot', snapshot.val());
-              return snapshot.val();
-            } else {
-              console.log('No data available');
-            }
+            return {
+              status: true,
+              data: response.data,
+              isUserLoggedIn: true,
+            };
           })
           .catch((error) => {
-            console.error("when error occurred",error);
             return {
               status: false,
-              errorMsg: error,
+              errorMsg: error.response,
+              isUserLoggedIn: false,
             };
           });
 
-        console.log('usdeat', loginDetails);
+        return profileDetail;
+      }
 
-        return loginDetails;
-      } 
+ const  userInfo = userDetail.myDetail;
+ const email = userInfo?.email;
+ const password = userInfo?.password
+ const data = {
+   username:email,
+   password
+ };
+  const loginReqRes = ForwardLoginReq.post('/api/auth/login/', data)
+                    .then((response) => {
+ 
+     
+      if (response.status === 200) {
+        localStorage.clear()
+        const {data} = response;
+         localStorage.setItem('accessToken', data.access);
+         localStorage.setItem('refreshToken', data.refresh);
+         const expirationDate = new Date();
+         expirationDate.setDate(new Date().getDate() + 30);
+        localStorage.setItem('expirationDate', expirationDate.toDateString());
+
+        
+
+        
+      
+        return  true
+      }
+      
+    })
+    .then((response)=>{
+      // const expirationDate = localStorage.getItem('accessToken');
+      //  const currentDate = localStorage.getItem('refreshToken');
+      console.log('login res', response);
+      let userToken = localStorage.getItem('accessToken')
+      console.log('useTOken', userToken);
+   
+      if(response === true){
+        let name = 'asteve4345yspcom';
+           let profileDetail = ForwardLoginReq.get(
+             `/api/auth/profile/update/${name}/`,
+             {
+               headers: {
+                 //@ts-ignore
+                 Authorization: userToken,
+               },
+             }
+           )
+             .then((response) => {
+               console.log('req user res new', response);
+
+               return {
+                 status: true,
+                 data: response.data,
+                 isUserLoggedIn: true,
+               };
+             })
+             .catch((error) => {
+               return {
+                 status: false,
+                 errorMsg: error.response,
+                 isUserLoggedIn: false,
+               };
+             });
+
+             return profileDetail;
+
+
+      }
+
+    })
+    .catch((error) => {
+      console.log('login error', error.response);
+      return {
+        status: false,
+        errorMsg: error.response,
+      };
+    });
+    return loginReqRes;
 
   }
 );
+
+
 
 // const getSigninUserByForm = createAsyncThunk(
 //   'get/getUsers',
@@ -122,69 +164,17 @@ const loginSlice = createSlice({
     loginFormStatus: '',
     showFormLoader: false,
     errorMsg: '',
-    netWorkError:""
+    netWorkError: '',
+    loguserIn: 'No',
+    gender:"",
+    img:""
   },
   reducers: {
-    addSigninUser: (state: any, action: any) => {
-      // state.showFormLoader =  true
-
-      if (action.payload.type === 'loginByForm') {
-        let { myDetail } = action.payload;
-        let userEmail = myDetail.email;
-        let userPassword = myDetail.password;
-        // logUserIn(userEmail, userPassword);
-
-        registerNewUser.get('/signup.json').then((response) => {
-          let userObjKey = Object.keys(response.data);
-
-          for (let eachUser of userObjKey) {
-            if (
-              response.data[eachUser].Email === userEmail &&
-              response.data[eachUser].password === userPassword
-            ) {
-              // state.showFormLoader = false;
-              state.email = userEmail;
-
-              localStorage.setItem('userId', eachUser);
-            }
-          }
-        });
-      }
-      try {
-        const { userDetail, tokenDetail } = action.payload;
-        state.firstName = userDetail.familyName;
-        state.lastName = userDetail.givenName;
-        state.email = userDetail.email;
-
-        state.accessTokenDetail = {
-          tokenId: tokenDetail.access_token,
-          expireIn: tokenDetail.expires_in,
-        };
-        localStorage.setItem('token', userDetail);
-        localStorage.setItem('tokenExpireIn', tokenDetail.expires_in);
-        registerNewUser.get('/signup.json').then((response) => {
-          let arrayOfObjectKey = Object.keys(response.data);
-
-          for (let eachItems of arrayOfObjectKey) {
-            let eachUser = response.data[eachItems];
-
-            if (response.data[eachItems].Email === userDetail.email) {
-              localStorage.setItem('userId', eachItems);
-              break;
-            }
-          }
-        });
-        // setTimeout(() => {
-        //   localStorage.removeItem('token');
-        //   alert();
-        // }, tokenDetail.expires_in);
-
-        let userKey: string;
-      } catch (e) {
-        console.log('login redux section error', e);
-      }
-    },
+    addSigninUser: (state: any, action: any) => {},
     clearState: (state: any) => {
+       
+      localStorage.clear()
+   
       return {
         firstName: '',
         lastName: '',
@@ -192,97 +182,74 @@ const loginSlice = createSlice({
         phoneNumber: '',
         city: '',
         NIN: '',
-        loading: true,
+        loading: false,
         userExist: 'unknown',
         loginFormStatus: '',
         showFormLoader: false,
         errorMsg: '',
-        netWorkError:""
+        netWorkError: '',
+        loguserIn: 'No',
+        gender:"",
+        img:""
       };
     },
     changeLoginStatus: (state: any) => {
       state.loginFormStatus = '';
     },
   },
-  extraReducers: {
-    //@ts-ignore
-    [getUsers.pending]: (state, { meta }) => {
-      if (meta.arg) {
-        if (meta.arg.type === 'loginByForm') {
-          state.showFormLoader = true;
-        }
-      }
-    },
-    //@ts-ignore
-    [getUsers.fulfilled]: (state, { payload, meta }) => {
-   
+  extraReducers: (builder) => {
+    builder.addCase(getUsers.pending, (state) => {
+      //@ts-ignore
+      state.showFormLoader = true;
+      state.errorMsg = '';
+      state.loading = true
+    });
 
-      if (meta.arg) {
-        if (meta.arg.type === 'validategoogleform') {
-          const userObj = meta.arg.userDetail;
-          console.log('my userDetails', userObj);
-          const userEmail = userObj.email;
-          const userFirstName = userObj.familyName;
-          const userLastName = userObj.givenName;
-          let userObjKeys = Object.keys(payload);
-          for (let eachItems of userObjKeys) {
-            if (payload[eachItems].Email === userEmail) {
-              state.email = userEmail;
-              state.firstName = userFirstName;
-              state.lastName = userLastName;
-            } else {
-              state.userExist = 'No';
-            }
-          }
-        }
+    builder.addCase(getUsers.fulfilled, (state, userDetail) => {
+      console.log('my-user', userDetail);
+      //@ts-ignore
+      const { payload } = userDetail;
+      //@ts-ignore
+      if (payload.status === true) {
+        //@ts-ignore
+        const {email,first_name,gender,image_uri,last_name,slug} = payload.data
+        state.email = email;
+        state.firstName = first_name;
+        state.lastName = last_name;
+        state.gender = gender;
+        state.img = image_uri
+        localStorage.setItem('userSlug', slug);
 
-        if (meta.arg.type === 'loginByForm' || meta.arg.type === 'keepuser') {
-          console.log('mypayy', payload);
-          if (payload.errorMsg){
-            if (!payload.status) {
-              state.showFormLoader = false;
-
-              switch (payload.errorMsg) {
-                case 'Firebase: Error (auth/user-not-found).':
-                  state.errorMsg = 'user does not exist';
-                  break;
-                case 'client Error':
-                  state.netWorkError = 'network error try again';
-              }
-            }
-
-          }
-            
-          if (!payload) {
-            state.loading = false;
-             
-          }
-          const { Email, NIN, city, course, firstName, lastName, phoneNumber } =
-            payload;
-          let userState = payload.state;
-
-          state.email = Email;
-          state.NIN = NIN;
-          state.city = city;
-
-          state.firstName = firstName;
-          state.lastName = lastName;
-          state.phoneNumber = phoneNumber;
-          state.loading = false;
-        }
-
-        state.loading = false;
-          //  state.showFormLoader = false;
+        //@ts-ignore
+        state.loguserIn = 'yes';
+        //@ts-ignore
+        state.showFormLoader = false;
+        console.log('login data payload', userDetail);
+        //@ts-ignore
+        state.loading = false
        
       }
+      //@ts-ignore
+      else if (payload.status === false) {
+        state.loading = false;
+        //@ts-ignore
+        const { errorMsg } = payload;
+        if (!errorMsg){
+            state.showFormLoader = false;
+           state.errorMsg = 'an error occured try again';
+               return;
 
-      // state.loading = false;
-    },
-    //@ts-ignore
-    [getUsers.rejected]: (state) => {
-      //   state.loading = false;
-     
-    },
+        } console.log('error payload', errorMsg);
+        if (errorMsg.status &&  errorMsg.status === 404 ) {
+          state.errorMsg = 'an error occured try again';
+          state.showFormLoader = false;
+          return;
+        } 
+        state.errorMsg = errorMsg.data.detail;
+        //@ts-ignore
+        state.showFormLoader = false;
+      }
+    });
   },
 });
 

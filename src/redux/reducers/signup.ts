@@ -1,36 +1,103 @@
 import {createSlice,createAsyncThunk} from "@reduxjs/toolkit"
-import { getDatabase, ref, set } from 'firebase/database';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { initializeApp } from 'firebase/app';
+import * as SignupTypes from "../../components/form/signin/type"
+import * as userInfoTypes from "../../components/form/register/type"
+import BaseUrl from "../../axios"
 
 
-import {registerNewUser} from "../../axios"
-import signupuser from "../../firebaseConfig/firebasesignin"
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyDT-zrQbWvHt15SiNKCcDofxl1ubVj9mLE',
-  authDomain: 'yourstudypath-ysp.firebaseapp.com',
-  databaseURL: 'https://yourstudypath-ysp-default-rtdb.firebaseio.com',
-  projectId: 'yourstudypath-ysp',
-  storageBucket: 'yourstudypath-ysp.appspot.com',
-  messagingSenderId: '899670359755',
-  appId: '1:899670359755:web:53d7178f926074ec6c654e',
-  measurementId: 'G-RZKLL82KYC',
+
+type ErrorObj = {
+  status: boolean;
+  errorMsg: string;
 };
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+
+type successObj = {
+  status: boolean;
+  data: any;
+};
+
+type isSubmitByEmail =
+  | SignupTypes.asyncInput
+  | userInfoTypes.asynInputType
+  | ErrorObj
+  | successObj
+  | undefined
 
 
-let addNewUser = createAsyncThunk(
-  'addNewUser',
-  async (userDetail?: any) => {
-    let { Email, password } = userDetail.values;
-    let reply = signupuser(Email, password);
-    return reply;
+
+
+function subByEmail(submitMethod: isSubmitByEmail): submitMethod is SignupTypes.asyncInput {
+  return (submitMethod as SignupTypes.asyncInput).type === 'verifyEmail';
+}
+
+// function errorMessage(
+//   submitMethod: isSubmitByEmail
+// ): submitMethod is SignupTypes.asyncInput {
+//   return (submitMethod as SignupTypes.asyncInput).type === 'verifyEmail';
+// }
+
+const addNewUser = createAsyncThunk('addNewUser',async (userDetail: SignupTypes.asyncInput | userInfoTypes.asynInputType ) => {
+    
+  
+  if (userDetail.type === 'verifyEmail') {
+      return {
+        ...userDetail,
+      };
+    } 
+    else if (userDetail.type === 'submitForm') {
+      if (subByEmail(userDetail)){
+
+      } 
+      else{
+      
+    const { firstName, lastName,username } = userDetail.values;
+        console.log('registerSubmit', userDetail);
+        //@ts-ignore
+        const { Email, password } = userDetail.values.userInfo;
+
+        const data = {
+          username,
+          password,
+          email: Email,
+          firstName,
+          lastName,
+          password1: password,
+          password2: password,
+        };
+
+        let signupResponse = BaseUrl.post('/api/auth/register/', data)
+          .then((response) => {
+            console.log('my-details', response);
+            if (response.status === 200 || response.status === 201) {
+              console.log('my-res200', response);
+              return {
+                status: true,
+                data: response.data,
+              };
+            } else {
+              return {
+                status: true,
+                data: response,
+              };
+            }
+          })
+          .catch((error) => {
+            console.log('errorMsgSIgnup', error.response);
+            return {
+              status: false,
+              errorMsg: error.response,
+            };
+          });
+
+        return signupResponse;
+      }
+
+    }
   }
+  
 );
 
-export { addNewUser };
+
 
 
 const signinSlice = createSlice({
@@ -47,29 +114,12 @@ const signinSlice = createSlice({
     loading: false,
     errorMsg: '',
     redirectFromSignup: false,
+    submitting: false,
+    showLoader: false,
+    sigupSuccess:"No"
   },
   reducers: {
-    addUser: (state: any, action: any) => {
-      try {
-        let keyToUpdate = Object.keys(action.payload);
-        for (let eachKey of keyToUpdate) {
-          state[eachKey] = action.payload[eachKey];
-        }
-       
-
-        if (state.firstName !== '') {
-          state.loading = true;
-          let userId = localStorage.getItem("userId");
-          console.log('userId', userId)
-
-    const db = getDatabase(app);
-                  set(ref(db, 'signup/' + userId),state);
-                        }
-                      } catch (e) {
-                        console.log('error', e);
-                      }
-                    },
-    clearSigninDetails: (state: any) => {
+    clearSigninDetails: (state, action) => {
       return {
         firstName: '',
         lastName: '',
@@ -82,40 +132,83 @@ const signinSlice = createSlice({
         loading: false,
         errorMsg: '',
         redirectFromSignup: false,
+        submitting: false,
+        showLoader: false,
+        sigupSuccess: 'No'
       };
     },
   },
-  extraReducers: {
-    //@ts-ignore
-    [addNewUser.pending]: (state, payload) => {
-      state.loading = true;
-    },
-    //@ts-ignore
-    [addNewUser.fulfilled]: (state, { payload }) => {
-      console.log('state', payload);
-      if (payload.errorMsg) {
-        state.loading = false;
-
-        switch (payload.errorMsg) {
-          case 'Firebase: Error (auth/email-already-in-use).':
-            state.errorMsg = 'Email already in use';
-        }
-      } else {
-        let userId = payload.userInfo.uid;
-        let email = payload.userInfo.email;
-        localStorage.setItem('userId', userId);
-         let user = localStorage.getItem('userId');
-         console.log('user11', userId);
-        
-        state.Email = email;
-        state.loading = false;
-        state.redirectFromSignup=true
+  extraReducers: (builder) => {
+    builder.addCase(addNewUser.pending, (state, action) => {
+      console.log('users', action);
+      const { meta } = action;
+      if (meta.arg.type && meta.arg.type === 'submitForm') {
+        state.showLoader = true;
+        state.errorMsg = '';
       }
-    },
+      state.loading = true;
+      state.errorMsg = '';
+    });
+
+    builder.addCase(addNewUser.fulfilled, (state, { payload }) => {
+      console.log('mypayload12', payload);
+      //@ts-ignore
+      if (payload.status === false) {
+        //@ts-ignore
+        if (payload.errorMsg) {
+          //@ts-ignore
+          if (payload.errorMsg.status === 400) {
+            console.log('enemy');
+            state.showLoader = false;
+            //@ts-ignore
+            const ErrMsg = payload.errorMsg.data.username
+              ? 
+              //@ts-ignore
+                payload.errorMsg.data.username[0]
+              : //@ts-ignore
+                payload.errorMsg.data.email[0];
+            //@ts-ignore
+            const errorMsgKey = Object.keys(payload.errorMsg.data);
+            for (let eachKeys of errorMsgKey) {
+              //@ts-ignore
+              let errorMsg = payload.errorMsg.data[eachKeys][0];
+              state.errorMsg = errorMsg;
+              break;
+            }
+          }
+
+          return;
+        }
+
+        //@ts-ignore
+        if (!payload.errorMsg) {
+          state.showLoader = false;
+          state.errorMsg = 'an error occurred try again';
+        }
+      }
+      //@ts-ignore
+      if (payload.type === 'verifyEmail') {
+        //@ts-ignore
+        state.Email = payload.values.Email;
+        //@ts-ignore
+        state.password = payload.values.password;
+        //@ts-ignore
+        state.submitting = true;
+      }
+
+      //@ts-ignore
+      if (payload.status === true) {
+        state.showLoader = false;
+        state.sigupSuccess = 'yes';
+      }
+    });
+
+    builder.addCase(addNewUser.rejected, (state, action) => {});
   },
 });
 
 export default signinSlice.reducer;
-const addUser = signinSlice.actions.addUser 
+
+// const addUser = signinSlice.actions.addUser 
 const  clearSigninDetails = signinSlice.actions.clearSigninDetails
-export { addUser, clearSigninDetails };
+export { addNewUser, clearSigninDetails };

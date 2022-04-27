@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { registerNewUser } from '../../axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUser } from '../../redux/reducers/signup';
 import { getUsers } from '../../redux/reducers/login';
 
 //styles
@@ -33,61 +31,7 @@ const Login: React.FC = (props) => {
 
 
 
-  const checkUserExist = (userEmail: string) => {
-    registerNewUser
-      .get('/signup.json')
-      .then((response) => {
-        let availaBleUser = Object.keys(response.data);
-        let alreadyExist = false;
-        let doesNotExist = false;
 
-        for (let eachItems of availaBleUser) {
-          if (response.data[eachItems].Email === userEmail) {
-            alreadyExist = true;
-          } else if (response.data[eachItems].Email !== userEmail) {
-            doesNotExist = false;
-          }
-        }
-
-        if (alreadyExist) {
-          return true;
-        } else if (!doesNotExist) {
-          return false;
-        }
-      })
-      .then((response) => {
-        if (response) {
-          setErrorMsg('user already exist');
-          // setTimeout(() => setErrorMsg(''), 1000);
-        } else if (response === false) {
-          setRedirectPage(true);
-        }
-      })
-      .catch((error) => {
-        console.log('user already exist', error);
-      });
-  };
-  const handleLogin = (googleData: any) => {
- 
-    if (googleData.error) {
-      setErrorMsg('sorry,an error occurred try again');
-    }
-    if (googleData.profileObj) {
-      let userDetail = googleData.profileObj;
-      let tokenDetail = googleData.tokenObj;
-      let userPayload = {
-        userDetail,
-        tokenDetail,
-        type: 'validategoogleform',
-      };
-      //@ts-ignore
-      addSigninDispatch(getUsers(userPayload));
-      // setUserExist(true)
-      // setTimeout(()=>{
-      //  setUserExist(false);
-      // },1000)
-    }
-  };
   if (signinUserDetail.email) {
   }
 
@@ -103,47 +47,7 @@ const Login: React.FC = (props) => {
           </div>
           <div className={style.createTextWrapper}>
             <p className={style.createAccHeader}>Welcome Back To Success</p>
-               {/* <button
-              className={style.signInWithGoogle}
-                  // onClick={renderProps.onClick}
-            >
-                 <div>
-                   <FcGoogle></FcGoogle>
-                 </div>
-                 Sign in With Google
-                </button> */}
-
-            {/* <GoogleLogin
-                clientId='715423435625-7d590qpf3nbd6t9brb1hgvmjmjuousf6.apps.googleusercontent.com'
-                buttonText='Log in with Google'
-                onSuccess={handleLogin}
-                onFailure={handleLogin}
-                cookiePolicy={'single_host_origin'}
-              /> */}
-            {/* <GoogleLogin
-              clientId='715423435625-7d590qpf3nbd6t9brb1hgvmjmjuousf6.apps.googleusercontent.com'
-              buttonText='Login'
-              onSuccess={handleLogin}
-              onFailure={handleLogin}
-              cookiePolicy={'single_host_origin'}
-             redirectUri="/sure"
-              render={(renderProps) => ( 
-              <button 
-                   className={style.signInWithGoogle}
-                   onClick={renderProps.onClick}
-                 >
-                   <div>
-                    <FcGoogle></FcGoogle>
-                   </div>
-                   Sign in With Google
-                 </button>
-               )}
-             />
-            {signinUserDetail.userExist === 'No' ? (
-              <div className={style.errorMsg}>
-                user does not Exist 
-              </div>
-            ) : null} */}
+              
             <br></br>
             <div className={style.signUpWithEmail}>
               <div className={style.hzRule}></div>&nbsp; Sign in With

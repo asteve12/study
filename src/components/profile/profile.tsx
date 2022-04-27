@@ -8,26 +8,25 @@ import style from "./profile.module.css"
 import pencilIcon from "../../assets/profile/pencil.svg"
 //link
 import {NavLink,Navigate} from "react-router-dom"
-import {logout} from "../../redux/reducers/logout"
+
 import {clearState} from "../../redux/reducers/login"
 import {useDispatch,useSelector} from "react-redux"
 import {clearSigninDetails} from "../../redux/reducers/signup"
+ import {RootState,AppDispatch} from "../../redux/store"
 
 
 
 const ProfileComp:React.FC = (props)=>{
   let [islogout,setLogout] = useState(false)
-  //@ts-ignore
-  const signinUser = useSelector((state)=> state.login)
+
+  const signinUser = useSelector((state: RootState) => state.login);
 
   const logUserOut = useDispatch()
   const clearuserState = useDispatch()
   const clearSignupState = useDispatch()
     return (
       <>
-        {islogout === true ? (
-          <Navigate to='/login' replace={true}></Navigate>
-        ) : null}
+        {islogout === true ? <Navigate to='/' replace={true}></Navigate> : null}
         <section className={style.ProfileCom}>
           <div className={style.chatHead}>
             <ChatHeader title='Profile'></ChatHeader>
@@ -35,7 +34,7 @@ const ProfileComp:React.FC = (props)=>{
           <div className={style.profileDetailPage}>
             <section className={style.ProfileBgCont}>
               <div className={style.BgImg}></div>
-              <div className={style.BgPics}></div>
+              <img className={style.BgPics} src={signinUser.img}></img>
               <button className={style.changeProfile}>
                 <img src={pencilIcon} alt='' />
               </button>
@@ -64,10 +63,11 @@ const ProfileComp:React.FC = (props)=>{
               <button
                 className={style.logout}
                 onClick={() => {
-                  logUserOut(logout());
+                  localStorage.clear();
+
                   clearuserState(clearState());
-                  clearSignupState(clearSigninDetails());
-                  setLogout(true);
+
+                  console.log('logout');
                 }}
               >
                 Log Out

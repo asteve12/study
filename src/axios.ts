@@ -2,9 +2,12 @@ import axios from "axios"
 
 
 
-export const registerNewUser = axios.create({
-  baseURL: 'https://yourstudypath-ysp-default-rtdb.firebaseio.com',
-});
+ const registerNewUser = axios.create({
+   baseURL: 'https://ysp-staging.herokuapp.com',
+  
+ });
+
+export default registerNewUser;
 
 
   // export const authenticateUser = axios.create({

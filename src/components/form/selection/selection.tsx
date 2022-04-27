@@ -115,7 +115,7 @@ export default function SelectItems() {
 
   return (
     <div>
-      {redirectPage ? <Navigate replace={true} to='/homePage'></Navigate> : null}
+      {redirectPage ? <Navigate replace={true} to='/'></Navigate> : null}
       <form onSubmit={formChangeObj.handleSubmit}>
         <FormControl
           sx={{

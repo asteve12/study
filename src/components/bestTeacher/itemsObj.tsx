@@ -15,6 +15,12 @@ import WathOffline from "../../assets/bluePage/watchOffline.png"
        'Access videos, notes and study aids anywhere, anytime. Online or offline, get the best study help.',
      img: WathOffline,
    },
+   {
+     header: 'Watch offline, Anytime',
+     bodyText:
+       'Access videos, notes and study aids anywhere, anytime. Online or offline, get the best study help.',
+     img: WathOffline,
+   }
  ]; 
 
 
