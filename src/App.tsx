@@ -53,7 +53,7 @@ dispatchAuthentication(getUsers({type:"keepuser"}));
       </section>
     );
   }
-if (signedinUser.netWorkError){
+if (signedinUser.netWorkError ){
   return <div>network error try again</div>
 }
   return (

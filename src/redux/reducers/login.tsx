@@ -236,7 +236,7 @@ const loginSlice = createSlice({
         const { errorMsg } = payload;
         if (!errorMsg){
             state.showFormLoader = false;
-           state.errorMsg = 'an error occured try again';
+           state.netWorkError = 'an error occured try again';
                return;
 
         } console.log('error payload', errorMsg);
