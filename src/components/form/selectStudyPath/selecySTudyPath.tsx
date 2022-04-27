@@ -65,6 +65,27 @@ const SelectStudyPath: React.FC<studyPath> = (props) => {
             );
           })
         }
+
+        {
+          //@ts-ignore
+          studyPath.map((eachPath) => {
+            return (
+              <div
+                //@ts-ignore
+                id={`${eachPath.exam_name}`}
+                className={style.smjambPath}
+                onClick={props.selectItems}
+              >
+                <img
+                  className={style.bgImg}
+                  //@ts-ignore
+                  src={`${eachPath.exam_image}`}
+                  alt=''
+                />
+              </div>
+            );
+          })
+        }
         {/* <div id='jamb' className={style.jambPath} onClick={props.selectItems}>
           <img className={style.bgImg} src={jambLogo} alt='' />
         </div>

@@ -238,14 +238,14 @@ useEffect(()=>{
   BaseUrl.get('/api/courses/list/', {
     headers: {
       //@ts-ignore
-      Authorization:`Bearer${userTk}`,
+      Authorization:`${userTk}`,
     },
   })
     .then((response) => {
  
       console.log('ourToken', userTk);
       let userDetail = response.data
-           console.log('getCourshheList', userDetail);
+           console.log('getCourshheList', response);
       setCourses(response.data);
     })
     .catch((error) => {
