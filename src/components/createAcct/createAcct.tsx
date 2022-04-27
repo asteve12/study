@@ -1,7 +1,6 @@
 import React,{useState} from "react";
-import  {registerNewUser} from "../../axios"
 import {useDispatch,useSelector} from "react-redux"
-import {addUser} from '../../redux/reducers/signup';
+// import {addUser} from '../../redux/reducers/signup';
 
 //styles 
 import style from "./createAcct.module.css"
@@ -10,18 +9,12 @@ import style from "./createAcct.module.css"
 import checkBoxIcon from "../../assets/createAcct/checkBox.svg"
 //components
 import SigninForm from "../form/signin/signin"
-import {GoogleLogin} from "react-google-login"
-
 //@ts-ignore
 import  Checkbox from "react-custom-checkbox"
 //link
-//@ts-ignore
-import {Navigate} from "react-router-dom"
-//icons
-import {FcGoogle} from "react-icons/fc"
 import Logo from '../../assets/createAcct/logo.svg';
 
-import sigupWithGoogle from "../../firebaseConfig/firebaseGoogle"
+
 
 
 
@@ -29,88 +22,14 @@ import sigupWithGoogle from "../../firebaseConfig/firebaseGoogle"
 
 
 const CreateAcct:React.FC = (props)=>{
-  const[errorMsg,setErrorMsg] = useState("")
-  //@ts-ignore
-  const signinUserDetail = useSelector((state)=> state.login);
-  const [redirectPage,setRedirectPage] = useState(false)
-  const addNewUser = useDispatch<any>()
 
-const checkUserExist = (userEmail: string) => {
 
-let isUserExst = registerNewUser.get('/signup.json').then((response) => {
  
-      let availaBleUser = Object.keys(response.data);
-      let alreadyExist=false
-      let doesNotExist = false
 
-      for (let eachItems of availaBleUser) {
-          
-        if (response.data[eachItems].Email === userEmail) {
-          alreadyExist = true;
-        }
-        else if (response.data[eachItems].Email !== userEmail) {
-          doesNotExist = false
-        }
-      }
-    
-        if (alreadyExist) {
-          return true;
-        } else if (!doesNotExist) {
-          return false;
-        }
-    })
-    .then((response) => {
-      if (response) {
-      ;
-        setErrorMsg('user already exist');
-        return true
-        // setTimeout(() => setErrorMsg(''), 1000);
-      } else  if (response === false) {
-        
-        setRedirectPage(true);
-         return false
-      }
-    })
-    .catch((error) => {
-      console.log('user already exist', error);
-    });
-
-    return isUserExst;
-};
-  const handleLogin =  async(googleData:any) => {
-     if(googleData.error){
-       setErrorMsg("sorry,an error occurred try again");
-       console.log(googleData.error);
-}
-      if(googleData.profileObj){
-        const { email, familyName, givenName } = googleData.profileObj;
-        let userToAdd = {
-          Email: email,
-          firstName: familyName,
-          lastName: givenName,
-        };
-       let checkUserExistence = await checkUserExist(email);
-       if (checkUserExistence){
-            setErrorMsg('user already exist');
-        
-
-       }
-       else{
-         setRedirectPage(true)
-               addNewUser(addUser(userToAdd));
-       }
-      
-        
-       
-       
-      
-     
-      }
-
-  };
+  
     return (
       <>
-        {redirectPage ? <Navigate to='/homePage' /> : null}
+        {/* {redirectPage ? <Navigate to='/homePage' /> : null} */}
         <section className={style.createAcctContainer}>
           <div className={style.createAcctWrapper}>
             <div className={style.ImgWrapper}>
@@ -121,37 +40,7 @@ let isUserExst = registerNewUser.get('/signup.json').then((response) => {
                 Take Your First Step Towards Success
               </p>
 
-              {/* <GoogleLogin
-                clientId='715423435625-7d590qpf3nbd6t9brb1hgvmjmjuousf6.apps.googleusercontent.com'
-                buttonText='Login'
-                onSuccess={handleLogin}
-                onFailure={handleLogin}
-                cookiePolicy={'single_host_origin'}
-               
-                render={(renderProps) => (
-                  <button
-                    className={style.signInWithGoogle}
-                    onClick={renderProps.onClick}
-                  >
-                    <div>
-                      <FcGoogle></FcGoogle>
-                    </div>
-                    Sign Up With Google
-                  </button>
-                )}
-              /> */}
-              {/* <button
-                className={style.signInWithGoogle}
-                onClick={sigupWithGoogle}
-              >
-                <div>
-                  <FcGoogle></FcGoogle>
-                </div>
-                Sign Up aje With Google
-              </button>
-              <div className={style.errorMsg}>{errorMsg}</div> */}
-
-              <br></br>
+             <br></br>
               <div className={style.signUpWithEmail}>
                 <div className={style.hzRule}></div>&nbsp; Sign Up With
                 Email&nbsp;<div className={style.hzRule}></div>

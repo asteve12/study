@@ -25,13 +25,14 @@ const reduceDivMrg = useRef<any>();
 const hideMreBtn = useRef<any>();
 
   const handleBtnClick = (e:React.MouseEvent)=>{
-    //@ts-ignore
-    const selectedItems = e.target.id
-  if( selectedItems === "attendees")
+  
+    const selectedItems = e.target as HTMLElement 
+
+  if( selectedItems.id === "attendees")
   {
     setActiveBtn({ attendees: true, chat: false });
   }
-  if (selectedItems === 'chat') {
+  if (selectedItems.id === 'chat') {
     setActiveBtn({ attendees: false, chat: true });
   }}
   
@@ -189,12 +190,12 @@ const MobileChatCont = ()=>{
       chat: false,
     });
     const handleBtnClick = (e: React.MouseEvent) => {
-      //@ts-ignore
-      const selectedItems = e.target.id;
-      if (selectedItems === 'attendees') {
+      
+      const selectedItems = e.target as HTMLElement;
+      if (selectedItems.id === 'attendees') {
         setActiveBtn({ attendees: true, chat: false });
       }
-      if (selectedItems === 'chat') {
+      if (selectedItems.id === 'chat') {
         setActiveBtn({ attendees: false, chat: true });
       }
     };

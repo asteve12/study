@@ -1,4 +1,4 @@
-import React from "react"
+import React,{useState,useEffect} from "react"
 //styles
 import style from "./main.module.css"
 //icons
@@ -19,6 +19,10 @@ import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import {useSelector} from "react-redux"
+import { Grid } from 'react-loader-spinner';
+import BaseUrl from "../../../axios"
+//types
+import {RootState,AppDispatch} from "../../../redux/store"
 
 const responsive = {
   desktop: {
@@ -223,8 +227,32 @@ const subjects = [
 
 
 const HomeMainPage:React.FC = (props)=>{
-  
-  const obtainUserName = useSelector<any>((state)=> state)
+
+ const [courses,setCourses] = useState()
+ const [courseErrorMsg,setCourseErrMsg] = useState() 
+  const obtainUserName = useSelector((state: RootState) => state.login);
+
+
+useEffect(()=>{
+ const userTk = localStorage.getItem("accessToken")
+  BaseUrl.get('/api/courses/list/', {
+    headers: {
+      //@ts-ignore
+      Authorization:`Bearer${userTk}`,
+    },
+  })
+    .then((response) => {
+ 
+      console.log('ourToken', userTk);
+      let userDetail = response.data
+           console.log('getCourshheList', userDetail);
+      setCourses(response.data);
+    })
+    .catch((error) => {
+      console.log('getCourseListError', error);
+    });
+
+},[])
 
 
 
@@ -244,7 +272,7 @@ const HomeMainPage:React.FC = (props)=>{
           <section className={style.welcomeMessage}>
             <p className={style.welcomeText}>
               {/*@ts-ignore*/}
-              <b>Welcome {obtainUserName.login.firstName}!</b>
+              <b>Welcome {obtainUserName.firstName}!</b>
             </p>
             &nbsp; &nbsp;
             <div className={style.circle}></div>
@@ -310,6 +338,46 @@ const HomeMainPage:React.FC = (props)=>{
                 autoPlay={false}
                 // centerMode={true}
               >
+                {/* {!courses ? (
+                  <div
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Grid ariaLabel='loading-indicator' color='#4E6AA0' />
+                  </div>
+                ) : (
+                  <>
+                  
+                  {
+                    //@ts-ignore
+                  courses.length > 0 ?
+                    <div>{
+                      //@ts-ignore
+                      courses.map((eachCourse)=>{
+                        return (
+                          <Link to={`/details/:${eachCourse.slug}`}>
+                            <CourseCard
+                              courseTitle={`${eachCourse.title}`}
+                              topic='introduction'
+                              timeElapse={5}
+                              img=''
+                              tutorName='james brown'
+                            ></CourseCard>
+                          </Link>
+                        );
+
+                      })
+                      
+                      }</div>:
+                    <div style={{width:"100%",height:"100%",display:"flex",justifyContent:"flex",alignItems:"center"}}>no course available yet</div>
+                  }</>
+                )} */}
+                
                 <Link to='/courses'>
                   <CourseCard
                     courseTitle='Mathematics'

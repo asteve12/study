@@ -1,4 +1,7 @@
 import  React,{useState} from 'react';
+import * as  HelperFunc from "./helperFunc"
+import * as registerTypes from "./type"
+import {RootState,AppDispatch} from "../../../redux/store"
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -7,14 +10,12 @@ import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import MenuItem from '@mui/material/MenuItem';
 import { Theme, useTheme } from '@mui/material/styles';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import ContinuBtn from "../../../ui/continueBtn/continueBtn"
-import {useDispatch} from "react-redux"
-import {addUser} from "../../../redux/reducers/signup"
+import { useDispatch, useSelector} from 'react-redux';
+import { addNewUser } from '../../../redux/reducers/signup';
 import {Navigate} from "react-router-dom"
 import {ThreeCircles} from "react-loader-spinner";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -94,25 +95,23 @@ function getStyles(states: string, stateName: string[], theme: Theme) {
 
 
 
-interface State {
-  LegalFirstName: string;
-  LegalLastName: string;
-  phonenumber: string;
-  NIN: string;
-  City:string;
-  showPassword: boolean;
-}
+
 
 export default function RegisterForm() {
   const theme = useTheme();
   const [stateName, setStateName] = React.useState<string[]>([]);
-  const addUserInfo = useDispatch()
+  const addUserInfo = useDispatch<AppDispatch>();
   const [redirectPage,setRedirect] = useState(false)
   const [showLoader,setShowLoader] = useState(false)
    const [datePicker, setDatePicker] = React.useState<Date | null>(null);
   const [datePickerErrMsg,setDatePickerErrorMsg] = useState("") 
-  const [selectedPics,setSelectedPics] = useState("");
+  const [selectedPics,setSelectedPics] = useState<File>();
   const [picErrMsg,setPicErrMsg] = useState("")
+  
+  ///////////////////new
+  
+  const userDetail = useSelector((state: RootState) => state.signin);
+
 
 
   const inputProps = {
@@ -122,33 +121,7 @@ export default function RegisterForm() {
   
 
 
-   interface validateInput {
-     firstName: string;
-     lastName: string;
-     city: string;
-     state: string;
-     phoneNumber: string;
-     NIN: string;
-     gender: string;
-     street: string;
-     locale: string;
-     country: string;
   
-   }
-    interface emailInterface {
-      firstName?: string;
-      lastName?: string;
-      city?: string;
-      state?: string;
-      phoneNumber?: string;
-      NIN?: string;
-      gender?: string;
-       street?: string;
-      locale?: string;
-      country?: string;
-    
-    
-    }
 
     countries.registerLocale(enLocale)
      
@@ -161,54 +134,7 @@ export default function RegisterForm() {
         value: key,
       };
     });
-    const validate = (value: validateInput) => {
-      console.log('validateForm', value);
-      const errors: emailInterface = {};
-      if (!value.firstName) {
-        errors.firstName = 'Required';
-      }
-       if (!value.lastName) {
-         errors.lastName = 'Required';
-       }
-        if (!value.city) {
-          errors.city = 'Required';
-        }
-         if (!value.state) {
-           errors.state = 'Required';
-         }
-         
-          if (!value.phoneNumber) {
-            errors.phoneNumber = 'Required';
-          }
-          else if (
-            !/^\d{11}$/.test(value.phoneNumber) &&
-            !/^[+]234\d{10}$/.test(value.phoneNumber)
-          ) {
-            errors.phoneNumber = 'invalid Number';
-          }
-            if (!value.NIN) {
-              errors.NIN = 'Required';
-            }
-             if (!value.gender) {
-               errors.gender = 'Required';
-             }
 
-           
-               if (!value.street) {
-                 errors.street = 'Required';
-               }
-               if (!value.locale) {
-                 errors.locale = 'Required';
-               }
-               if (!value.country) {
-                 errors.country = 'Required';
-               }
-                 
-               
-
-      return errors;
-
-    };
   const registerFormObj = useFormik({
     initialValues: {
       firstName: '',
@@ -221,9 +147,9 @@ export default function RegisterForm() {
       street: '',
       locale: '',
       country: '',
-    
+      username:""
     },
-    validate,
+    validate:HelperFunc.validate,
     onSubmit: (value) => {
       if (!datePicker) {
         setDatePickerErrorMsg('Required');
@@ -231,32 +157,35 @@ export default function RegisterForm() {
       } else {
         setDatePickerErrorMsg('');
       }
-      //@ts-ignore
-      if (!selectedPics.name) {
+      
+      if (!selectedPics?.name) {
         setPicErrMsg('Required');
         return;
       } else {
         setDatePickerErrorMsg('');
       }
 
-        if (
-          value.firstName &&
-          value.lastName &&
-          value.city &&
-          value.state &&
-          value.phoneNumber &&
-          value.NIN &&
-          value.gender &&
-          value.street &&
-          value.locale &&
-          value.country
-        ) {
-          addUserInfo(addUser(value));
-          setShowLoader(true);
-          setRedirect(true);
-        }
-
-    
+      if (
+        value.firstName &&
+        value.lastName &&
+        value.city &&
+        value.state &&
+        value.phoneNumber &&
+        value.NIN &&
+        value.gender &&
+        value.street &&
+        value.locale &&
+        value.country
+      ) {
+        const userInfo = {
+          type: 'submitForm',
+          values: {
+            ...value,
+           userInfo:userDetail,
+          },
+        };
+        addUserInfo(addNewUser(userInfo));
+      }
     },
   });
 
@@ -271,7 +200,7 @@ export default function RegisterForm() {
 
   return (
     <Box>
-       {redirectPage ? <Navigate replace={true} to='/sure' /> : null} 
+      {userDetail.sigupSuccess === "yes" ? <Navigate replace={true} to='/sure' /> : null}
       <form onSubmit={registerFormObj.handleSubmit}>
         <div className={style.formContainer}>
           <FormControl
@@ -332,6 +261,35 @@ export default function RegisterForm() {
           </div>
         ) : null}
         <br />
+        <div className={style.formContainer}>
+          <FormControl
+            sx={{ width: '25ch', border: '2px' }}
+            className={style.siginContainer}
+            variant='standard'
+          >
+            <InputLabel
+              htmlFor='standard-adornment-password'
+              className={style.labelName}
+            >
+              username
+            </InputLabel>
+            <Input
+              id='username'
+              name='username'
+              className={style.disableInputStyle}
+              // type={values.showPassword ? 'text' : 'password'}
+              value={registerFormObj.values.username}
+              onChange={registerFormObj.handleChange}
+              onBlur={registerFormObj.handleBlur}
+            />
+          </FormControl>
+        </div>
+        {registerFormObj.touched.username && registerFormObj.errors.username ? (
+          <div className={style.ErrorMsg}>
+            {registerFormObj.errors.username}
+          </div>
+        ) : null}
+        <br></br>
         <div className={style.FormContainer}>
           <FormControl
             sx={{ width: '25ch', border: '2px' }}
@@ -540,8 +498,8 @@ export default function RegisterForm() {
               label='Date Of Birth'
               value={datePicker}
               onChange={(newValue) => {
-                if (datePickerErrMsg)setDatePickerErrorMsg("");
-                 setDatePicker(newValue);
+                if (datePickerErrMsg) setDatePickerErrorMsg('');
+                setDatePicker(newValue);
                 //  if (!datePicker) {
                 //    console.log('my date value', datePicker);
                 //    setDatePickerErrorMsg('Required');
@@ -639,21 +597,20 @@ export default function RegisterForm() {
           <input
             type='file'
             onChange={(e) => {
-              if(picErrMsg) setPicErrMsg("")
+              if (picErrMsg) setPicErrMsg('');
               //@ts-ignore
               registerFormObj.setFieldValue('pics', e.currentTarget.files[0]);
               //@ts-ignore
-              setSelectedPics(e.currentTarget.files[0]);
-              //@ts-ignore
-              console.log('selctedPics', e.currentTarget.files[0]);
-              
+              const sel = e.currentTarget.files[0] as File;
+
+              setSelectedPics(sel);
             }}
           ></input>
         </div>
         <br></br>
         {picErrMsg ? <div className={style.ErrorMsg}>{picErrMsg}</div> : null}
 
-        {showLoader ? (
+        {userDetail.showLoader ? (
           <div>
             <ThreeCircles
               color='#315292'
@@ -666,6 +623,8 @@ export default function RegisterForm() {
           <ContinuBtn></ContinuBtn>
         )}
       </form>
+
+      <div className={style.ErrorMsg}>{userDetail.errorMsg}</div>
     </Box>
   );
 }

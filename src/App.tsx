@@ -16,10 +16,8 @@ import {useSelector,useDispatch} from "react-redux"
 import { getUsers } from './redux/reducers/login';
 import { BrowserRouter } from 'react-router-dom';
 import { Circles } from 'react-loader-spinner';
-
-
-
-//@ts-ignore
+//types
+import { RootState, AppDispatch } from './redux/store';
 import {Routes, Route,Navigate} from 'react-router-dom';
 
 import './App.css';
@@ -30,21 +28,21 @@ import './App.css';
 
 
 function App() {
-  //@ts-ignore
-  const signedinUser = useSelector((state) => state.login);
-  //@ts-ignore
-  const signedupUser = useSelector((state) => state.signin);
+
+  const signedinUser = useSelector((state: RootState) => state.login);
+ const signedupUser = useSelector((state: RootState) => state.signin);
   const [loading, setLoading] = useState(true);
-  const dispatchAuthentication = useDispatch();
+  const dispatchAuthentication = useDispatch<AppDispatch>();
+
+  console.log('uuuu', signedinUser.loguserIn);
 
   useEffect(() => {
+    
    
+dispatchAuthentication(getUsers({type:"keepuser"}));
   
    
-      dispatchAuthentication(getUsers({type:"keepuser"}));
-  
-   
-  });
+  },[]);
 
   if (signedinUser.loading) {
     return (
@@ -63,16 +61,34 @@ if (signedinUser.netWorkError){
       <BrowserRouter>
         <div className='App'>
           <Routes>
-            <Route path='/register' element={<OnBoard />}></Route>
-            <Route path='/' element={<LoginPage />}></Route>
-            <Route path='/createAccount' element={<Register />}></Route>
+            <Route path='/register' element={ signedinUser.loguserIn === 'yes' ?   <Navigate replace to='/homePage' />: <OnBoard />}></Route>
+            <Route
+              path='/'
+              element={
+                signedinUser.loguserIn === 'yes' ? (
+                  <Navigate replace to='/homePage' />
+                ) : (
+                  <LoginPage />
+                )
+              }
+            ></Route>
+            <Route
+              path='/createAccount'
+              element={
+                signedinUser.loguserIn === 'yes' ? (
+                  <Navigate replace to='/homePage' />
+                ) : (
+                  <Register />
+                )
+              }
+            ></Route>
             <Route path='/sure' element={<SurePage />}></Route>
             <Route path='/chooseAStudyPath' element={<StudyPath />}></Route>
             <Route path='/confirmCourse' element={<ConfirmCourse />}></Route>
             <Route
               path='/homePage'
               element={
-                signedinUser.email || signedupUser.Email ? (
+                signedinUser.loguserIn === 'yes' || signedupUser.Email ? (
                   <HomePage />
                 ) : (
                   <Navigate replace to='/' />
@@ -82,27 +98,27 @@ if (signedinUser.netWorkError){
             <Route
               path='/Chats'
               element={
-                signedinUser.email || signedupUser.Email ? (
+                signedinUser.loguserIn === 'yes' || signedupUser.Email ? (
                   <ChatHomePage />
                 ) : (
-                  <Navigate replace to='/login' />
+                  <Navigate replace to='/' />
                 )
               }
             ></Route>
             <Route
               path='/Profile'
               element={
-                signedinUser.email || signedupUser.Email ? (
+                signedinUser.loguserIn === 'yes' || signedupUser.Email ? (
                   <Profile />
                 ) : (
-                  <Navigate replace to='/login' />
+                  <Navigate replace to='/' />
                 )
               }
             ></Route>
             <Route
               path='/Resources'
               element={
-                signedinUser.email || signedupUser.Email ? (
+                signedinUser.loguserIn === 'yes' || signedupUser.Email ? (
                   <ResourcePage />
                 ) : (
                   <Navigate replace to='/' />
@@ -112,7 +128,7 @@ if (signedinUser.netWorkError){
             <Route
               path='/schedule'
               element={
-                signedinUser.email || signedupUser.Email ? (
+                signedinUser.loguserIn === 'yes' || signedupUser.Email ? (
                   <SchedulePage />
                 ) : (
                   <Navigate replace to='/' />
@@ -122,14 +138,13 @@ if (signedinUser.netWorkError){
             <Route
               path='/Courses'
               element={
-                signedinUser.email || signedupUser.Email ? (
+                signedinUser.loguserIn === 'yes' || signedupUser.Email ? (
                   <CoursePage />
                 ) : (
                   <Navigate replace to='/' />
                 )
               }
             ></Route>
-          
           </Routes>
         </div>
       </BrowserRouter>

@@ -1,4 +1,6 @@
 import React,{useState} from 'react';
+import * as  HelperFunc from "./helper"
+import * as SignupTypes from './type';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
@@ -21,25 +23,20 @@ import { useFormik } from 'formik';
 //styles 
 import style from "./signin.module.css"
 import {useSelector,useDispatch} from "react-redux"
-import {addUser} from "../../../redux/reducers/signup"
-import {registerNewUser} from "../../../axios"
+import { addNewUser } from '../../../redux/reducers/signup';
 import { AnyARecord } from 'dns';
 import {
   addSigninUser,
   getUsers,
   changeLoginStatus,
-} from '../../../redux/reducers/login';
-import {addNewUser} from "../../../redux/reducers/signup"
+} from '../../../redux/reducers/login'
+
+import { RootState, AppDispatch } from '../../../redux/store';
 
 
 
-interface State {
-  Email: string;
-  password: string;
-  weight: string;
-  weightRange: string;
-  showPassword: boolean;
-}
+
+
 
 export default function InputAdornments() {
   const signinInfo = useSelector<any>(storeState => storeState.signin);
@@ -51,11 +48,8 @@ export default function InputAdornments() {
     const changeErrorStatus = useDispatch<any>()
     //@ts-ignore
      const signUpDetail = useSelector(state=>state.signin)
-   
-  
- 
-      const[isCheck,setIsCheck]= React.useState(true)
-  const [values, setValues] = React.useState<State>({
+   const[isCheck,setIsCheck]= React.useState(true)
+  const [values, setValues] = React.useState<SignupTypes.State>({
     Email: '',
     password: '',
     weight: '',
@@ -63,135 +57,38 @@ export default function InputAdornments() {
     showPassword: false,
   });
 
-  // const handleChange =
-  //   (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-  //     setValues({ ...values, [prop]: event.target.value });
-  //   };
 
-  // const handleEmailChange =
-  //   (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-  //     setValues({ ...values, [prop]: event.target.value });
-  //   };
 
-  const handleInputBox = ()=>{
+
+  const handleInputBox = () => {
     setIsCheck(!isCheck);
-
-  }
+  };
 
   const handleClickShowPassword = () => {
-
     setValues({
       ...values,
       showPassword: !values.showPassword,
     });
   };
 
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
-  /*formik section*/
-  /*form validation*/
-  interface validateInput{
-    Email:string,
-    password:string,
-  
-  }
-   interface emailInterface{
-    Email?:string,
-    password?:string
+
+ const formChangeObj = useFormik({
+   initialValues: {
+     Email: '',
+     password: '',
+   },
+   validate:HelperFunc.validate,
+   onSubmit: (values) => {
    
-  }
-
-  const checkUserExist = (values:any)=>{
-
-
-   
-
-    registerNewUser.get("/signup.json").then((response)=>{
-     
-     let availaBleUser = Object.keys(response.data)
-     for(let eachItems of availaBleUser ){
     
-       if (response.data[eachItems].Email === values.Email) {
-         return true;
-       }
-     }
-
-    }).then((response)=>{
-       if(response){
-           setUser(true);
-           setMember(true)
-           setTimeout(()=> setUser(false), 1000)
-              setShowLoader(false);
-
-           
-       }
-       else{
-          if (
-            isCheck &&
-            values.Email &&
-            values.password 
-            
-          ) {
-            
-            addUserDispatch(addNewUser(values));
-            // setRedirect(true);
-          }
-       }
-
-    })
-    .catch((error)=>{
-      console.log("user validation1",error)
-    })
-
-  }
-  const validate = (value:validateInput) => {
-    const errors:emailInterface = {};
-       if (!value.Email) {
-         errors.Email = 'email required';
-      
-       } 
-       else if (
-         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value.Email)
-       ) {
-         errors.Email = 'Invalid email address';
-       }
-    if (!value.password) {
-      errors.password = 'Required';
-    
-    }
-     
-     
-
-    return errors;
-  };
-
-
-  const formChangeObj = useFormik({
-    initialValues: {
-      Email: '',
-      password: '',
-     
-    },
-    validate,
-    onSubmit: (values) => {
-      // setShowLoader(true)
-      //  checkUserExist(values);
-      const signUpObj = { type: 'signUserUp', values};
-         addUserDispatch(addNewUser(signUpObj));
-      //changeErrorStatus(changeLoginStatus());
-     
-     
-    },
-  });
+     const signUpObj = { type: 'verifyEmail', values };
+     addUserDispatch(addNewUser(signUpObj));
+   },
+ });
 
   return (
     <Box>
-      {signUpDetail.redirectFromSignup == true ? (
-        <Navigate to='/createAccount'></Navigate>
-      ) : null}
+      {signUpDetail.submitting === true ? <Navigate to='/createAccount'></Navigate> : null}
       <form onSubmit={formChangeObj.handleSubmit}>
         <div className={style.formContainer}>
           <FormControl
@@ -249,7 +146,7 @@ export default function InputAdornments() {
                   <IconButton
                     aria-label='toggle password visibility'
                     onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
+                    onMouseDown={HelperFunc.handleMouseDownPassword}
                   >
                     {values.showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
@@ -321,9 +218,9 @@ export default function InputAdornments() {
 
 
 export  function LoginForm() {
-  const signinInfo = useSelector<any>((storeState) => storeState.signin);
-  //@ts-ignore
-  const signinUser = useSelector((storeState) => storeState.login);
+  const signinInfo = useSelector((storeState: RootState) => storeState.signin);
+
+  const signinUser = useSelector((storeState: RootState) => storeState.login);
 
   const [redirectPage, setRedirect] = useState(false);
   const [userExist, setUser] = useState(false);
@@ -337,7 +234,7 @@ export  function LoginForm() {
   
 
   const [isCheck, setIsCheck] = React.useState(true);
-  const [values, setValues] = React.useState<State>({
+  const [values, setValues] = React.useState<SignupTypes.State>({
     Email: '',
     password: '',
     weight: '',
@@ -368,74 +265,16 @@ export  function LoginForm() {
     });
   };
 
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
-  /*formik section*/
-  /*form validation*/
-  interface validateInput {
-    Email: string;
-    password: string;
-  }
-  interface emailInterface {
-    Email?: string;
-    password?: string;
-  }
 
-  const checkUserExist = (values: any) => {
-    registerNewUser
-      .get('/signup.json')
-      .then((response) => {
-        let availaBleUser = Object.keys(response.data);
-        for (let eachItems of availaBleUser) {
-          if (response.data[eachItems].Email === values.Email) {
-            return true;
-          }
-        }
-      })
-      .then((response) => {
-        if (response) {
-          setUser(true);
-          setMember(true);
-          setTimeout(() => setUser(false), 1000);
-          setShowLoader(false);
-        } else {
-          if (isCheck && values.Email && values.password) {
-            addUserDispatch(addUser(values));
-            setRedirect(true);
-          }
-        }
-      })
-      .catch((error) => {
-        console.log('user validation', error);
-         setShowLoader(false);
-      });
-  };
-  const validate = (value: validateInput) => {
-    const errors: emailInterface = {};
-    if (!value.Email) {
-      errors.Email = 'email required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value.Email)) {
-      errors.Email = 'Invalid email address';
-    }
-    if (!value.password) {
-      errors.password = 'Required';
-    }
 
-    return errors;
-  };
 
-  const formChangeObj = useFormik({
+const formChangeObj = useFormik({
     initialValues: {
       Email: '',
       password: '',
     },
-    validate,
+   validate: HelperFunc.validate,
     onSubmit: (values) => {
-         
-    
       // checkUserExist(values);
       let logincredential = {
         type: 'loginByForm',
@@ -446,9 +285,6 @@ export  function LoginForm() {
       };
       //@ts-ignore
       loginUserInDispatch(getUsers(logincredential));
-    
-  
-    
     },
   });
 
@@ -456,7 +292,9 @@ export  function LoginForm() {
 
   return (
     <Box>
-      {redirectPage == true ? <Navigate to='/createAccount'></Navigate> : null}
+      {signinUser.loguserIn === 'yes' ? (
+        <Navigate to='/homePage'></Navigate>
+      ) : null}
       <form onSubmit={formChangeObj.handleSubmit}>
         <div className={style.formContainer}>
           <FormControl
@@ -482,7 +320,7 @@ export  function LoginForm() {
           </FormControl>
         </div>
         {signinUser.errorMsg ? (
-          <div className={style.errorMsg} >{signinUser.errorMsg}</div>
+          <div className={style.errorMsg}>{signinUser.errorMsg}</div>
         ) : null}
         {signinUser.loginFormStatus === 'No' ? (
           <div className={style.errorMsg}>
@@ -521,7 +359,7 @@ export  function LoginForm() {
                   <IconButton
                     aria-label='toggle password visibility'
                     onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
+                    onMouseDown={HelperFunc.handleMouseDownPassword}
                   >
                     {values.showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
@@ -564,7 +402,7 @@ export  function LoginForm() {
         {signinUser.showFormLoader ? (
           <div className={style.loaderContainer}>
             <ThreeCircles
-              color='#292a2c'
+              color='#4E6AA0'
               height={50}
               width={50}
               ariaLabel='three-circles-rotating'
