@@ -89,7 +89,7 @@ const getUsers = createAsyncThunk(
       if(response === true){
         let name = 'asteve4345yspcom';
            let profileDetail = ForwardLoginReq.get(
-             `/api/auth/profile/update/${name}/`,
+             `/api/auth/profile/update/${email}/`,
              {
                headers: {
                  //@ts-ignore

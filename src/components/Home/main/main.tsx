@@ -229,6 +229,7 @@ const subjects = [
 const HomeMainPage:React.FC = (props)=>{
 
  const [courses,setCourses] = useState()
+ const [schedule,setSchedule] = useState()
  const [courseErrorMsg,setCourseErrMsg] = useState() 
   const obtainUserName = useSelector((state: RootState) => state.login);
 
@@ -251,6 +252,33 @@ useEffect(()=>{
     .catch((error) => {
       console.log('getCourseListError', error);
     });
+
+},[])
+
+
+
+useEffect(()=>{
+
+   const userTk = localStorage.getItem('accessToken');
+   BaseUrl.get('/api/videos/list/', {
+     headers: {
+       //@ts-ignore
+       Authorization: `Bearer ${userTk}`,
+     },
+   })
+     .then((response) => {
+       console.log('ourToken', userTk);
+     
+       console.log('schedule', response);
+       setSchedule(response.data);
+     })
+     .catch((error) => {
+       console.log('scheduleError', error);
+     });
+
+
+
+
 
 },[])
 
@@ -538,15 +566,15 @@ useEffect(()=>{
               <br></br>
               <div>
                 <Carousel
-                  partialVisbile={true}
+                  // partialVisbile={true}
                   responsive={responsiveSchedule}
-                  autoPlay={false}
-                  infinite={false}
+                  // autoPlay={false}
+                  // infinite={false}
                   // containerClass='schedule-carousel-container'
                   // itemClass='schedule-carousel-item'
                   // centerMode={true}
                 >
-                  <section className={style.scheduleCard}>
+                  {/* <section className={style.scheduleCard}>
                     <ScheduleCard></ScheduleCard>
                   </section>
                   <section className={style.scheduleCard}>
@@ -581,7 +609,57 @@ useEffect(()=>{
                   </section>
                   <section className={style.scheduleCard}>
                     <ScheduleCard></ScheduleCard>
-                  </section>
+                  </section> */}
+
+                  {!schedule ? (
+                    <div
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Grid ariaLabel='loading-indicator' color='#4E6AA0' />
+                    </div>
+                  ) : (
+                    <>
+                      {
+                        //@ts-ignore
+                        schedule.length > 0 ? (
+                          <>
+                            {
+                              //@ts-ignore
+                              schedule.map((eachCourse, index) => {
+                                return (
+                                  <div style={{ margin: '0px !important' }}>
+                                    <Link to={`/details/${eachCourse.slug}`} style={{textDecoration:"none"}}>
+                                      {/* <SubjectCard
+                                        colors={subjects[index].colors}
+                                        name={eachCourse.title}
+                                        svgColor={subjects[index].svgColor}
+                                        symbol={subjects[index].symbol}
+                                      ></SubjectCard> */}
+
+                                      <section className={style.scheduleCard}>
+                                        <ScheduleCard
+                                          //@ts-ignore
+                                          title={eachCourse.title}
+                                        ></ScheduleCard>
+                                      </section>
+                                    </Link>
+                                  </div>
+                                );
+                              })
+                            }
+                          </>
+                        ) : (
+                          <section></section>
+                        )
+                      }
+                    </>
+                  )}
                 </Carousel>
 
                 {/* <ScheduleCard></ScheduleCard>
@@ -606,17 +684,16 @@ useEffect(()=>{
                   })}
                 </Carousel>
               </div> */}
-              
-                <Carousel
-                  // partialVisbile={true}
-                  responsive={subresponsive}
-                  // autoPlay={false}
-                  // infinite={false}
-                  // centerMode={true}
-                  // containerClass='subject-carousel-container'
-                  // itemClass='subject-carousel-item'
-                >
-                  {/* {subjects.map((eachItems) => {
+              <Carousel
+                // partialVisbile={true}
+                responsive={subresponsive}
+                // autoPlay={false}
+                // infinite={false}
+                // centerMode={true}
+                // containerClass='subject-carousel-container'
+                // itemClass='subject-carousel-item'
+              >
+                {/* {subjects.map((eachItems) => {
                     return (
                       <SubjectCard
                         colors={eachItems.colors}
@@ -627,51 +704,51 @@ useEffect(()=>{
                     );
                   })} */}
 
-                  {!courses ? (
-                    <div
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <Grid ariaLabel='loading-indicator' color='#4E6AA0' />
-                    </div>
-                  ) : (
-                    <>
-                      {
-                        //@ts-ignore
-                        courses.length > 0 ? (
-                          <>
-                            {
-                              //@ts-ignore
-                              courses.map((eachCourse, index) => {
-                                return (
-                                  <div style={{ margin: '0px !important' }}>
-                                    <Link to={`/details/${eachCourse.slug}`}>
-                                      <SubjectCard
-                                        colors={subjects[index].colors}
-                                        name={eachCourse.title}
-                                        svgColor={subjects[index].svgColor}
-                                        symbol={subjects[index].symbol}
-                                      ></SubjectCard>
-                                    </Link>
-                                  </div>
-                                );
-                              })
-                            }
-                          </>
-                        ) : (
-                          <section></section>
-                        )
-                      }
-                    </>
-                  )}
-                </Carousel>
-              </div>
-            
+                {!courses ? (
+                  <div
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Grid ariaLabel='loading-indicator' color='#4E6AA0' />
+                  </div>
+                ) : (
+                  <>
+                    {
+                      //@ts-ignore
+                      courses.length > 0 ? (
+                        <>
+                          {
+                            //@ts-ignore
+                            courses.map((eachCourse, index) => {
+                              return (
+                                <div style={{ margin: '0px !important' }}>
+                                  <Link to={`/details/${eachCourse.slug}`}>
+                                    <SubjectCard
+                                      colors={subjects[index].colors}
+                                      name={eachCourse.title}
+                                      svgColor={subjects[index].svgColor}
+                                      symbol={subjects[index].symbol}
+                                    ></SubjectCard>
+                                  </Link>
+                                </div>
+                              );
+                            })
+                          }
+                        </>
+                      ) : (
+                        <section></section>
+                      )
+                    }
+                  </>
+                )}
+              </Carousel>
+            </div>
+
             <br />
             <div className={style.ContinueCard}>
               <p className={style.continueText}>Continue where you left off</p>
@@ -687,7 +764,7 @@ useEffect(()=>{
                 // itemClass='continue-carousel-item'
                 // centerMode={true}
               >
-                <ContinueCard
+                {/* <ContinueCard
                   course='Mathematics'
                   chapter='Introduction'
                 ></ContinueCard>
@@ -706,7 +783,7 @@ useEffect(()=>{
                 <ContinueCard
                   course='Mathematics'
                   chapter='Introduction'
-                ></ContinueCard>
+                ></ContinueCard> */}
               </Carousel>
             </div>
             <br></br>
