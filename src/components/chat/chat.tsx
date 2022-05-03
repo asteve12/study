@@ -153,12 +153,20 @@ const ChatComp: React.FC<chatInterface> = (props) => {
 
 
     const updateRecentChat = () => {
+      if (recentChat.length >= 0) {
+        setRecentChats([]);
+      }
+
       const starCountRef = ref(db, 'recentsChats/');
       onValue(
         starCountRef,
         (snapshot) => {
           const data = snapshot.val();
           // updateStarCount(postElement, data);
+           if (recentChat.length >= 0) {
+             setRecentChats([]);
+           }
+
           console.log('upppppp', data);
             
             console.log('myrecentchats', data);
@@ -171,11 +179,18 @@ const ChatComp: React.FC<chatInterface> = (props) => {
             for (let eachUserKeys of currentUser){
               unReadMessage(userObj[eachUserKeys].receiver);
               getLatestChat(userObj[eachUserKeys].receiver);
+
+              // if (recentChat.length >= 0) {
+              //   setRecentChats([]);
+              // }
               //@ts-ignore
-              setRecentChats((prevState) => [
+              setRecentChats((prevState) =>{ 
+                
+                
+                return [
                 ...prevState,
                 userObj[eachUserKeys],
-              ]);
+              ]});
             }
             
             return;

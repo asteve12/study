@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, child, push, update } from 'firebase/database';
+import { getDatabase, ref, child, push, update, get } from 'firebase/database';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -34,14 +35,69 @@ export default async function writeRecentChats(username: string,receiver:string)
 
   const db = getDatabase();
   const updates = {};
-    const newPostKey = push(child(ref(db), 'recentsChats')).key;
-  //@ts-ignore
-   updates['recentsChats/' + `${username}/` + newPostKey] = {
-     receiver,
-   };
+    // const newPostKey = push(child(ref(db), 'recentsChats')).key;
+  
+      const updateRecentChat = () => {
+       const dbRef = ref(getDatabase());
 
-  //recentsChats
-  return update(ref(db), updates);
+        get(child(dbRef, `recentsChats/`))
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              console.log("validating recentChat",snapshot.val());
+              const ownerRecChat = localStorage.getItem("sender")
+               const data = snapshot.val();
+               //@ts-ignore
+               const currObj = data[ownerRecChat];
+                let currentUser = Object.keys(currObj);
+  let chatAlreadyExist;
+                for (let eachUserKeys of currentUser) {
+                  console.log(
+                    'uyo',
+                    currObj[eachUserKeys].receiver === receiver
+                  );
+                  if(currObj[eachUserKeys].receiver === receiver ){
+                    chatAlreadyExist = true;
+                    break;
+
+                  }
+                 
+                 
+                }
+
+                   console.log('chatAlreadyExst', chatAlreadyExist);
+                   if (chatAlreadyExist === true) {
+                     return;
+                   }
+                   const newPostKey = push(child(ref(db), 'posts')).key;
+                   //@ts-ignore
+                   updates['recentsChats/' + `${username}/` + newPostKey] = {
+                     receiver,
+                   };
+
+                   //recentsChats
+                   update(ref(db), updates);
+
+                return;
+            } else {
+              console.log('No data available');
+                const newPostKey = push(child(ref(db), 'posts')).key;
+                //@ts-ignore
+                updates['recentsChats/' + `${username}/` + newPostKey] = {
+                  receiver,
+                };
+
+                //recentsChats
+                update(ref(db), updates);
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+   
+      };
+
+      updateRecentChat()
+   
   // set(ref(db, 'recentsChats/' + `${username}/`), {
   //   receiver,
   // });
