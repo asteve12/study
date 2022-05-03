@@ -46,6 +46,8 @@ export default function InputAdornments() {
     const[alreadyMember,setMember] = useState(false)
     const[showLoader,setShowLoader] = useState(false)
     const changeErrorStatus = useDispatch<any>()
+    // const routeInfo = useRouteMatch();
+    console.log('paramedetails',window.location.href);
     //@ts-ignore
      const signUpDetail = useSelector(state=>state.signin)
    const[isCheck,setIsCheck]= React.useState(true)

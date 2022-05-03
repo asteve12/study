@@ -16,6 +16,28 @@
   
 }
 
+.logout{
+    width:100%;
+    height:50px;
+    text-decoration: none;
+    color: #EF4358;
+    font-family: 'Gilroy-Medium';
+    font-size: 17px;
+    display:flex;
+    align-items: center;
+    border-bottom:1px solid #F2F2F2;
+    padding-left:10px;
+    text-decoration: none;
+    background:none;
+    border:none;
+    cursor:pointer
+   
+}
+
+.homePageContainer a {
+    text-decoration:none 
+}
+
 .setExamDateCont{
     width:183px;
     height:137.7px;
@@ -27,6 +49,7 @@
     color:white;
     font-family: 'Gilroy-SemiBold';
 font-size: 16px;
+cursor:pointer;
 }
 
 .setExamDateCont button{

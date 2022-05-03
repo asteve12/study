@@ -1,5 +1,7 @@
 interface chatHeaders{
-    title:string
+    title?:string,
+    headerElement?:JSX.Element;
+    logo?:any
 }
 
 

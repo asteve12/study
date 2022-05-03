@@ -16,12 +16,13 @@ const ScheduleCard:React.FC = (props)=>{
         <div className={style.scheduleCardDetail}>
           <section className={style.scheduleCont}>
             <div className={style.scheduleContHead}>
-              <p>Mathematics</p>
-              <button >
+              {/*@ts-ignore*/}
+              <p style={{fontSize:"14px"}}>{props.title}</p>
+              <button>
                 <img src={circleIcon} alt='' />
               </button>
             </div>
-<p className={style.intro}>Chapter 1: Introduction</p>
+            <p className={style.intro}>Chapter 1: Introduction</p>
             <section className={style.tutoPicsContent}>
               <div className={style.tutorPics}></div>&nbsp;
               <p>Brooklyn Williamson</p>

@@ -15,7 +15,20 @@ const SelectCourse: React.FC<selectInterface> = (props) => {
   const [isTrue, setValue] = useState(false);
   return (
     <section className={style.selectCourseWrapper}>
-      <button className={style.checkBoxStyle} onClick={() => setValue(!isTrue)}>
+      <button
+        id={props.name}
+        className={style.checkBoxStyle}
+        onClick={(e) => {
+           setValue((prevValue) => !prevValue);
+           //@ts-ignore
+         
+             props.fectSelectedCourse(e, isTrue);
+             console.log("have been clicked")
+              console.log('have been clicked isTruu', isTrue);
+        }
+       }
+     
+      >
         <Checkbox
           checked={isTrue}
           icon={<img src={checkIcon} alt='' />}

@@ -1,0 +1,63 @@
+.notifItems{
+    width:300px;
+     white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left:10px;
+  box-sizing:border-box;
+  display:block;
+  text-decoration:none;
+  border-bottom:solid 2px rgb(133, 52, 52,0.1);
+  color:grey;
+  padding:20px;
+  cursor:pointer
+   
+}
+
+.notifItems:hover{
+    background-color:rgba(0,0,0,0.1)
+}
+.comBellIcon{
+    font-size:25px;
+}
+.iconItems{
+    width:100% !important;
+    display:block;
+ 
+  
+}
+
+.notBtn{
+    color:grey !important;
+    width:10px;
+      text-overflow: ellipsis"[...]"
+
+}
+
+.notBtn:hover{
+    background:transparent !important
+}
+
+.navLink{
+    text-decoration:none;
+    /* padding:10px; */
+}
+
+.notRow{
+   
+
+    align-items:center;
+       background-color:yellow !important;
+       width:100%
+    
+}
+.notRow p{
+ 
+ /* display:block !important;
+white-space: nowrap !important;
+text-overflow:ellipsis;
+width:250px !important */
+       
+
+   
+}

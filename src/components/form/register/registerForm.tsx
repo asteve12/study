@@ -139,42 +139,42 @@ export default function RegisterForm() {
     initialValues: {
       firstName: '',
       lastName: '',
-      city: '',
-      state: '',
+      // city: '',
+      //state: '',
       phoneNumber: '',
       NIN: '',
       gender: '',
-      street: '',
-      locale: '',
+      // street: '',
+      // locale: '',
       country: '',
       username:""
     },
     validate:HelperFunc.validate,
     onSubmit: (value) => {
-      if (!datePicker) {
-        setDatePickerErrorMsg('Required');
-        return;
-      } else {
-        setDatePickerErrorMsg('');
-      }
+      // if (!datePicker) {
+      //   setDatePickerErrorMsg('Required');
+      //   return;
+      // } else {
+      //   setDatePickerErrorMsg('');
+      // }
       
-      if (!selectedPics?.name) {
-        setPicErrMsg('Required');
-        return;
-      } else {
-        setDatePickerErrorMsg('');
-      }
+      // if (!selectedPics?.name) {
+      //   setPicErrMsg('Required');
+      //   return;
+      // } else {
+      //   setDatePickerErrorMsg('');
+      // }
 
       if (
         value.firstName &&
         value.lastName &&
-        value.city &&
-        value.state &&
+        //value.city &&
+        //value.state &&
         value.phoneNumber &&
         value.NIN &&
         value.gender &&
-        value.street &&
-        value.locale &&
+        //value.street &&
+        //value.locale &&
         value.country
       ) {
         const userInfo = {
@@ -289,9 +289,9 @@ export default function RegisterForm() {
             {registerFormObj.errors.username}
           </div>
         ) : null}
-        <br></br>
+        {/* <br></br> */}
         <div className={style.FormContainer}>
-          <FormControl
+          {/* <FormControl
             sx={{ width: '25ch', border: '2px' }}
             className={style.siginContainerForm}
             variant='standard'
@@ -316,88 +316,11 @@ export default function RegisterForm() {
                 {registerFormObj.errors.city}
               </div>
             ) : null}
-          </FormControl>
+          </FormControl> */}
 
           <div className={style.textfield}>
             <div className={style.frmCont}>
-              <FormControl
-                className={style.courseFormWraper}
-                sx={{
-                  m: 0,
-                  marginBottom: 1,
-                  p: 0,
-                  width: '100%',
-                  '& .MuiInputLabel-root ': {
-                    top: 5,
-                    marginTop: 0,
-                  },
-                  '& label': {
-                    color: 'yellow',
-                  },
-                }}
-              >
-                <InputLabel
-                  id='demo-multiple-name-label'
-                  className={style.courseLabel}
-                >
-                  state
-                </InputLabel>
-
-                <Select
-                  className={style.inputBxWrapper}
-                  labelId='demo-multiple-name-label'
-                  id='state'
-                  name='state'
-                  value={registerFormObj.values.state}
-                  onChange={registerFormObj.handleChange}
-                  onBlur={registerFormObj.handleBlur}
-                  input={
-                    <OutlinedInput
-                      sx={{
-                        '& label:focus': {
-                          color: 'yellow',
-                        },
-                      }}
-                      label='state'
-                    />
-                  }
-                  MenuProps={MenuProps}
-                  sx={{
-                    '& legend': {
-                      border: 0,
-                      outline: 0,
-                      display: 'none',
-                    },
-                    '& fieldset ': {
-                      borderColor: '#DBDFE9',
-                      borderWidth: '0px',
-                      border: 'none',
-                      height: 40,
-                      width: 130,
-                      marginBottom: 0,
-                    },
-                    '& svg': {
-                      top: 20,
-                    },
-                  }}
-                >
-                  {statesOfCoun.map((eachState) => (
-                    <MenuItem
-                      key={eachState}
-                      value={eachState}
-                      style={getStyles(eachState, stateName, theme)}
-                    >
-                      {eachState}
-                    </MenuItem>
-                  ))}
-                </Select>
-                {registerFormObj.touched.state &&
-                registerFormObj.errors.state ? (
-                  <div className={style.ErrorMsg}>
-                    {registerFormObj.errors.state}
-                  </div>
-                ) : null}
-              </FormControl>
+              {/* s */}
             </div>
           </div>
         </div>
@@ -461,7 +384,7 @@ export default function RegisterForm() {
           ) : null}
         </div>
         <br></br>
-        <br />
+        
         <div className={style.formContainer}>
           <FormControl
             sx={{ width: '25ch', border: '2px' }}
@@ -491,7 +414,7 @@ export default function RegisterForm() {
           ) : null}
         </div>
         <br></br>
-        <div className={style.dateCont}>
+        {/* <div className={style.dateCont}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
               className='date_of_birth'
@@ -513,9 +436,9 @@ export default function RegisterForm() {
         </div>
         {datePickerErrMsg ? (
           <div className={style.ErrorMsg}>{datePickerErrMsg}</div>
-        ) : null}
-        <br></br>
-        <div className={style.formContainer}>
+        ) : null} */}
+        {/* <br></br> */}
+        {/* <div className={style.formContainer}>
           <FormControl
             sx={{ width: '25ch', border: '2px' }}
             className={style.siginContainer}
@@ -542,11 +465,11 @@ export default function RegisterForm() {
               {registerFormObj.errors.street}
             </div>
           ) : null}
-        </div>
+        </div> */}
 
-        <br></br>
+        {/* <br></br> */}
         <div className={style.formContainer}>
-          <FormControl
+          {/* <FormControl
             sx={{ width: '25ch', border: '2px' }}
             className={style.siginContainer}
             variant='standard'
@@ -566,14 +489,14 @@ export default function RegisterForm() {
               onChange={registerFormObj.handleChange}
               onBlur={registerFormObj.handleBlur}
             />
-          </FormControl>
-          {registerFormObj.touched.locale && registerFormObj.errors.locale ? (
+          </FormControl> */}
+          {/* {registerFormObj.touched.locale && registerFormObj.errors.locale ? (
             <div className={style.ErrorMsg}>
               {registerFormObj.errors.locale}
             </div>
-          ) : null}
+          ) : null} */}
         </div>
-        <br></br>
+        {/* <br></br> */}
         <FormControl fullWidth>
           <InputLabel id=''>country</InputLabel>
           <Select
@@ -590,7 +513,8 @@ export default function RegisterForm() {
             })}
           </Select>
         </FormControl>
-
+        <br></br>
+{/* 
         <br></br>
         <br></br>
         <div className={style.profilePic}>
@@ -608,9 +532,9 @@ export default function RegisterForm() {
           ></input>
         </div>
         <br></br>
-        {picErrMsg ? <div className={style.ErrorMsg}>{picErrMsg}</div> : null}
-
-        {userDetail.showLoader ? (
+         {picErrMsg ? <div className={style.ErrorMsg}>{picErrMsg}</div> : null} */}
+<br></br>
+         {userDetail.showLoader ? (
           <div>
             <ThreeCircles
               color='#315292'
