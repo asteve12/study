@@ -17,7 +17,7 @@ import { getDatabase, ref,onValue } from 'firebase/database';
 import {useSelector} from "react-redux"
 import {useParams} from "react-router-dom"
 import updateReadStatus from "../../firebaseConfig/chats/validateRead"
-
+import {IoCheckmarkDoneOutline} from "react-icons/io5"
 // import {app} from "../../firebaseConfig/chats/getChats"
 // import db from "../../firebaseConfig/chats/getChats"
 // const db = getDatabase(app);
@@ -201,7 +201,7 @@ else{
           <button className={style.bckBtn} onClick={props.showChatHandler}>
             <IoChevronBackSharp></IoChevronBackSharp>
           </button>
-          <div className={style.profilePic}></div>
+          <img src={loginUser.img} className={style.profilePic}></img>
           <div className={style.userName}>
             <h3>{username}</h3>
             <p>Last seen at 10.54PM</p>
@@ -236,10 +236,39 @@ else{
                       }
                       chats={eachItems.chat.message}
                     ></DisplayMsg>
-                    {eachItems.chat.read  === true ? (
-                      <p>message have been read</p>
+                    {eachItems.chat.read === true ? (
+                      //A
+                      <span
+                        style={
+                          eachItems.chat.sender === loginUser.username
+                            ? {
+                                width: '100%',
+                                justifyContent: 'right',
+                                display: 'flex',
+                              }
+                            : {}
+                        }
+                      >
+                        <span style={{ color: '#3641B7' }}>
+                          <IoCheckmarkDoneOutline></IoCheckmarkDoneOutline>
+                        </span>
+                      </span>
                     ) : (
-                      <p>message have not been read</p>
+                      <div
+                        style={
+                          eachItems.chat.sender === loginUser.username
+                            ? {
+                                width: '100%',
+                                justifyContent: 'right',
+                                display: 'flex',
+                              }
+                            : {}
+                        }
+                      >
+                        <span style={{ color: 'grey' }}>
+                          <IoCheckmarkDoneOutline></IoCheckmarkDoneOutline>
+                        </span>
+                      </div>
                     )}
                   </>
                 );
