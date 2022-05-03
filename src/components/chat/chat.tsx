@@ -188,7 +188,10 @@ const ChatComp: React.FC<chatInterface> = (props) => {
   },[])
 
 
-
+// if (recentChat.length <=0 ){
+//   alert()
+//    return  <div>fetching data</div>;
+// } 
   return (
     <section className={style.ChatMainComp}>
       {/* <div className={style.comHeader}>
@@ -222,9 +225,9 @@ const ChatComp: React.FC<chatInterface> = (props) => {
           <br></br>
           <br></br>
           <div className={style.chatContainer}>
-            {recentChat.map((eachChats)=>{
+            {recentChat.map((eachChats) => {
               //@ts-ignore
-        
+
               // let rece
               //@ts-ignore
               let id = eachChats.receiver;
@@ -250,7 +253,7 @@ const ChatComp: React.FC<chatInterface> = (props) => {
                 </div>
               );
             })}
-         
+
             {/* <br></br>
             <ChatBox handleChatPage={props.handleChatPage}></ChatBox>
             <br></br>
