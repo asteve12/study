@@ -6,45 +6,63 @@ import {IoCheckmarkDoneOutline} from "react-icons/io5"
 //interface
 import chatInterface from "./interface"
 import {useParams} from "react-router-dom"
+import {useSelector} from "react-redux"
 
 
 
 
 const ChatBox: React.FC<chatInterface> = (props) => {
   const { username } = useParams()
+  //@ts-ignore
+  const loginUser = useSelector((state)=> state.login )
+
+  
 
   if (!props.latestMsg) {
     return <></>
   }
 
+  console.log('msg receiver', loginUser.username);
+    console.log('sent ', props.receiver);
+
+
+  
+
   return (
     <section className={style.chatBoxCont} onClick={props.handleChatPage}>
       <div className={style.messageBox}>
-        <section className={style.picsCont}></section>
+        <img src={loginUser.img} className={style.picsCont}></img>
         <section className={style.userNameBox}>
           <p className={style.userName}>
             <b>{props.username}</b>
           </p>
           <p className={style.message}>
-            {props.latestMsg.read ?   <span style={props.latestMsg.read === true ? { color: '' } : {}}>
-              <IoCheckmarkDoneOutline></IoCheckmarkDoneOutline>
-            </span>:null}
-          
+            {props.latestMsg.read ? (
+              <span>
+                <IoCheckmarkDoneOutline></IoCheckmarkDoneOutline>
+              </span>
+            ) : (
+              <span style={{ color: 'grey' }}>
+                <IoCheckmarkDoneOutline></IoCheckmarkDoneOutline>
+              </span>
+            )}
             &nbsp; {props.latestMsg.message}
           </p>
         </section>
       </div>
       <div className={style.timeBox}>
-        <p className={style.timeText}>{props.latestMsg.time}</p>
-        {username === props.username ? (
-          <></>
-        ) : (
-          <>
+        {props.latestMsg.time ? (
+          <p className={style.timeText}>
+            {new Date(parseInt(props.latestMsg.time)).getHours().toString()}:
+            {new Date(parseInt(props.latestMsg.time)).getMinutes().toString()}
+          </p>
+        ) : null}
+
+      
             {!props.unread || props.unread === 0 ? null : (
               <p className={style.messageCount}>{props.unread}</p>
             )}
-          </>
-        )}
+        
       </div>
     </section>
   );
@@ -57,7 +75,8 @@ export const MbChatBox: React.FC<chatInterface> = (props) => {
   return (
     <section className={style.mbchatBoxCont} onClick={props.handleChatPage}>
       <div className={style.messageBox}>
-        <section className={style.picsCont}></section>
+        {/* @ts-ignore */}
+        {/* <img src={loginUser.img} className={style.picsCont}></img> */}
         <section className={style.userNameBox}>
           <p className={style.userName}>
             <b>Kaitlyn</b>

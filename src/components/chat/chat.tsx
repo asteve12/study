@@ -74,13 +74,19 @@ const ChatComp: React.FC<chatInterface> = (props) => {
         const arrayOfcurrMsgKeys = Object.keys(currMsg);
         let unreadMsg = 0;
         for(let eachKeys of arrayOfcurrMsgKeys){
-          if(currMsg[eachKeys].read === false){
-            unreadMsg +=1;
+          if (
+            currMsg[eachKeys].read === false &&
+            currMsg[eachKeys].sender !== currentUser
+          ) {
+            unreadMsg += 1;
           }
 
         }
         //@ts-ignore
-        setUnreadCount((prevState) => {  return {...prevState,[endUser]:unreadMsg}})
+        setUnreadCount((prevState) => {  return {
+          ...prevState,
+          [endUser]: unreadMsg }
+        })
       ;
       }
     }
@@ -119,10 +125,11 @@ const ChatComp: React.FC<chatInterface> = (props) => {
               setLatestChat((prevState) => {
                 return {
                   ...prevState,
-                  [loginUser.username]: {
+                  [interestedMsgKey]: {
                     time: msgKey,
                     message: currMsg[msgKey].message,
                     read: currMsg[msgKey].read,
+                    receiver: endUser,
                   },
                 };
               });
@@ -231,6 +238,13 @@ const ChatComp: React.FC<chatInterface> = (props) => {
               // let rece
               //@ts-ignore
               let id = eachChats.receiver;
+              let logUser = loginUser.username;
+              const arrayOfUser = [id, logUser];
+              const sortedArray = arrayOfUser.sort();
+              const intKey = `${sortedArray[0]}-${sortedArray[1]}`;
+
+              //@ts-ignore
+              console.log('ubreeeeady', unreadMsg[id]);
               //@ts-ignore
               // if (id) console.log('unreadCOunt', unreadMsg[id]);
               return (
@@ -244,10 +258,13 @@ const ChatComp: React.FC<chatInterface> = (props) => {
                     //@ts-ignore
                     username={eachChats.receiver}
                     //@ts-ignore
-                    latestMsg={latestChat[loginUser.username]}
+                    latestMsg={latestChat[intKey]}
                     img=''
                     //@ts-ignore
-                    unread={unreadMsg[id] === 0 ? 0 : unreadMsg[id]}
+                    unread={unreadMsg[eachChats.receiver]}
+                    //@ts-ignore
+                    receiver={id}
+                    // sender={unreadMsg[id].sender}
                   ></ChatBox>
                   <br></br>
                 </div>

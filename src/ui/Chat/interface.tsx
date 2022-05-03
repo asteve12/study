@@ -3,7 +3,8 @@ interface chat{
     username:string,
     img:string,
     unread:number,
-    latestMsg?:any
+    latestMsg?:any,
+    receiver:string
     
 }
 
