@@ -1,0 +1,80 @@
+
+.scheduledDetail{
+    width:100%;
+    height:100%;
+}
+.playedVideo{
+    width:80%
+}
+
+.loaderCont{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    height:100%;
+    align-items:center;
+}
+
+.scheduleWrapper{
+    background-color:#F9F9F9;
+    width:100%;
+    min-height:100vh
+}
+.scheduleDetailHeader{
+    padding-left:20px;
+      padding-right:20px;
+        /* padding-top:20px; */
+}
+
+.detailCont{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    box-sizing:border-box;
+    padding-left:2%;
+      padding-right:2%;
+
+}
+.imgDetail{
+    width:60%;
+    height:450px;
+    /* background-color:green */
+}
+
+.scheduleList{
+    width:370px;
+    min-height:200px;
+  
+}
+.scheduleHeader{
+    font-size:20px;
+}
+@media(max-width:920px){
+    
+}
+
+@media(max-width:1075px){
+    .detailCont{
+    flex-direction:column
+    }
+    .imgDetail{
+        width:100%;
+        display:flex;
+        justify-content:center
+    }
+    .scheduleList{
+        width:100%
+    }
+    .playedVideo{
+        width:80% !important;
+    }
+
+}
+
+@media(max-width:700px){
+    .playedVideo{
+        width:100% !important
+
+    }
+
+}

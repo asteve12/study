@@ -16,12 +16,13 @@ import style from "./register.module.css"
 
 
 const Register:React.FC=(props)=>{
+  
 
     return (
       <section className={style.registerWrapper}>
         <div className={style.formContainer}>
           <br></br>
-          <Backbtn path='/'></Backbtn>
+          <Backbtn path='/register'></Backbtn>
           <br></br>
           <div className={style.registedHeader}>Personal Information</div>
           <p>

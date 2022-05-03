@@ -13,6 +13,21 @@
     padding-right:30px;
 }
 
+.schecduleBtn{
+    width:150px;
+    height:auto;
+    padding:10px;
+    border-radius:7px;
+    background-color:rgb(42,77,144);
+    color:white;
+    text-align:center;
+    font:inherit;
+    cursor:pointer;
+    outline:none;
+    border:none
+}
+
+
 .scheduleMain{
     display:flex;
     width:100%;

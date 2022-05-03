@@ -87,6 +87,7 @@ padding:10px;
   border-radius:60px;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(313.78deg, #2855AE -3.15%, #7292CF 100%);
  border:none;
+ cursor:pointer;
 
 
 }
@@ -132,6 +133,10 @@ padding:10px;
   overflow-y:scroll;
   padding-right:10px;
   box-sizing: border-box;
+  padding-bottom:250px;
+  /* background-color:yellow */
+   -moz-padding-bottom:500px;
+  -webkit-padding-bottom:500px;
   
 
 }

@@ -1,0 +1,20 @@
+.chatAddBtnCon{
+    width:48px !important;
+    height:48px  !important;
+    border-radius:48px;
+    border:none;
+ background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(313.78deg, #2855AE -3.15%, #7292CF 100%);
+box-shadow: 0px 3.09677px 15.4839px rgba(50, 145, 255, 0.3);
+border-radius: 65.0323px;
+box-sizing: border-box
+
+}
+
+.chatAddBtn{
+    color:white !important;
+    font-size:25px;
+    cursor:pointer;
+    outline: none;
+    border:none
+
+}

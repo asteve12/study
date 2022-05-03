@@ -12,8 +12,7 @@ const displayMsg: React.FC<displayInter> = (props) => {
     <section className={style.mainText}>
       
         <p className={props.identity === "sender" ? style.textCont:style.receiverStyle}>
-          ppphhhv brhuryr ppphhhv ppphhhv brhuryr ppphhhv ppphhhv brhuryr
-          ppphhhv 
+          {props.chats}
         </p>
       
     </section>

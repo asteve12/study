@@ -63,8 +63,8 @@ const ProfileComp:React.FC = (props)=>{
               <button
                 className={style.logout}
                 onClick={() => {
-                  localStorage.clear();
-
+                
+                     clearuserState(clearSigninDetails());
                   clearuserState(clearState());
 
                   console.log('logout');

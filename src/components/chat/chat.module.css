@@ -123,7 +123,7 @@ color: #999999;
 
 .chatContainer{
     height:70%;
-    overflow-y: hidden;
+    overflow-y: scroll;
     width:100%;
   
 

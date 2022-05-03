@@ -1,6 +1,8 @@
 import { createSlice, current, createAsyncThunk } from '@reduxjs/toolkit';
 import ForwardLoginReq from "../../axios"
 import axios from "axios"
+import loginUser from "../../firebaseConfig/login/login"
+
 
 
 type loginType = {
@@ -21,7 +23,8 @@ const getUsers = createAsyncThunk(
 
 
       if (userDetail.type === 'keepuser' && userToken) {
-        let name = 'asteve4345yspcom';
+        let name = localStorage.getItem("userSlug");
+        console.log('my userSLug', name);
         let profileDetail = ForwardLoginReq.get(
           `/api/auth/profile/update/${name}/`,
           {
@@ -33,6 +36,7 @@ const getUsers = createAsyncThunk(
         )
           .then((response) => {
             console.log('req user res new', response);
+            localStorage.setItem('sender', response.data.username);
 
             return {
               status: true,
@@ -50,6 +54,14 @@ const getUsers = createAsyncThunk(
 
         return profileDetail;
       }
+      // else{
+      //   return {
+      //     status: false,
+      //     errorMsg:""
+      //   };
+      // }
+
+     
 
  const  userInfo = userDetail.myDetail;
  const email = userInfo?.email;
@@ -58,76 +70,92 @@ const getUsers = createAsyncThunk(
    username:email,
    password
  };
-  const loginReqRes = ForwardLoginReq.post('/api/auth/login/', data)
-                    .then((response) => {
+ if (!email && !password) {
+   return {
+     status: false,
+     errorMsg:""
+   };
+ }
  
-     
-      if (response.status === 200) {
-        localStorage.clear()
-        const {data} = response;
-         localStorage.setItem('accessToken', data.access);
-         localStorage.setItem('refreshToken', data.refresh);
-         const expirationDate = new Date();
-         expirationDate.setDate(new Date().getDate() + 30);
-        localStorage.setItem('expirationDate', expirationDate.toDateString());
+//@ts-ignore
+  const loginUserRes = await loginUser(email, password)
+  console.log("userlogin",loginUserRes)
 
-        
+  if (loginUserRes  === true){
+    const loginReqRes = ForwardLoginReq.post('/api/auth/login/', data)
+      .then((response) => {
+        if (response.status === 200) {
+          // localStorage.clear()
+          const { data } = response;
+          localStorage.setItem('accessToken', data.access);
+          localStorage.setItem('refreshToken', data.refresh);
+          const expirationDate = new Date();
+          expirationDate.setDate(new Date().getDate() + 30);
+          localStorage.setItem('expirationDate', expirationDate.toDateString());
 
-        
-      
-        return  true
-      }
-      
-    })
-    .then((response)=>{
-      // const expirationDate = localStorage.getItem('accessToken');
-      //  const currentDate = localStorage.getItem('refreshToken');
-      console.log('login res', response);
-      let userToken = localStorage.getItem('accessToken')
-      console.log('useTOken', userToken);
-   
-      if(response === true){
-        let name = 'asteve4345yspcom';
-           let profileDetail = ForwardLoginReq.get(
-             `/api/auth/profile/update/${email}/`,
-             {
-               headers: {
-                 //@ts-ignore
-                 Authorization: `Bearer ${userToken}`,
-               },
-             }
-           )
-             .then((response) => {
-               console.log('req user res new', response);
+          return true;
+        }
+      })
+      .then((response) => {
+        // const expirationDate = localStorage.getItem('accessToken');
+        //  const currentDate = localStorage.getItem('refreshToken');
+        console.log('login res', response);
+        let userToken = localStorage.getItem('accessToken');
+        console.log('useTOken', userToken);
 
-               return {
-                 status: true,
-                 data: response.data,
-                 isUserLoggedIn: true,
-               };
-             })
-             .catch((error) => {
-               return {
-                 status: false,
-                 errorMsg: error.response,
-                 isUserLoggedIn: false,
-               };
-             });
+        if (response === true) {
+          let name = localStorage.getItem('userSlug');
+          console.log('userLogin', name);
+          let profileDetail = ForwardLoginReq.get(
+            `/api/auth/profile/update/${name}/`,
+            {
+              headers: {
+                //@ts-ignore
+                Authorization: `Bearer ${userToken}`,
+              },
+            }
+          )
+            .then((response) => {
+              console.log('req user res new', response);
 
-             return profileDetail;
+              return {
+                status: true,
+                data: response.data,
+                isUserLoggedIn: true,
+              };
+            })
+            .catch((error) => {
+              return {
+                status: false,
+                errorMsg: error.response,
+                isUserLoggedIn: false,
+              };
+            });
 
+          return profileDetail;
+        }
+      })
+      .catch((error) => {
+        console.log('login error', error.response);
+        return {
+          status: false,
+          errorMsg: error.response,
+        };
+      });
+      return loginReqRes;
 
-      }
+  }
+  else{
+     return {
+       status: false,
+       errorMsg: 'an error try again',
+     };
 
-    })
-    .catch((error) => {
-      console.log('login error', error.response);
-      return {
-        status: false,
-        errorMsg: error.response,
-      };
-    });
-    return loginReqRes;
+  }
+
+  
+    
+    
 
   }
 );
@@ -167,13 +195,15 @@ const loginSlice = createSlice({
     netWorkError: '',
     loguserIn: 'No',
     gender:"",
-    img:""
+    img:"",
+    point:"",
+    username:""
   },
   reducers: {
     addSigninUser: (state: any, action: any) => {},
     clearState: (state: any) => {
        
-      localStorage.clear()
+      localStorage.removeItem("accessToken");
    
       return {
         firstName: '',
@@ -190,7 +220,9 @@ const loginSlice = createSlice({
         netWorkError: '',
         loguserIn: 'No',
         gender:"",
-        img:""
+        img:"",
+        point:"",
+        username:""
       };
     },
     changeLoginStatus: (state: any) => {
@@ -212,13 +244,17 @@ const loginSlice = createSlice({
       //@ts-ignore
       if (payload.status === true) {
         //@ts-ignore
-        const {email,first_name,gender,image_uri,last_name,slug} = payload.data
+        const {email,first_name,gender,image_uri,last_name,slug,points,username} = payload.data
+        localStorage.setItem('userEmail', email);
+        
         state.email = email;
         state.firstName = first_name;
         state.lastName = last_name;
         state.gender = gender;
         state.img = image_uri
-        localStorage.setItem('userSlug', slug);
+        state.point = points;
+        state.username = username;
+        //localStorage.setItem('userSlug', slug);
 
         //@ts-ignore
         state.loguserIn = 'yes';

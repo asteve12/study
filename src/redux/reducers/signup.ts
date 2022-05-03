@@ -3,6 +3,8 @@ import * as SignupTypes from "../../components/form/signin/type"
 import * as userInfoTypes from "../../components/form/register/type"
 import BaseUrl from "../../axios"
 
+import signupUser from "../../firebaseConfig/signup/signup"
+
 
 
 
@@ -64,32 +66,46 @@ const addNewUser = createAsyncThunk('addNewUser',async (userDetail: SignupTypes.
           password1: password,
           password2: password,
         };
-      console.log("registerData",data)
-        let signupResponse = BaseUrl.post('/api/auth/register/', data)
-          .then((response) => {
-            console.log('my-details', response);
-            if (response.status === 200 || response.status === 201) {
-              console.log('my-res200', response);
-              return {
-                status: true,
-                data: response.data,
-              };
-            } else {
-              return {
-                status: true,
-                data: response,
-              };
-            }
-          })
-          .catch((error) => {
-            console.log('errorMsgSIgnup', error.response);
+        let registerUser = await signupUser(Email, password);
+        if (registerUser === true)
+        {
+             console.log('registerData', data);
+             let signupResponse = BaseUrl.post('/api/auth/register/', data)
+               .then((response) => {
+                 console.log('my-details', response);
+                 if (response.status === 200 || response.status === 201) {
+                   console.log('my-res200', response);
+                   return {
+                     status: true,
+                     data: response.data,
+                   };
+                 } else {
+                   return {
+                     status: true,
+                     data: response,
+                   };
+                 }
+               })
+               .catch((error) => {
+                 console.log('errorMsgSIgnup', error.response);
+                 return {
+                   status: false,
+                   errorMsg: error.response,
+                 };
+               });
+                 return signupResponse;
+          
+        }
+        else{
             return {
               status: false,
-              errorMsg: error.response,
+              errorMsg: "an error occurred try again"
             };
-          });
+        }
+        
+     
 
-        return signupResponse;
+      
       }
 
     }
@@ -119,7 +135,12 @@ const signinSlice = createSlice({
     sigupSuccess:"No"
   },
   reducers: {
-    clearSigninDetails: (state, action) => {
+    resetSubmit:(state,action)=>{
+      state.submitting = false;
+      console.log('resetBtn', state);
+
+    }, 
+    clearSigninDetails: (state) => {
       return {
         firstName: '',
         lastName: '',
@@ -194,10 +215,15 @@ const signinSlice = createSlice({
         state.password = payload.values.password;
         //@ts-ignore
         state.submitting = true;
+        // state.submitting = false
+          state.loading = false;
       }
 
       //@ts-ignore
       if (payload.status === true) {
+        //@ts-ignore
+        localStorage.setItem('userSlug', payload.data.slug);
+        console.log("signup success slug",localStorage.getItem('userSlug'));
         state.showLoader = false;
         state.sigupSuccess = 'yes';
       }
@@ -211,4 +237,5 @@ export default signinSlice.reducer;
 
 // const addUser = signinSlice.actions.addUser 
 const  clearSigninDetails = signinSlice.actions.clearSigninDetails
-export { addNewUser, clearSigninDetails };
+const resetSubmit = signinSlice.actions.resetSubmit;
+export { addNewUser, clearSigninDetails, resetSubmit };

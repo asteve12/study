@@ -10,26 +10,25 @@ export interface State {
  export interface validateInput {
    firstName: string;
    lastName: string;
-   city: string;
-   state: string;
+  //  city: string;
+  //  state: string;
    phoneNumber: string;
    NIN: string;
    gender: string;
-   street: string;
-   locale: string;
+  // locale: string;
    country: string;
    username:string
  }
  export interface emailInterface {
    firstName?: string;
    lastName?: string;
-   city?: string;
-   state?: string;
+  //  city?: string;
+  //  state?: string;
    phoneNumber?: string;
    NIN?: string;
    gender?: string;
-   street?: string;
-   locale?: string;
+  //  street?: string;
+  //  locale?: string;
    country?: string;
    username?: string;
  }
@@ -40,13 +39,13 @@ export interface State {
    values: {
      firstName: string;
      lastName: string;
-     city: string;
-     state: string;
+    //  city: string;
+    //  state: string;
      phoneNumber: string;
      NIN: string;
      gender: string;
-     street: string;
-     locale: string;
+    //  street: string;
+    // locale: string;
      country: string;
      username:string
    };

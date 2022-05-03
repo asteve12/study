@@ -9,12 +9,12 @@ export const validate = (value: registerType.validateInput) => {
   if (!value.lastName) {
     errors.lastName = 'Required';
   }
-  if (!value.city) {
-    errors.city = 'Required';
-  }
-  if (!value.state) {
-    errors.state = 'Required';
-  }
+  // if (!value.city) {
+  //   errors.city = 'Required';
+  // }
+  // if (!value.state) {
+  //   errors.state = 'Required';
+  // }
 
   if (!value.phoneNumber) {
     errors.phoneNumber = 'Required';
@@ -31,15 +31,17 @@ export const validate = (value: registerType.validateInput) => {
     errors.gender = 'Required';
   }
 
-  if (!value.street) {
-    errors.street = 'Required';
-  }
-  if (!value.locale) {
-    errors.locale = 'Required';
-  }
+  // if (!value.street) {
+  //   errors.street = 'Required';
+  // }
+  // if (!value.locale) {
+  //   errors.locale = 'Required';
+  // }
   if (!value.country) {
     errors.country = 'Required';
   }
+
+  console.log("validate errors",errors)
 
   return errors;
 };

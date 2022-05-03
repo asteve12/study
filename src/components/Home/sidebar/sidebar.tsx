@@ -8,8 +8,13 @@ import {AiOutlineSchedule} from "react-icons/ai"
 import {RiChatSmile3Line} from "react-icons/ri"
 import {FiDownload} from "react-icons/fi"
 import { BsPerson } from 'react-icons/bs';
+import {FaQuestion} from "react-icons/fa"
+import {BsJournalBookmarkFill} from "react-icons/bs"
+import { clearState } from '../../../redux/reducers/login';
+import {useDispatch} from "react-redux"
 //components
 import SideBarItems from '../../../ui/sidebaritems/sidebarItems';
+import {Link} from "react-router-dom"
 
 const navigationItems = [
   {
@@ -32,7 +37,16 @@ const navigationItems = [
     links: '/Resources',
     icons: FiDownload,
   },
- 
+  {
+    name: 'Question Bank',
+    links: '/questionBank',
+    icons: FaQuestion,
+  },
+  {
+    name: 'Mock Test',
+    links: '/mock',
+    icons: BsJournalBookmarkFill,
+  },
 ];
 
 const smnavigationItems = [
@@ -62,13 +76,17 @@ const smnavigationItems = [
 
 const HomeSideBar:React.FC = (props)=>{
     const [navigation, setNavigation] = useState(navigationItems);
+      const clearuserState = useDispatch();
     return (
       <>
         <section className={style.homeSideBarWrapper}>
           <div className={style.homePageContainer}>
-            <div className={style.logoContainer}>
-              <img src={companyLogo} alt='' />
-            </div>
+            <Link to='/homePage'>
+              <div className={style.logoContainer}>
+                <img src={companyLogo} alt='' />
+              </div>
+            </Link>
+
             <br />
 
             {navigation.map((eachItems) => {
@@ -81,17 +99,27 @@ const HomeSideBar:React.FC = (props)=>{
               );
             })}
             <br></br>
-            <br></br>
-            <br></br>
+          
 
             <div className={style.setExamDateCont}>
               <p>Let's set a reminder for you</p>
               <button className={style.setExamDate}>Select exam date</button>
             </div>
+            <br />
+            <button
+              className={style.logout}
+              onClick={() => {
+              
+
+                clearuserState(clearState());
+
+                console.log('logout');
+              }}
+            >
+              Log Out
+            </button>
           </div>
         </section>
-       
-      
       </>
     );
 }

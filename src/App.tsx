@@ -16,6 +16,7 @@ import {useSelector,useDispatch} from "react-redux"
 import { getUsers } from './redux/reducers/login';
 import { BrowserRouter } from 'react-router-dom';
 import { Circles } from 'react-loader-spinner';
+import ScheduleDetail from "./pages/schedetailPage/scheduleDetail"
 //types
 import { RootState, AppDispatch } from './redux/store';
 import {Routes, Route,Navigate} from 'react-router-dom';
@@ -61,7 +62,16 @@ dispatchAuthentication(getUsers({type:"keepuser"}));
       <BrowserRouter>
         <div className='App'>
           <Routes>
-            <Route path='/register' element={ signedinUser.loguserIn === 'yes' ?   <Navigate replace to='/homePage' />: <OnBoard />}></Route>
+            <Route
+              path='/register'
+              element={
+                signedinUser.loguserIn === 'yes' ? (
+                  <Navigate replace to='/homePage' />
+                ) : (
+                  <OnBoard />
+                )
+              }
+            ></Route>
             <Route
               path='/'
               element={
@@ -97,6 +107,16 @@ dispatchAuthentication(getUsers({type:"keepuser"}));
             ></Route>
             <Route
               path='/Chats'
+              element={
+                signedinUser.loguserIn === 'yes' || signedupUser.Email ? (
+                  <ChatHomePage />
+                ) : (
+                  <Navigate replace to='/' />
+                )
+              }
+            ></Route>
+            <Route
+              path='/Chats/:username'
               element={
                 signedinUser.loguserIn === 'yes' || signedupUser.Email ? (
                   <ChatHomePage />
@@ -144,6 +164,10 @@ dispatchAuthentication(getUsers({type:"keepuser"}));
                   <Navigate replace to='/' />
                 )
               }
+            ></Route>
+            <Route
+              path='/details/:id/:courseName'
+              element={<ScheduleDetail></ScheduleDetail>}
             ></Route>
           </Routes>
         </div>

@@ -1,0 +1,65 @@
+.goToWrapper{
+   text-decoration:none
+}
+
+.scheduleCard{
+    width:100%;
+    height:150px;
+    /* background-color:yellow; */
+    display:flex;
+    justify-content:space-between;
+    box-sizing:border-box;
+    padding:20px;
+    padding-bottom:0px;
+    text-decoration:none
+    
+
+}
+.videoPlayer{
+    object-fit:cover
+}
+
+.videoContainer{
+    min-width:50%;
+    height:80%;
+  
+    padding:5px;
+    padding-top:0px;
+    box-sizing:border-box
+}
+.courseCardText{
+    height:100%;
+    box-sizing:border-box;
+       padding:1px;
+    padding-top:0px;
+
+}
+
+.courseCardText h5{
+    margin:0px;
+    margin-bottom:5px;
+}
+
+.courseCardText p{
+    font-size:12px;
+    color:grey;
+    text-decoration:none
+}
+
+@media(max-width:1075px){
+    .videoContainer{
+        height:100%;
+        object-fit:cover !important;
+
+    }
+   
+
+}
+
+@media(max-width:400px){
+     .scheduleCard{
+         flex-direction:column;
+
+    }
+
+}

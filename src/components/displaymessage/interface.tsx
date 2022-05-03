@@ -1,5 +1,6 @@
 interface displayMessage{
-    identity:string
+    identity:string,
+    chats:string
 }
 
 export default displayMessage;

@@ -6,11 +6,16 @@ import style from "./chats.module.css"
 import Sidebar from "../../components/Home/sidebar/sidebar"
 import ChatCom from "../../components/chat/chat"
 import {MobileChatComp} from "../../components/chat/chat"
+import {useParams} from "react-router-dom"
 
 
 
  const ChatsHomePage:React.FC =(props)=>{
    const [displayChatPage,setChatPage] = useState(false)
+   const { username } = useParams()
+//@ts-ignore
+   localStorage.setItem('receiver', username);
+   
 
    const chatPageHandler = () =>{
      setChatPage(true)
@@ -21,10 +26,7 @@ import {MobileChatComp} from "../../components/chat/chat"
         <div className={style.mbWrapper}>
           <Sidebar></Sidebar>
         </div>
-        <ChatCom
-          status={displayChatPage}
-          handleChatPage={chatPageHandler}
-        ></ChatCom>
+        <ChatCom status={username ? true:false} handleChatPage={chatPageHandler}></ChatCom>
         <MobileChatComp handleChatPage={chatPageHandler}></MobileChatComp>
       </section>
     );
