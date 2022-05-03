@@ -12,6 +12,11 @@ import {useParams} from "react-router-dom"
 
 const ChatBox: React.FC<chatInterface> = (props) => {
   const { username } = useParams()
+
+  if (!props.latestMsg) {
+    return <></>
+  }
+
   return (
     <section className={style.chatBoxCont} onClick={props.handleChatPage}>
       <div className={style.messageBox}>
@@ -21,9 +26,10 @@ const ChatBox: React.FC<chatInterface> = (props) => {
             <b>{props.username}</b>
           </p>
           <p className={style.message}>
-            <span style={props.latestMsg.read === true ? {color:""}:{} }>
+            {props.latestMsg.read ?   <span style={props.latestMsg.read === true ? { color: '' } : {}}>
               <IoCheckmarkDoneOutline></IoCheckmarkDoneOutline>
-            </span>
+            </span>:null}
+          
             &nbsp; {props.latestMsg.message}
           </p>
         </section>
