@@ -110,17 +110,20 @@ const ChatComp: React.FC<chatInterface> = (props) => {
     const starCountRef = ref(db, 'message/');
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
-      console.log('unreadMsg', data);
+    
       const arrayOfMsgKey = Object.keys(data).sort();
       for (let eachMsgKey of arrayOfMsgKey) {
+        
         if (interestedMsgKey === eachMsgKey) {
           const currMsg = data[interestedMsgKey];
           const arrayOfcurrMsgKeys = Object.keys(currMsg);
           const sortedArray = arrayOfcurrMsgKeys.sort();
           const reverseKeys = sortedArray.reverse() 
-
+         
           for(let msgKey of reverseKeys){
-            if (loginUser.username === currMsg[msgKey].sender) {
+               console.log('ajonu', currMsg[msgKey].sender);
+            if (loginUser.username ) {
+               
               //@ts-ignore
               setLatestChat((prevState) => {
                 return {
@@ -153,9 +156,9 @@ const ChatComp: React.FC<chatInterface> = (props) => {
 
 
     const updateRecentChat = () => {
-      if (recentChat.length >= 0) {
-        setRecentChats([]);
-      }
+      // if (recentChat.length >= 0) {
+      //   setRecentChats([]);
+      // }
 
       const starCountRef = ref(db, 'recentsChats/');
       onValue(
@@ -164,6 +167,7 @@ const ChatComp: React.FC<chatInterface> = (props) => {
           const data = snapshot.val();
           // updateStarCount(postElement, data);
            if (recentChat.length >= 0) {
+             console.log("calllled")
              setRecentChats([]);
            }
 
@@ -175,6 +179,7 @@ const ChatComp: React.FC<chatInterface> = (props) => {
           if(loginUser.username === eachKeys ){
             let userObj = data[eachKeys];
             let currentUser = Object.keys(userObj);
+            console.log('userrecentChats', userObj);
           
             for (let eachUserKeys of currentUser){
               unReadMessage(userObj[eachUserKeys].receiver);
@@ -191,12 +196,13 @@ const ChatComp: React.FC<chatInterface> = (props) => {
                 ...prevState,
                 userObj[eachUserKeys],
               ]});
+               console.log('alluser', recentChat);
             }
             
             return;
           }
         } 
-        console.log('alluser', recentChat);
+       
           console.log('myrecentchats', data);
           // formatMessage()
         },
@@ -208,6 +214,9 @@ const ChatComp: React.FC<chatInterface> = (props) => {
     updateRecentChat()
 
   },[])
+
+
+
 
 
 // if (recentChat.length <=0 ){
@@ -248,6 +257,8 @@ const ChatComp: React.FC<chatInterface> = (props) => {
           <br></br>
           <div className={style.chatContainer}>
             {recentChat.map((eachChats) => {
+
+              console.log('asteveBuf', latestChat);
               //@ts-ignore
 
               // let rece
@@ -263,6 +274,7 @@ const ChatComp: React.FC<chatInterface> = (props) => {
               //@ts-ignore
               // if (id) console.log('unreadCOunt', unreadMsg[id]);
               return (
+              
                 <div
                   style={{ cursor: 'pointer' }}
                   //@ts-ignore

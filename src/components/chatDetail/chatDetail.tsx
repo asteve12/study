@@ -92,6 +92,7 @@ const handleFileUpload = (e: React.FormEvent) => {
   console.log('upload files', fileUrl);
 };
 
+
 const updateValue = ()=>{
   const starCountRef = ref(db, 'message/');
    onValue(

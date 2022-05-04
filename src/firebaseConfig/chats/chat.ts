@@ -108,6 +108,15 @@ export default async function writeUserData(msg:string,username:string,sender:st
           return;
         } else {
           console.log('No data available');
+            const ownerRecChat = localStorage.getItem('sender');
+            const newPostKey = push(child(ref(db), 'posts')).key;
+            //@ts-ignore
+            updates['recentsChats/' + `${intUser[0]}/` + newPostKey] = {
+              receiver: ownerRecChat,
+            };
+
+            //recentsChats
+            update(ref(db), updates);
             set(ref(db, 'message/' + `${username}/` + `${timestamp}`), {
               sender,
               receiver: 'ronke',
