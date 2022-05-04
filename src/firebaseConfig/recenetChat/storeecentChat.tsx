@@ -45,11 +45,25 @@ export default async function writeRecentChats(username: string,receiver:string)
             if (snapshot.exists()) {
               console.log("validating recentChat",snapshot.val());
               const ownerRecChat = localStorage.getItem("sender")
+              console.log('ownerCht', ownerRecChat);
                const data = snapshot.val();
                //@ts-ignore
                const currObj = data[ownerRecChat];
+               if(!currObj){
+                   const newPostKey = push(child(ref(db), 'posts')).key;
+                   //@ts-ignore
+                   updates['recentsChats/' + `${username}/` + newPostKey] = {
+                     receiver,
+                   };
+
+                   //recentsChats
+                   update(ref(db), updates);
+                   return ;
+
+               }
+               
                 let currentUser = Object.keys(currObj);
-  let chatAlreadyExist;
+                  let chatAlreadyExist;
                 for (let eachUserKeys of currentUser) {
                   console.log(
                     'uyo',

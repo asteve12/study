@@ -51,10 +51,46 @@ const ChatDetailCom: React.FC<showChatInterface> = (props) => {
   const [inputMessage,setInputMessage] = useState("")
   //@ts-ignore
   const loginUser = useSelector((state)=>  state.login)
+  const [fileToUpload,setFileToUpload] = useState()
+  const [fileUrl,setFileUrl] = useState("")
+  const imgToUpload = useRef()
 
   const {username} = useParams()
 
 
+const uploadImgHandler = (e:React.MouseEvent)=>{
+  // @ts-ignore
+  imgToUpload.current.click()
+
+
+}
+//handle file upload and image preview
+const cancelImgHandler = () =>{
+  // @ts-ignore
+  setFileToUpload('');
+  setFileUrl('');
+}
+
+const uploadImgNowHandler = ()=>{
+  
+}
+
+const handleFileUpload = (e: React.FormEvent) => {
+  // @ts-ignore
+  setFileToUpload(e.currentTarget.files[0]);
+  //@ts-ignore
+  const reader = new FileReader();
+  //@ts-ignore
+  const fileUrl = reader.readAsDataURL(e.currentTarget.files[0]);
+   reader.onloadend = (e)=>{
+     //@ts-ignore
+     setFileUrl(reader.result);
+   }
+  //@ts-ignore
+
+  // @ts-ignore
+  console.log('upload files', fileUrl);
+};
 
 const updateValue = ()=>{
   const starCountRef = ref(db, 'message/');
@@ -185,6 +221,7 @@ else{
 //   updateValue();
   
 // });
+
    
 
 
@@ -276,6 +313,24 @@ else{
             : null
         }
 
+        {fileUrl ? (
+          <div className={style.imgPreviewCont}>
+            <button
+              onClick={cancelImgHandler}
+              className={style.imgprevBtnCancel}
+            >
+              cancel
+            </button>
+            <img src={fileUrl}></img>
+            <button
+              onClick={uploadImgNowHandler}
+               className={style.imgprevBtnUpload}
+            >
+              upload
+            </button>
+          </div>
+        ) : null}
+
         {/* <DisplayMsg identity='sender'></DisplayMsg>
         <p className={style.todayText}>TODAY</p>
         <DisplayMsg identity='receiver'></DisplayMsg>
@@ -307,7 +362,16 @@ else{
               onChange={(e) => setInputMessage(e.target.value)}
             ></input>
             <section className={style.recorder}>
-              <button>
+              <input
+                // @ts-ignore
+                ref={imgToUpload}
+                type='file'
+                accept='image/*'
+                onChange={handleFileUpload}
+                style={{ display: 'none' }}
+              />
+
+              <button onClick={uploadImgHandler}>
                 <img src={camera} alt='' />
               </button>
               <button>
