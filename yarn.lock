@@ -8861,6 +8861,11 @@ react-calendar@^3.7.0:
     merge-class-names "^1.1.1"
     prop-types "^15.6.0"
 
+react-circular-progressbar@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/react-circular-progressbar/-/react-circular-progressbar-2.0.4.tgz#5b04a9cf6be8c522c180e4e99ec6db63677335b0"
+  integrity sha512-OfX0ThSxRYEVGaQSt0DlXfyl5w4DbXHsXetyeivmoQrh9xA9bzVPHNf8aAhOIiwiaxX2WYWpLDB3gcpsDJ9oww==
+
 react-custom-checkbox@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-custom-checkbox/-/react-custom-checkbox-2.0.1.tgz#dbb40f741f849779f4aab6f913e9a7b7175055ba"
