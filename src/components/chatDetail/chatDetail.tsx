@@ -18,6 +18,19 @@ import {useSelector} from "react-redux"
 import {useParams} from "react-router-dom"
 import updateReadStatus from "../../firebaseConfig/chats/validateRead"
 import {IoCheckmarkDoneOutline} from "react-icons/io5"
+import {getDownloadURL} from 'firebase/storage';
+// import { RevolvingDot } from 'react-loader-spinner'
+import {
+  CircularProgressbar,
+  CircularProgressbarWithChildren,
+  buildStyles,
+} from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import storeImgHandler from "../../firebaseConfig/storage/storage"
+
+
+
+const percentage = 66;
 // import {app} from "../../firebaseConfig/chats/getChats"
 // import db from "../../firebaseConfig/chats/getChats"
 // const db = getDatabase(app);
@@ -53,6 +66,12 @@ const ChatDetailCom: React.FC<showChatInterface> = (props) => {
   const loginUser = useSelector((state)=>  state.login)
   const [fileToUpload,setFileToUpload] = useState()
   const [fileUrl,setFileUrl] = useState("")
+  const [uploading,setUploading] = useState()
+  const [uploadProg,setUploadProg] = useState(0)
+  const[uploadedImgUrl,setUploadedImgUrl] = useState()
+  const[uploadedVidUrl,setUploadedVidUrl] = useState();
+  const[uploadedAudioUrl,setUploadedAudioUrl] = useState()
+
   const imgToUpload = useRef()
 
   const {username} = useParams()
@@ -70,9 +89,81 @@ const cancelImgHandler = () =>{
   setFileToUpload('');
   setFileUrl('');
 }
+const sendImgMsg = ()=>{
+  setFileUrl("")
+  setInputMessage("")
+   const arrayOfUser = [loginUser.username, receiver];
+   const sortedUser = arrayOfUser.sort();
+   writeUserData(
+     inputMessage,
+     `${sortedUser[0]}-${sortedUser[1]}`,
+     loginUser.username,
+     {
+       //@ts-ignore
+       img: uploadedImgUrl ? uploadedImgUrl:null,
+     }
+   );
+}
 
-const uploadImgNowHandler = ()=>{
-  
+const performUpload = async ()=>{
+  //@ts-ignore
+  setUploading(true);
+  //@ts-ignore
+  let uploadObj =  storeImgHandler(fileToUpload,fileToUpload.size,fileToUpload.name);
+  //@ts-ignore
+  console.log('uploadObj', uploadObj);
+  //@ts-ignore
+  uploadObj.on(
+    'state_changed',
+    //@ts-ignore
+    (snapshot) => {
+      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    
+      //@ts_ignore
+      setUploadProg(parseInt(progress.toString()));
+      console.log('Upload is ' + progress + '% done');
+      switch (snapshot.state) {
+        case 'paused':
+          console.log('Upload is paused');
+          break;
+        case 'running':
+          console.log('Upload is running');
+          break;
+      }
+    },
+    //@ts-ignore
+    (error) => {
+      // A full list of error codes is available at
+      // https://firebase.google.com/docs/storage/web/handle-errors
+      switch (error.code) {
+        case 'storage/unauthorized':
+          // User doesn't have permission to access the object
+          break;
+        case 'storage/canceled':
+          // User canceled the upload
+          break;
+
+        // ...
+
+        case 'storage/unknown':
+          // Unknown error occurred, inspect error.serverResponse
+          break;
+      }
+    },
+    () => {
+      // Upload completed successfully, now we can get the download URL
+      //@ts-ignore
+      getDownloadURL(uploadObj.snapshot.ref).then((downloadURL) => {
+        //@ts-ignore
+        setUploadedImgUrl(downloadURL);
+       
+        console.log('File available at', downloadURL);
+      });
+    }
+  );
+
+  console.log('fileSize', fileToUpload);
 }
 
 const handleFileUpload = (e: React.FormEvent) => {
@@ -273,6 +364,9 @@ else{
                           : 'sender'
                       }
                       chats={eachItems.chat.message}
+                      img={eachItems.chat.img ? eachItems.chat.img : null}
+                      video={eachItems.chat.video ? eachItems.chat.video : null}
+                      Audio={eachItems.chat.Audio ? eachItems.chat.Audio : null}
                     ></DisplayMsg>
                     {eachItems.chat.read === true ? (
                       //A
@@ -316,19 +410,69 @@ else{
 
         {fileUrl ? (
           <div className={style.imgPreviewCont}>
-            <button
-              onClick={cancelImgHandler}
-              className={style.imgprevBtnCancel}
-            >
-              cancel
-            </button>
-            <img src={fileUrl}></img>
-            <button
-              onClick={uploadImgNowHandler}
-               className={style.imgprevBtnUpload}
-            >
-              upload
-            </button>
+            {uploading && uploadProg !== 100 ? (
+              <section className={style.uploadingIndCont}>
+                <div className={style.loaderWrapper}>
+                  <CircularProgressbar
+                    value={uploadProg}
+                    text={`${uploadProg}%`}
+                  />
+                </div>
+
+                {/* <section className={style.recorder}>
+              <input
+                // @ts-ignore
+                ref={imgToUpload}
+                type='file'
+                accept='image/*'
+                onChange={handleFileUpload}
+                style={{ display: 'none' }}
+              />
+
+              <button onClick={uploadImgHandler}>
+                <img src={camera} alt='' />
+              </button>
+              <button>
+                <img src={recorder} alt='' />
+              </button>
+            </section> */}
+              </section>
+            ) : null}
+            <div className={style.previewUpImCont}>
+              <img src={fileUrl} className={style.previewUpImg}></img>
+            </div>
+
+            <div className={style.imginputMessageCont}>
+              <section className={style.inputMsgCont}>
+                <div className={style.imginputCont}>
+                  <input
+                    value={inputMessage}
+                    type='text'
+                    placeholder='Type a message'
+                    onChange={(e) => setInputMessage(e.target.value)}
+                  ></input>
+                </div>
+                <button className={style.sendMsgBtn} onClick={sendImgMsg}>
+                  <img src={sentLogo} alt='' />
+                </button>
+              </section>
+            </div>
+            {uploadProg !== 100 ? (
+              <button
+                onClick={performUpload}
+                className={style.imgprevBtnUpload}
+              >
+                upload
+              </button>
+            ) : null}
+            {uploadProg !== 100 ? (
+              <button
+                onClick={cancelImgHandler}
+                className={style.imgprevBtnCancel}
+              >
+                cancel
+              </button>
+            ) : null}
           </div>
         ) : null}
 

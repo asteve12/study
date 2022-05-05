@@ -33,6 +33,7 @@
     "material-ui-search-bar": "^1.0.0",
     "react": "^17.0.2",
     "react-calendar": "^3.7.0",
+    "react-circular-progressbar": "^2.0.4",
     "react-custom-checkbox": "^2.0.1",
     "react-dom": "^17.0.2",
     "react-google-login": "^5.2.2",

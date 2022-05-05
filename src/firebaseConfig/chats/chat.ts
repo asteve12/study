@@ -31,16 +31,27 @@ import { getDatabase, ref, child, get, set, update,push } from 'firebase/databas
 
 // }
 
-
-export default async function writeUserData(msg:string,username:string,sender:string) {
-   console.log("write message to firebase",username)
-    const timestamp = Date.now();
-    const fireBaseUid = localStorage.getItem('firebaseLogin');
+const writeMsgHandler = ()=>{
   
+}
+ interface multimediaType{
+   img?:string,
+   video?:string,
+   Audio?:string
+ }
+
+export default async function writeUserData(
+  msg?: string,
+  username?: string,
+  sender?: string,
+  multimediaObj?: multimediaType
+) {
+  console.log('write message to firebase', username);
+  const timestamp = Date.now();
+  const fireBaseUid = localStorage.getItem('firebaseLogin');
+
   const db = getDatabase();
-  console.log("userDetail","send msg")
-
-
+  console.log('userDetail', 'send msg');
 
   const updates = {};
   // const newPostKey = push(child(ref(db), 'recentsChats')).key;
@@ -55,19 +66,20 @@ export default async function writeUserData(msg:string,username:string,sender:st
           const ownerRecChat = localStorage.getItem('sender');
           const data = snapshot.val();
           //@ts-ignore
-       
+
           // let currentUser = Object.keys(currObj);
           let recentChatAlreadyExist;
-          let recentReceiver = username.split("-")
+          //@ts-ignore
+          let recentReceiver = username.split('-');
           let intUser = recentReceiver.filter(
             (eachUser) => eachUser !== ownerRecChat
           );
-            //  const currObj = data[intUser[0]];
-          
+          //  const currObj = data[intUser[0]];
+
           // for (let eachUserKeys of currentUser) {
           //   // console.log('uyo', currObj[eachUserKeys].receiver === receiver);
           //   if (currObj[eachUserKeys].receiver === intUser[0]) {
-          //   
+          //
           //     break;
           //   }
           // }
@@ -75,40 +87,28 @@ export default async function writeUserData(msg:string,username:string,sender:st
             recentChatAlreadyExist = true;
             console.log('recentChatAlreadyExis', recentChatAlreadyExist);
           }
-            if (recentChatAlreadyExist === true) {
-              set(ref(db, 'message/' + `${username}/` + `${timestamp}`), {
-                sender,
-                receiver: 'ronke',
-                message: msg,
-                verification: fireBaseUid,
-                read: false,
-              });
-
-              return;
-            } else {
-              const newPostKey = push(child(ref(db), 'posts')).key;
+          if (recentChatAlreadyExist === true) {
+          
+            set(ref(db, 'message/' + `${username}/` + `${timestamp}`), {
+              sender,
+              receiver: 'ronke',
+              message: msg,
+              verification: fireBaseUid,
+              read: false,
               //@ts-ignore
-              updates['recentsChats/' + `${intUser[0]}/` + newPostKey] = {
-                receiver: ownerRecChat,
-              };
+              img:
+                multimediaObj && multimediaObj.img ? multimediaObj.img : null,
+              //@ts-ignore
+              video:
+                multimediaObj && multimediaObj.video
+                  ? multimediaObj.video
+                  : null,
+              //@ts-ignore
+              Audio:multimediaObj && multimediaObj. Audio ? multimediaObj.Audio : null,
+            });
 
-              //recentsChats
-              update(ref(db), updates);
-
-              set(ref(db, 'message/' + `${username}/` + `${timestamp}`), {
-                sender,
-                receiver: 'ronke',
-                message: msg,
-                verification: fireBaseUid,
-                read: false,
-              });
-            }
-        
-
-          return;
-        } else {
-          console.log('No data available');
-            const ownerRecChat = localStorage.getItem('sender');
+            return;
+          } else {
             const newPostKey = push(child(ref(db), 'posts')).key;
             //@ts-ignore
             updates['recentsChats/' + `${intUser[0]}/` + newPostKey] = {
@@ -117,12 +117,62 @@ export default async function writeUserData(msg:string,username:string,sender:st
 
             //recentsChats
             update(ref(db), updates);
+
+            
             set(ref(db, 'message/' + `${username}/` + `${timestamp}`), {
               sender,
               receiver: 'ronke',
               message: msg,
               verification: fireBaseUid,
               read: false,
+              //@ts-ignore
+              img:
+                multimediaObj && multimediaObj.img ? multimediaObj.img : null,
+              //@ts-ignore
+              video:
+                multimediaObj && multimediaObj.video
+                  ? multimediaObj.video
+                  : null,
+              //@ts-ignore
+              Audio:
+                multimediaObj && multimediaObj.Audio
+                  ? multimediaObj.Audio
+                  : null,
+            });
+          }
+
+          return;
+        } else {
+          console.log('No data available');
+          const ownerRecChat = localStorage.getItem('sender');
+          const newPostKey = push(child(ref(db), 'posts')).key;
+          //@ts-ignore
+          updates['recentsChats/' + `${intUser[0]}/` + newPostKey] = {
+            receiver: ownerRecChat,
+          };
+
+          //recentsChats
+          update(ref(db), updates);
+       
+            set(ref(db, 'message/' + `${username}/` + `${timestamp}`), {
+              sender,
+              receiver: 'ronke',
+              message: msg,
+              verification: fireBaseUid,
+              read: false,
+              //@ts-ignore
+              img:
+                multimediaObj && multimediaObj.img ? multimediaObj.img : null,
+              //@ts-ignore
+              video:
+                multimediaObj && multimediaObj.video
+                  ? multimediaObj.video
+                  : null,
+              //@ts-ignore
+              Audio:
+                multimediaObj && multimediaObj.Audio
+                  ? multimediaObj.Audio
+                  : null,
             });
         }
       })
@@ -133,9 +183,7 @@ export default async function writeUserData(msg:string,username:string,sender:st
 
   updateRecentChat();
 
-
-
-  return true
+  return true;
 }
 
 
