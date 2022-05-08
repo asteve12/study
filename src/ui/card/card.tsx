@@ -12,7 +12,7 @@ const CourseCard: React.FC<CardInterface> = (props) => {
   return (
     <section className={style.cardWrapper}>
       <div className={style.cardContent}>
-        <h1>Mathematics</h1>
+        <h1>{props.courseTitle}</h1>
         <p>Chapter 1: Introduction</p>
 
         <section className={style.timeContainer}>

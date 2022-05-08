@@ -17,6 +17,7 @@ function ScheduleDetail() {
   const [subject,setSubject] = useState()
   const [currentVideo,setCurrentVid] = useState()
  
+ 
 
   useEffect(() => {
     window.addEventListener('beforeunload', handleChange);
@@ -45,17 +46,22 @@ function ScheduleDetail() {
   useEffect(()=>{
     if (id === 'subjects'){
         const userToken = localStorage.getItem('accessToken');
-        BaseUrl.get('/api/courses/list/', {
+        BaseUrl.get(`/api/courses/${courseName}/`, {
           headers: {
             Authorization: `Bearer ${userToken}`,
           },
         }).then((response) => {
-       
-          setCurrentVid(
-            //@ts-ignore
-            response.data.filter((eachVids) => eachVids.slug === courseName)
-          );
-             console.log('obtain subject', currentVideo);
+          console.log('mysubjectRes', response.data);
+          for (let eachVids of response.data) {
+            if (eachVids.slug === courseName) {
+              //ts-ignore
+              setCurrentVid(response.data.lecture[0]);
+            }
+          }
+          // if (eachVids.slug === courseName) {
+          // }
+
+          console.log('obtain subject', currentVideo);
           setSubject(response.data);
         });
 
@@ -84,7 +90,7 @@ function ScheduleDetail() {
             <ReactPlayer
               // width='100%'
               height='100%'
-              url='https://www.youtube.com/watch?v=ysz5S6PUM-U'
+              url={`${currentVideo}`}
               controls={false}
               className={style.playedVideo}
             />
