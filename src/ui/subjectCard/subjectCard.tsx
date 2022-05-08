@@ -8,10 +8,13 @@ import MathSymbol  from "../../assets/home/mathsymbol.svg";
 import circleDot from "../../assets/home/circledot.svg"
 //interfaces.
 import myInterface from "./interface"
+import {useParams} from "react-router-dom"
 
 
 
 const SubjectCard: React.FC<myInterface> = (props) => {
+  
+
   return (
     <section className={style.subjectCard} style={{backgroundColor:props.colors}}>
       <div className={style.LogoCont}>

@@ -205,7 +205,7 @@ const HomeMainPage:React.FC = ()=>{
    BaseUrl.get('/api/courses/list-live-class/', {
      headers: {
        //@ts-ignore
-       Authorization: `Bearer ${userTk}`,
+       Authorization:`Bearer ${userTk}`,
      },
    })
      .then((response) => {
@@ -385,9 +385,10 @@ useEffect(()=>{
                         {
                           //@ts-ignore
                           liveVideo.map((eachCourse, index) => {
+                            
                             return (
                               <div style={{ margin: '0px !important' }}>
-                                <Link to={`/Courses`}>
+                                <Link to={`/Courses/${eachCourse.exam}`}>
                                   <CourseCard
                                     courseTitle={`${eachCourse.name}`}
                                     topic='introduction'

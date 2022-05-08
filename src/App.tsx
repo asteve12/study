@@ -156,7 +156,7 @@ dispatchAuthentication(getUsers({type:"keepuser"}));
               }
             ></Route>
             <Route
-              path='/Courses'
+              path='/Courses/:courseIframe'
               element={
                 signedinUser.loguserIn === 'yes' || signedupUser.Email ? (
                   <CoursePage />

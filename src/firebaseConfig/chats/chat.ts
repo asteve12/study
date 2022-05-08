@@ -31,9 +31,7 @@ import { getDatabase, ref, child, get, set, update,push } from 'firebase/databas
 
 // }
 
-const writeMsgHandler = ()=>{
-  
-}
+
  interface multimediaType{
    img?:string,
    video?:string,

@@ -179,7 +179,7 @@ const signinSlice = createSlice({
         if (payload.errorMsg) {
           //@ts-ignore
           if (payload.errorMsg.status === 400) {
-            console.log('enemy');
+            // console.log('enemy');
             state.showLoader = false;
             //@ts-ignore
             const ErrMsg = payload.errorMsg.data.username
